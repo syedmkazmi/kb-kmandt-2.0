@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://mean-starter-kit.herokuapp.com'
+  apiUrl: 'https://kb-kmandt-v2.herokuapp.com'
 };
