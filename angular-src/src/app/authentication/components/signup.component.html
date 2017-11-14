@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>{{title}}</h2>
+  <form (ngSubmit)="signUp()" [formGroup]="signupForm" novalidate>
+
+    <div class="form-group">
+      <label for="fullName">Full Name</label>
+      <input type="text" class="form-control" id="fullName" placeholder="Enter full name" formControlName="fullName">
+
+      <span *ngIf="signupForm.get('fullName').touched || signupForm.get('fullName').dirty">
+        <small class="form-text text-muted" *ngIf="signupForm.get('fullName').hasError('required')">Please enter your full name.</small>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" formControlName="email">
+
+      <span *ngIf="signupForm.get('email').touched || signupForm.get('email').dirty">
+        <small class="form-text text-muted" *ngIf="signupForm.get('email').hasError('required')">Please enter your email.</small>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+
+      <span *ngIf="signupForm.get('password').touched || signupForm.get('password').dirty">
+        <small class="form-text text-muted" *ngIf="signupForm.get('password').hasError('required')">Please enter your password.</small>
+      </span>
+    </div>
+
+    <button type="submit" [disabled]="signupForm.invalid" class="btn btn-primary">Submit</button>
+  </form>
+
+  {{user}}
+
+  <div *ngFor="let data of user">
+    {{data.fullName}}
+    {{data.email}}
+  </div>
+
+</div>
