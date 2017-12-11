@@ -1,3 +1,15 @@
-body {
-  font-family: 'Source Sans Pro', sans-serif;
+.uk-container {
+  padding-left: 200px;
+}
+
+.site-header {
+  padding-left: 30px;
+  padding-top: 30px;
+}
+.site-header #header-logo {
+  width: 12%;
+}
+
+.notification {
+  padding: 0px 120px 0px 120px;
 }

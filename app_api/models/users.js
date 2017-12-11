@@ -10,6 +10,7 @@ const userSchema =  new mongoose.Schema({
     email: String,
     password: String,
     fullName: String,
+    usersProposals: [],
     account: {
         verified: {type: String, default: 'false'}
     }
@@ -36,7 +37,7 @@ userSchema.methods.generateJwt = function () {
        _id: this._id,
         email: this.email,
         fullName: this.fullName,
-    }, process.env.JWT_SECRET, {expiresIn: 60});
+    }, process.env.JWT_SECRET, {expiresIn: '1h'});
 
 };
 

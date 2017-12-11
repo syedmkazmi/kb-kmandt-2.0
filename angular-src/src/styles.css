@@ -1,2 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+*{ box-sizing: border-box }
+html {
+  height: 100%;
+  font-size: 15px;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  background-color: #fff;
+  min-height: 100%;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+h2 {
+
+}
 

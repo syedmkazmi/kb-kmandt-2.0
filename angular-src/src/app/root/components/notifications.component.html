@@ -1,5 +1,6 @@
-<div class="container">
-  <div *ngIf="notification" class="alert alert-danger" role="alert">
+
+  <div *ngIf="notification" class="uk-alert-danger" uk-alert>
+    <a class="uk-alert-close" uk-close></a>
     {{notification}}
   </div>
-</div>
+

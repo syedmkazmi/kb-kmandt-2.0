@@ -7,7 +7,8 @@ import {AuthenticationService} from "../authentication/services/authentication.s
 })
 export class WelcomeComponent implements OnInit {
 
-  title: string = "Main Component";
+  title: string = `Welcome to your
+Dashboard`;
 
   constructor(private _authService: AuthenticationService) {
   }
