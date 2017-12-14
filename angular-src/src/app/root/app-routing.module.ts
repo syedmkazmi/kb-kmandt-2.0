@@ -7,7 +7,7 @@ import { AuthGuard } from "../authentication/guards/auth.guard";
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: 'welcome', component: WelcomeComponent, canActivate: [AuthGuard]},
+      { path: 'welcome', component: WelcomeComponent}, //canActivate: [AuthGuard]
       { path: '', redirectTo: 'welcome', pathMatch: 'full'},
       { path: '**', component: PageNotFoundComponent}
     ],{useHash: true})

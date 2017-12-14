@@ -6,10 +6,12 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const CronJob = require('cron').CronJob;
 
 require('./app_api/models/db');
 require('./app_api/config/passport');
 
+const mail = require('./app_api/config/emailNotifications');
 const index = require('./app_server/routes/index');
 const apiRoutes = require('./app_api/routes/index');
 
@@ -50,6 +52,11 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+new CronJob('00 40 11 * * 1-5', function() {
+    // Execute code here
+    mail.proposalStatus();
+}, null, true, 'Europe/London');
 
 
 module.exports = app;

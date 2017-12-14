@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box
+}
+
+#nav {
+  width: 240px;
+  background-color: #f7f9fa;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+}
+
+#nav > ul > #header-logo {
+  width: 50%;
+  margin: 35px 35px 35px 35px;
+}
+
+#nav > ul {
+}
+
+#nav > ul > li > a {
+  color: #0070e0;
+  padding: 15px 0 10px 30px;
+}
+
+#nav > ul > li > a:hover {
+  background-color: #0070e0;
+  color: #ffffff;
+  animation-timing-function: ease-in;
+  transition: 0.3s;
+}
+
+#nav > ul > li > a:active {
+  background-color: #0070e0;
+  color: #ffffff;
+}
+
+#header {
+  margin-left: 240px;
+  border-bottom: 2px solid #f7f9fa;
+  padding: 20px;
+  position: relative;
+  height: 60px;
+}
+
+#header > button {
+  position: absolute;
+  top: 15px;
+  right: 60px;
+  color: #ffffff;
+  line-height: 30px;
+}
+
+.uk-offcanvas-bar {
+  background-color: #0070e0;
+}

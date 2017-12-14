@@ -5,8 +5,18 @@
 const express = require('express');
 const router = express.Router();
 const {getAllUsers: findUser} = require('../controllers/users');
+const {create: createNew, update: updateExisting, get: getAll, getOne: getOne, upload: uploadFile, status: status} = require('../controllers/proposals');
 const {register: registerUser, login: loginUser} = require('../controllers/authentication');
 const jwt = require('jsonwebtoken');
+
+// For handling file uploads using multer library
+const multer  = require('multer');
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {cb(null, 'uploads/')},
+    filename: (req, file, cb) => {cb(null, file.originalname)}
+});
+const upload = multer({storage: storage});
+
 
 // registration
 router
@@ -48,9 +58,17 @@ router
     .route('/users')
     .get(findUser);
 
+
 // proposals
 router
     .route('/proposals')
-    .get(findUser);
+    .get(getAll)
+    .post(createNew);
+router
+    .route('/proposals/:id')
+    .put(updateExisting)
+    .get(getOne)
+    .post(upload.single('proposal'), uploadFile); //TODO setup upload progress bar functionality. Tip: Look at  xhr.upload.addEventListener("progress")
+                                                 // TODO replace POST with PATCH
 
 module.exports = router;

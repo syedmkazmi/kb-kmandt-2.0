@@ -43,3 +43,5 @@ process.on('SIGTERM', () => {
 });
 
 require('./users');
+require('./proposals');
+require('./sectors');

@@ -9,7 +9,8 @@ import {NotificationsService} from "../../root/services/notifications.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  title: string = "Login";
+  title: string = `Welcome to the Knowledge Base
+ you can login below`;
   loginForm: FormGroup;
   isLoggedIn: boolean = false;
 

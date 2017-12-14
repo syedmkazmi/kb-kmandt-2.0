@@ -15,6 +15,7 @@ import {ErrorInterceptorService} from "../authentication/services/error-intercep
 import {NotificationsComponent} from './components/notifications.component';
 import {NotificationsService} from "./services/notifications.service";
 import {PageNotFoundComponent} from './components/page-not-found.component';
+import {ProposalModule} from "../proposals/proposal.module";
 
 @NgModule({
   declarations: [
@@ -27,8 +28,9 @@ import {PageNotFoundComponent} from './components/page-not-found.component';
   imports: [
     BrowserModule,
     AuthenticationModule,
-    AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ProposalModule,
+    AppRoutingModule
 
   ],
   providers: [
