@@ -54,3 +54,10 @@
 .uk-offcanvas-bar {
   background-color: #0070e0;
 }
+
+@media screen and (max-width: 600px) {
+  #nav {
+    display: none;
+    width: 0px;
+  }
+}

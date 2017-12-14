@@ -25,3 +25,13 @@
   padding: 20px;
   height: 250px;
 }
+
+#col1, #col2 {
+  min-width: 200px;
+}
+
+@media screen and (max-width: 600px) {
+  #dashboard {
+    margin-left: 0px;
+  }
+}
