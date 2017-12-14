@@ -43,8 +43,8 @@
   <section id="nav">
     <ul uk-nav>
       <img id="header-logo" src="/assets/images/KB-Logo.png">
-      <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: home"></span> Dashboard</a></li>
-      <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: album"></span> Proposals</a></li>
+      <li><a [routerLink]="['/welcome']"href="#"><span class="uk-margin-small-right" uk-icon="icon: home"></span> Dashboard</a></li>
+      <li><a [routerLink]="['/proposals']"><span class="uk-margin-small-right" uk-icon="icon: album"></span> Proposals</a></li>
       <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Bios</a></li>
       <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: folder"></span> Case Studies</a></li>
     </ul>

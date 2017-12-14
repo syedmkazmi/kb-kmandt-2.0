@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 const Proposal = mongoose.model('Proposals');
 const sendinblue = require('sendinblue-api');
-const parameters = {"apiKey": "kRZBVDfAGF9j5Otr", "timeout": 5000};
+const parameters = {"apiKey": process.env.SEND_IN_BLUE, "timeout": 5000}; //TODO Move API Key to env process.env.JWT_SECRET
 const sendinObj = new sendinblue(parameters);
 
 let sendJsonResponse = (res, status, content) => {

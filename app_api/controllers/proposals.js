@@ -112,12 +112,12 @@ let getOne = (req, res) => {
 // UPLOAD FILE TO DROP BOX        =========================
 // =======================================================
 let upload = (req,res) => {
-
+    //GfxHmhVLefoAAAAAAAAF4-hFJZ0oZ4FtzPymFfxFVMMjFEKrBV2oBVphX_fTG-WE
     let options = {
         method: 'POST',
         uri: 'https://content.dropboxapi.com/2/files/upload',
         headers: {
-            'Authorization': 'Bearer GfxHmhVLefoAAAAAAAAF4-hFJZ0oZ4FtzPymFfxFVMMjFEKrBV2oBVphX_fTG-WE',
+            'Authorization': 'Bearer ' + process.env.DROPBOX_API_TOKEN,
             'Dropbox-API-Arg': "{\"path\": \"/test/"+req.file.originalname+"\",\"mode\": \"overwrite\",\"autorename\": true,\"mute\": false}",
             'Content-Type': 'application/octet-stream'
         },body: fs.createReadStream(`uploads/${req.file.originalname}`)
@@ -128,7 +128,7 @@ let upload = (req,res) => {
         .then(() => {return _generateShareableLink(req.file.originalname)})
         .then((shareableLink) => {sendJsonResponse(res, 200, shareableLink)})
         .catch(function (err) {sendJsonResponse(res, 500, err)});
-}; //TODO update promises to ES8 async/await
+}; //TODO update promises to ES8 async/await & Move Dropbox key to env
 
 // Promises methods
 let _updateUser = (userID, savedProposal) => {
@@ -159,7 +159,7 @@ let _generateShareableLink = (filename) => {
     return new Promise((resolve, reject) => {
         request.post('https://api.dropboxapi.com/2/sharing/create_shared_link_with_settings', {
             headers: {
-                'Authorization': 'Bearer GfxHmhVLefoAAAAAAAAF4-hFJZ0oZ4FtzPymFfxFVMMjFEKrBV2oBVphX_fTG-WE',
+                'Authorization': 'Bearer '+ process.env.DROPBOX_API_TOKEN,
                 'Content-Type': 'application/json; charset=utf-8'
             },body: JSON.stringify({path: `/test/${filename}`, settings: {requested_visibility: "public"}})
         }, (err, httpResponse) => {
