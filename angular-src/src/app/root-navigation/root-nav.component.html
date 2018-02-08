@@ -1,65 +1,28 @@
-<!--<div class="container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item" *ngIf="message">
-          <a class="nav-link" [routerLink]="['/welcome']">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item" *ngIf="!message">
-          <a class="nav-link" [routerLink]="['/login']">Login</a>
-        </li>
-        <li class="nav-item" *ngIf="!message">
-          <a class="nav-link" [routerLink]="['/signup']">Sign up</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</div>-->
-
-<!--<ul uk-nav>
-<li class="uk-nav-header">Header</li>
-<li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: table"></span> Item</a></li>
-<li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Item</a></li>
-<li class="uk-nav-divider"></li>
-<li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> Item</a></li>
-</ul>-->
-<div id="header">
-  <button type="button" uk-toggle="target: #offcanvas-flip" class="uk-button uk-button-primary">
-    Create
-  </button>
+<div id="header" *ngIf="isLoggedIn">
+  <span id="previous-page-btn" uk-icon="icon: arrow-left; ratio: 2" (click)="goBack()"></span>
+  <div id="user-profile-btn"><a [routerLink]="['/users', _id]">{{name}}<span uk-icon="icon: chevron-down"></span></a></div>
+  <div id="user-profile-img"><img src="{{profileImage}}" onerror="this.src='/assets/images/user-profile-icon/default-user.svg'"></div>
+  <div id="add-btn"><img src="assets/images/proposal-icons/add_circle.svg" [routerLink]="['/proposals/0/new']"></div>
 </div>
 
-
-<div class="uk-offcanvas-content">
+<!--data:image/png;base64, {{name}}-->
+<div class="uk-offcanvas-content" *ngIf="isLoggedIn">
   <section id="nav">
     <ul uk-nav>
-      <img id="header-logo" src="/assets/images/KB-Logo.png">
-      <li><a [routerLink]="['/welcome']"href="#"><span class="uk-margin-small-right" uk-icon="icon: home"></span> Dashboard</a></li>
-      <li><a [routerLink]="['/proposals']"><span class="uk-margin-small-right" uk-icon="icon: album"></span> Proposals</a></li>
-      <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Bios</a></li>
-      <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: folder"></span> Case Studies</a></li>
+      <img id="header-logo" src="/assets/images/Logo.svg">
+      <li><a [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a></li>
+      <li><a [routerLink]="['/proposals']" routerLinkActive="active">Proposals</a></li>
+      <li><a [routerLink]="['/bios']" routerLinkActive="active">Bios</a></li>
+      <li><a href="#">Case Studies</a></li>
     </ul>
   </section>
-
   <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
     <div class="uk-offcanvas-bar">
-
       <button class="uk-offcanvas-close" type="button" uk-close></button>
-
-      <h3>Title</h3>
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat.</p>
+      <ul uk-nav>
+        <li><a [routerLink]="['/proposals/0/new']"><span class="uk-margin-small-right"></span>Proposal</a></li>
+        <li><a [routerLink]="['/bios/0/new']"><span class="uk-margin-small-right"></span>Bio</a></li>
+      </ul>
 
     </div>
   </div>

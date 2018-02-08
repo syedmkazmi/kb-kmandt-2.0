@@ -1,5 +1,6 @@
 //User Token Interface
 export interface IAuthToken {
-  token: String,
-  expiresIn: String
+  token: string,
+  expiresIn: string,
+  userInfo: string
 }

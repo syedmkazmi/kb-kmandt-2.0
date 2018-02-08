@@ -24,7 +24,9 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-
+server.setTimeout(180000, ()=>{
+    console.log("time out set!")
+});
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);

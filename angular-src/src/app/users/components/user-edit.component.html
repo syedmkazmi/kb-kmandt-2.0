@@ -1,0 +1,146 @@
+<section class="userEdit">
+  <h1>{{title}}</h1>
+
+  <div uk-grid>
+    <div class="user-account-data">
+      <form (ngSubmit)="save()" [formGroup]="userEditForm" novalidate>
+        <div class="uk-grid-small" uk-grid>
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="title">First Name</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" type="text" placeholder="First Name" formControlName="firstName">
+            </div>
+          </div>
+
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="title">Last Name</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" type="text" placeholder="Last Name" formControlName="lastName">
+            </div>
+          </div>
+        </div>
+        <div class="uk-margin">
+          <label class="uk-form-label" for="title">Email</label>
+          <div class="uk-form-controls">
+            <input class="uk-input" type="text" placeholder="Enter KM&T Email" id="title" formControlName="email">
+          </div>
+        </div>
+
+        <div class="uk-grid-small" uk-grid>
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="startDate">Start Date</label>
+            <div class="uk-form-controls">
+              <mat-form-field class="example-full-width">
+                <input matInput [matDatepicker]="startDate" id="startDate" formControlName="startDate">
+                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                <mat-datepicker #startDate></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="birthday">Birthday</label>
+            <div class="uk-form-controls">
+              <mat-form-field class="example-full-width">
+                <input matInput [matDatepicker]="birthday" id="birthday" formControlName="birthday">
+                <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
+                <mat-datepicker #birthday></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="sector">Sector</label>
+            <div class="uk-form-controls">
+              <select class="uk-select" formControlName="sector" id="sector">
+                <option value="" disabled selected>Select Sector</option>
+                <option *ngFor="let sector of sectors" value="{{sector.sectorName}}">{{sector.sectorName}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="region">Region</label>
+            <div class="uk-form-controls">
+              <select class="uk-select" id="region" formControlName="region">
+                <option value="" disabled selected>Select Region</option>
+                <option value="UK">United Kingdom</option>
+                <option value="NA">North America</option>
+                <option VALUE="AU">Asia Pacific</option>
+              </select>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="uk-margin">
+          <label class="uk-form-label" for="lineManagerEmail">Line Manager Email</label>
+          <div class="uk-form-controls">
+            <input class="uk-input" type="text" placeholder="Enter Your Line Managers Email" id="lineManagerEmail"
+                   formControlName="lineManagerEmail">
+          </div>
+        </div>
+
+        <div class="uk-margin">
+          <button class="uk-button uk-button-primary" id="user-update-btn" [disabled]="userEditForm.invalid">UPDATE
+            DETAILS
+          </button>
+        </div>
+      </form>
+
+    </div>
+
+    <div class="user-profile-picture">
+      <div id="sec-two-heading">Profile Picture</div>
+      <div class="uk-alert-primary" uk-alert>
+        <a></a>
+        <div><strong>Note:</strong><br> Please only upload work related image as it will be used on your bio.</div>
+      </div>
+      <div id="image">
+        <img id="user-img" src="{{profileImage}}"
+             onerror="this.src='/assets/images/user-profile-icon/default-user.svg'">
+      </div>
+      <div id="add-btn">
+        <div>
+        <input id="custom-input" type="file" (change)="fileChangeListener($event)">
+        <button class="uk-button uk-button-default" type="button" tabindex="-1">Select</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div id="modal-container" class="uk-modal-container" uk-modal>
+  <div class="uk-modal-dialog">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title">Set Profile Picture</h2>
+    </div>
+    <div class="uk-modal-body">
+     <!-- <div class="uk-grid-small" uk-grid>
+        <div class="uk-width-1-2@s">-->
+
+      <div class="file-upload">
+       <!-- <input id="custom-input" type="file" (change)="fileChangeListener($event)">
+          <button class="uk-button uk-button-default" type="button" tabindex="-1">Select</button>-->
+      </div>
+      <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+      <br>
+      <span class="result rounded" *ngIf="data.image" >
+    <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+</span>
+          <!--<img-cropper [image]="data" [settings]="cropperSettings"></img-cropper>-->
+       <!-- </div>-->
+        <!--<div class="uk-width-1-4@s">
+          <img [src]="data?.image" onerror="this.src='/assets/images/user-profile-icon/default-user.svg'"
+               [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+        </div>-->
+      <!--</div>-->
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+      <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="saveProfileImage()">Save</button>
+    </div>
+  </div>
+</div>

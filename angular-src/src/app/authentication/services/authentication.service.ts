@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/map';
+import {tap, catchError, map} from "rxjs/operators";
 import {IAuthToken} from "../interfaces/userToken";
 import {Router} from "@angular/router";
 import {Subject} from 'rxjs/Subject';
@@ -39,27 +37,52 @@ export class AuthenticationService {
     const BASE_URL = environment.apiUrl;
 
     return this._http.post<IAuthToken>(BASE_URL + '/api/login', body)
-      .do(data => console.log(JSON.stringify(data)))
-      .map(data => {
+      .pipe(
+        tap(data => console.log(JSON.stringify(data))),
+        map(data => {
+          const token = data.token;
+          const unit: moment.unitOfTime.DurationConstructor = 'hour';
+          const expiresIn = moment().add(1, unit);
+          const userInfo = data.userInfo;
 
-        const token = data.token;
-        const unit: moment.unitOfTime.DurationConstructor = 'hour';
-        const expiresIn = moment().add(1, unit);
+          if (token) {
+            localStorage.setItem("token", JSON.stringify(token));
+            localStorage.setItem("expiresIn", JSON.stringify(expiresIn));
+            localStorage.setItem("userInfo", JSON.stringify(userInfo));
+            this._router.navigate(['/'])
+          }
+          return token;
+        }),
+        catchError(err => {
+          // do whatever you want when error occurs
+          console.log(err);
 
-        if (token) {
-          localStorage.setItem("token", JSON.stringify(token));
-          localStorage.setItem("expiresIn", JSON.stringify(expiresIn));
-          this._router.navigate(['/'])
-        }
-        return token;
-      })
-      .catch(err => {
-        // do whatever you want when error occurs
-        console.log(err);
+          // re-throw error so you can catch it when subscribing, fallback to generic error code
+          return Observable.throw(err || 'API_ERROR');
+        }))
+    //.do(data => console.log(JSON.stringify(data)))
+    /*.map(data => {
 
-        // re-throw error so you can catch it when subscribing, fallback to generic error code
-        return Observable.throw(err || 'API_ERROR');
-      });
+      const token = data.token;
+      const unit: moment.unitOfTime.DurationConstructor = 'hour';
+      const expiresIn = moment().add(1, unit);
+      const userInfo = data.userInfo;
+
+      if (token) {
+        localStorage.setItem("token", JSON.stringify(token));
+        localStorage.setItem("expiresIn", JSON.stringify(expiresIn));
+        localStorage.setItem("userInfo", JSON.stringify(userInfo));
+        this._router.navigate(['/'])
+      }
+      return token;
+    })*/
+    /*.catch(err => {
+      // do whatever you want when error occurs
+      console.log(err);
+
+      // re-throw error so you can catch it when subscribing, fallback to generic error code
+      return Observable.throw(err || 'API_ERROR');
+    });*/
   }
 
   logout(): void {

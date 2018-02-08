@@ -2,7 +2,10 @@
  * Created by syedkazmi on 21/08/2017.
  */
 const mongoose = require('mongoose');
-const dbURI = 'mongodb://syed26:plzopen26@ds013848.mlab.com:13848/tokenbasedauth';
+const dbURI = 'mongodb://syed26:plzopen26@ds049864.mlab.com:49864/foliogram';
+// mongodb://syed26:plzopen26@ds049864.mlab.com:49864/foliogram
+// mongodb://syed26:plzopen26@ds011505-a0.mlab.com:11505,ds011505-a1.mlab.com:11505/knowledge-base?replicaSet=rs-ds011505
+
 mongoose.connect(dbURI, { useMongoClient: true });
 
 mongoose.connection.on('connected', () => {
@@ -43,5 +46,9 @@ process.on('SIGTERM', () => {
 });
 
 require('./users');
+require('./counter');
 require('./proposals');
 require('./sectors');
+require('./skills');
+require('./icons');
+require('./bios');

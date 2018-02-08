@@ -1,3 +1,117 @@
-<h1>
-  proposal-list works!
-</h1>
+<section id="proposals">
+  <h1>{{title}}</h1>
+
+  <div class="search-bar">
+  <div class="uk-margin" id="search-bar">
+      <div class="uk-search uk-search-default">
+        <span uk-search-icon></span>
+        <input class="uk-search-input" type="search"  [(ngModel)]="_listFilter" placeholder="Search by ">
+      </div>
+    </div>
+
+    <div class="uk-inline" id="filters-btn">
+      <button class="uk-button uk-button-default" type="button">Filters <span uk-icon="icon: settings"></span></button>
+      <div uk-drop="mode: click">
+        <div class="uk-card uk-card-body uk-card-default">
+          <p id="filter-title">Status</p>
+          <fieldset id="status">
+          <div class="filter-options" uk-grid>
+            <div class="option-1"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.proposalStatus" value="won" name="status"> Won</label></div>
+            <div class="option-2"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.proposalStatus" value="live" name="status"> Live</label></div>
+            <div class="option-3"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.proposalStatus" value="lost" name="status"> Lost</label></div>
+          </div>
+          </fieldset>
+
+          <fieldset id="region">
+         <div class="filter-options" uk-grid>
+            <div class="option-1"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.proposalRegion" value="UK" name="region"> UK</label></div>
+            <div class="option-2"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.proposalRegion" value="NA" name="region"> NA</label></div>
+            <div class="option-3"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.proposalRegion" value="AU" name="region"> AU</label></div>
+          </div>
+          </fieldset>
+        </div>
+        <button (click)="filterProposals()">Apply</button>
+        <button (click)="proposalList()">Clear Filters</button>
+      </div>
+    </div>
+  </div>
+
+  <section *ngIf="!filterStatus" class="unsuccessful-filter">
+    <div>
+      {{filterMessage}}
+    </div>
+  </section>
+
+  <section *ngIf="filterStatus">
+    <table class="uk-table uk-table-middle uk-table-divider">
+      <thead>
+      <tr>
+        <th></th>
+        <th class="uk-width-small">NAME</th>
+        <th>SECTOR</th>
+        <th>STATUS</th>
+        <th>OWNER</th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let proposal of proposals | filter: _listFilter">
+        <td class="proposal-icon-td" id="proposal-icon"><img class="proposal-icon" src="assets/images/proposal-icons/proposal-normal.svg"></td>
+        <td class="proposal-title" id="proposal-title" (click)="onSelect(proposal)" uk-toggle="target: #offcanvas-slide"><span id="title">{{proposal.proposalNo}} - <span>{{(proposal.proposalTitle.length>30) ? (proposal.proposalTitle | slice:0:30)+'...':(proposal.proposalTitle) }}</span></span>
+          <span
+            id="client">{{(proposal.client.length>30) ? (proposal.client | slice:0:30)+'...':(proposal.client)}} <img
+            id="arrow_forward"
+            src="assets/images/proposal-icons/arrow_forward.svg"><span> {{proposal.proposalRegion}}</span></span>
+        </td>
+        <td id="proposal-sector"><span>{{proposal.sector}}</span></td>
+        <td id="proposal-status"><span
+          [ngClass]="{'status-circle-live': proposal.proposalStatus === 'live', 'status-circle-won': proposal.proposalStatus === 'won', 'status-circle-lost': proposal.proposalStatus === 'lost'}"></span><span
+          [ngClass]="{'live': proposal.proposalStatus === 'live', 'won': proposal.proposalStatus === 'won', 'lost': proposal.proposalStatus === 'lost'}">{{proposal.proposalStatus}}</span>
+        </td>
+        <td id="proposal-owner"><span>{{proposal.owner}}</span></td>
+        <td>
+          <div id="proposal-file">
+            <a href="{{proposal.proposalUrls}}" target="_blank"><i class="material-icons"
+                                                                   [ngClass]="{'file-available': proposal.proposalUrls, 'file-unavailable': proposal.proposalUrls === 'none' || !proposal.proposalUrls }">attach_file</i></a>
+          </div>
+        </td>
+        <td id="proposal-action">
+          <a class="uk-button uk-button-default" id="edit-btn"  [routerLink]="['/proposals', proposal._id]">Edit</a>
+          <!--<button uk-icon="icon: more; ratio: 1"></button>
+          <div uk-dropdown="mode: click">
+            <ul class="uk-nav uk-dropdown-nav"> [routerLink]="['/proposals', proposal._id]"
+              <li><a (click)="onSelect(proposal)" uk-toggle="target: #offcanvas-slide">View</a></li>
+              <li><a [routerLink]="['/proposals', proposal._id]">Edit</a></li>
+            </ul>
+          </div>-->
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</section>
+
+<div id="modal-center" class="uk-flex-top" uk-modal>
+  <div class="uk-modal-dialog uk-margin-auto-vertical">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title">Proposal Detail</h2>
+    </div>
+    <div class="uk-modal-body">
+      <proposal-detail [proposal]="selectedProposal"></proposal-detail>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button">Close</button>
+    </div>
+  </div>
+</div>
+<!--{{(proposal.proposalTitle.length>12) ? (proposal.proposalTitle | slice:0:12)+'...':(proposal.proposalTitle) }}-->
+
+
+<div id="offcanvas-slide" uk-offcanvas="overlay: true; flip: true">
+  <div class="uk-offcanvas-bar">
+    <button class="uk-offcanvas-close" type="button" uk-close></button>
+    <proposal-detail [proposal]="selectedProposal"></proposal-detail>
+  </div>
+</div>

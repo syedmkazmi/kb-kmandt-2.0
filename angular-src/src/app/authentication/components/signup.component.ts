@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {IUser} from "../interfaces/user";
+import {IUser} from "../../users/interfaces/user";
 import {HttpErrorResponse} from "@angular/common/http";
 import {AuthenticationService} from "../services/authentication.service";
 import {NotificationsService} from "../../root/services/notifications.service";

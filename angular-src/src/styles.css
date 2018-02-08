@@ -1,8 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-*{ box-sizing: border-box }
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+* {
+  box-sizing: border-box;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
 html {
-  height:100vh;
+  height: 100vh;
   font-size: 15px;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 body {
@@ -20,5 +27,92 @@ h1 {
 
 h2 {
 
+}
+
+.uk-notification {
+  width: 500px;
+}
+
+.uk-notification-message {
+  background-color: #f7f9fa;
+  border-radius: 5px;
+  color: #121212;
+  font-weight: 400;
+  padding: 10px;
+  line-height: 1;
+  font-size: 16px;
+}
+
+#notification-icon {
+  margin-right: 10px
+}
+
+.uk-notification-close {
+  top: 10px;
+  line-height: 1;
+}
+
+.uk-alert-danger {
+  border: 1px solid #FF5346;
+  font-size: 14px;
+  line-height: 18px;
+  margin-top: 20px;
+}
+
+.uk-text-warning {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.uk-text-danger {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.error {
+  color: #FF5346;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.uk-input.ng-valid.ng-touched {
+  border: 2px solid #0070E0;
+  border-radius: 3px;
+}
+
+.uk-input.ng-invalid.ng-touched {
+  border: 2px solid #FF5346;
+  border-radius: 3px;
+}
+
+.uk-select.ng-invalid.ng-touched {
+  border: 2px solid #FF5346;
+  border-radius: 3px;
+}
+
+.uk-select.ng-valid.ng-touched {
+  border: 2px solid #0070E0;
+  border-radius: 3px;
+}
+
+.uk-textarea {
+  line-height: 1.7;
+}
+
+.uk-textarea.ng-valid.ng-touched {
+  border: 2px solid #0070E0;
+  border-radius: 3px;
+}
+
+.uk-textarea.ng-invalid.ng-touched {
+  border: 2px solid #FF5346;
+  border-radius: 3px;
+}
+
+.uk-alert-danger {
+  border-radius: 3px;
+  border: 2px solid #FF5346;
 }
 

@@ -5,6 +5,7 @@ import {RouterModule} from "@angular/router";
 import {SignupComponent} from './components/signup.component';
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {LoginGuard} from "./guards/login.guard";
+import {NotificationsComponent} from "../root/components/notifications.component";
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import {LoginGuard} from "./guards/login.guard";
     ReactiveFormsModule,
     FormsModule
   ],
-  declarations: [LoginComponent, SignupComponent]
+  declarations: [LoginComponent, SignupComponent, NotificationsComponent]
 })
 export class AuthenticationModule {
 }
