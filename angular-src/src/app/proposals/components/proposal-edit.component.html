@@ -141,8 +141,7 @@
             <div class="uk-width-1-2@s">
               <label class="uk-form-label" for="title" [ngClass]="{'error': proposalEditForm.get('expenses').touched && proposalEditForm.get('expenses').hasError('required')}">{{proposalEditForm.get('expenses').touched && proposalEditForm.get('expenses').hasError('required') ? "Expenses are Required" : "Expenses"}}</label>
               <div class="uk-form-controls">
-                <input class="uk-input" type="number" placeholder="Expenses" (change)="calculateTotal()"
-                       formControlName="expenses">
+                <input class="uk-input" type="number" placeholder="Expenses" formControlName="expenses">
               </div>
             </div>
             <!----- ENTER PROJECT VALUE ------>

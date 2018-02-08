@@ -100,7 +100,7 @@ export class ProposalAddComponent implements OnInit {
 
   calculateTotal(totalNumberOfDays, dailyRate, expenses) {
     return (totalNumberOfDays * dailyRate) + expenses;
-  }
+  } //TODO: Removed this function from HTML as it requried 3 parameters to be provided from the declaration in HTML file
 
   public setOwnerEmail(){
     for(let user of this.users){
