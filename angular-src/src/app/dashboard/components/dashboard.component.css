@@ -1,3 +1,15 @@
+*{
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1 {
+  font-size: 38px;
+  font-weight: normal;
+  display: inline-block;
+  width: auto;
+  line-height: 1;
+}
+
 #dashboard {
   margin-left: 240px;
   padding-left: 60px;
@@ -28,10 +40,6 @@
 
 #col1, #col2 {
   min-width: 200px;
-}
-
-#proposals {
-  margin-left: 0 !important;
 }
 
 @media screen and (max-width: 600px) {

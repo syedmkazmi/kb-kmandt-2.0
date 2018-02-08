@@ -49,7 +49,7 @@ import {FilterPipe} from "../root/pipes/search-filter.pipe";
   ],
   declarations: [ProposalListComponent, ProposalDetailComponent, ProposalEditComponent, ProposalAddComponent, FilterPipe],
   providers: [ProposalEditResolverService, ProposalListResolverService, UserListResolverService],
-  exports: [ProposalListComponent]
+  exports: [ProposalDetailComponent, FilterPipe]
 })
 export class ProposalModule {
 }
