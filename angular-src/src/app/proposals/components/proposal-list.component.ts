@@ -13,7 +13,7 @@ import {IProposal} from "../interfaces/proposal";
 export class ProposalListComponent implements OnInit {
 // @Input() proposals?: IProposal[];
   title: String = "Proposals";
-  @Input() proposals: IProposal[];
+  proposals: IProposal[];
   filteredProposals: IProposal[];
   selectedProposal: IProposal;
   _listFilter: string;

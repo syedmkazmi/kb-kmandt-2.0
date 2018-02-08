@@ -14,7 +14,7 @@ export class DashboardService {
   // =======================================================
   // GET ALL PROPOSALS FOR THIS USE=========================
   // =======================================================
-  getAll(id): Observable<IProposal[]> {
+  getProposals(id): Observable<IProposal[]> {
     const BASE_URL = environment.apiUrl;
 
     return this._http.get<IProposal[]>(`${BASE_URL}/api/users/${id}/proposals`)

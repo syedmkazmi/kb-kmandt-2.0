@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getProposals(){
-    this._ds.getAll(this.userID)
+    this._ds.getProposals(this.userID)
       .subscribe(
         (data) => {
           this.proposals = data;
