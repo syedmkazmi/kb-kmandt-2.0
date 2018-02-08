@@ -90,8 +90,8 @@ router.use((req, res, next)=>{
 router
     .route('/proposals')
     .get(getAll)
-    //.post(newProposal);
-    .post(test);
+    .post(newProposal);
+    //.post(test);
 router
     .route('/proposals/:id')
     .put(updateExisting)
