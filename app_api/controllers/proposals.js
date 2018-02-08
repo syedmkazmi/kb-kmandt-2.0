@@ -43,6 +43,8 @@ let get = (req, res) => {
 // =======================================================
 let create = (req, res) => {
 
+    console.log(req.body);
+
     let newProposal = new Proposal();
 
     newProposal.sector = req.body.sector;
