@@ -1,0 +1,74 @@
+<div class="proposalDetailView">
+  <div id="proposal-id"><img id="barcode" src="assets/images/proposal-icons/barcode.svg">
+    {{proposal?.proposalNo}}
+  </div>
+
+  <div class="section-title">
+    {{(proposal?.proposalTitle.length>30) ? (proposal?.proposalTitle | slice:0:30)+'...':(proposal?.proposalTitle) }}
+  </div>
+  <span
+    [ngClass]="{'status-circle-live': proposal?.proposalStatus === 'live', 'status-circle-won': proposal?.proposalStatus === 'won', 'status-circle-lost': proposal?.proposalStatus === 'lost'}"></span><span
+  id="proposal-status"
+  [ngClass]="{'live': proposal?.proposalStatus === 'live', 'won': proposal?.proposalStatus === 'won', 'lost': proposal?.proposalStatus === 'lost'}">Proposal is {{proposal?.proposalStatus}}</span>
+  <div class="proposal-info">
+    <section class="section-title"> Proposal Info</section>
+    <div class="data-field">
+      <div class="field-title"><span uk-icon="icon: users"></span>Proposal Owner</div>
+      <div class="field-value">{{proposal?.owner}}</div>
+    </div>
+
+    <div class="data-field">
+      <div class="field-title"><span uk-icon="icon: users"></span>Region</div>
+      <div class="field-value">{{proposal?.proposalRegion}}</div>
+    </div>
+  </div>
+
+  <div class="client-info">
+    <section class="section-title"> Client Information</section>
+    <div class="data-field">
+      <div class="field-title"><span uk-icon="icon: users"></span>Client</div>
+      <div class="field-value">{{proposal?.client}}</div>
+    </div>
+
+    <div class="data-field">
+      <div class="field-title"><span uk-icon="icon: users"></span>Sector</div>
+      <div class="field-value">{{proposal?.sector}}</div>
+    </div>
+
+    <div class="data-field">
+      <div class="field-title"><span uk-icon="icon: users"></span>Person of Contact</div>
+      <div class="field-value">{{proposal?.clientContact}}</div>
+    </div>
+  </div>
+
+  <div class="financial-info">
+    <section class="section-title"> Financial Information</section>
+    <div class="data-field">
+      <div class="field-title"><span uk-icon="icon: users"></span>Total Value</div>
+      <div class="field-value">{{proposal?.totalValue | currency:proposal?.currency:'symbol-narrow':'.0'}}</div>
+    </div>
+
+    <div class="data-field">
+      <div class="field-title"><span uk-icon="icon: users"></span>Days Proposed</div>
+      <div class="field-value">{{proposal?.totalNumberOfDays}}</div>
+    </div>
+
+    <div class="data-field">
+      <div class="field-title"><span uk-icon="icon: users"></span>Daily Rate</div>
+      <div class="field-value">{{proposal?.dailyRate}}</div>
+    </div>
+
+    <div class="data-field">
+      <div class="field-title"><span uk-icon="icon: users"></span>Expenses</div>
+      <div class="field-value">{{proposal?.expenses}}</div>
+    </div>
+  </div>
+
+</div>
+
+<div id="sticky-edit-button">
+  <button class="uk-button uk-button-primary uk-offcanvas-close" id="proposal-save-btn"
+          [routerLink]="['/proposals', proposal?._id]">Edit Proposal
+  </button>
+</div>
+

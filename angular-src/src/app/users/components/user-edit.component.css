@@ -1,0 +1,141 @@
+.userEdit {
+  margin-left: 240px;
+  padding-left: 60px;
+  padding-top: 40px;
+  padding-right: 120px;
+}
+
+h1{
+  text-transform: capitalize;
+  font-size: 38px;
+  font-weight: normal;
+  line-height: 1;
+  margin-bottom: 40px;
+}
+
+.uk-alert-primary {
+  border: 1px solid #0070E0 !important;
+  border-radius: 0 !important;
+  background-color: #FAFDFF;
+  overflow: hidden;
+  color: #0070E0;
+  font-size: 13px;
+}
+
+.user-profile-picture {
+  width: 25%;
+}
+
+#sec-two-heading {
+  color: #121212;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 25px;
+}
+
+#add-btn {
+  margin-top: 5px;
+  text-align: -webkit-center;
+}
+
+.user-profile-picture > a {
+  margin-left: 24%;
+}
+
+.user-profile-picture > #image > #user-img {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 100%;
+  border: 1px solid rgba(0,0,0,.05);
+}
+
+.user-account-data {
+  width: 60%;
+}
+
+.uk-form-controls {
+  margin-top: 10px;
+}
+
+.uk-form-label {
+  color: #121212;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.uk-input {
+  font-size: 15px;
+  height: 55px;
+  border: 1px solid #C4CDD5;
+  text-transform: capitalize;
+  border-radius: 3px;
+  padding-left: 20px;
+}
+
+.uk-input:focus {
+  border-color: #0070E0;
+}
+
+.uk-select:not([multiple]):not([size]) {
+  height: 55px;
+}
+
+.uk-select:focus {
+  border-color: #0070E0;
+}
+
+.uk-select {
+  height: 55px;
+  font-size: 15px;
+  border: 1px solid #C4CDD5;
+  text-transform: capitalize;
+  border-radius: 3px;
+  padding-left: 20px;
+}
+
+.mat-form-field {
+  display: block;
+  font-family: 'Source Sans Pro', sans-serif;
+  border: 1px solid #C4CDD5;
+  border-radius: 3px;
+}
+
+/deep/ .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+/deep/ .mat-form-field-infix {
+  border-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+  padding-left: 20px;
+  line-height: 55px;
+}
+
+/deep/ .mat-input-underline {
+  color: #fff;
+  background-color: white;
+  bottom: 0;
+}
+
+/deep/ .mat-form-field-suffix .mat-icon-button {
+  margin-right: 10px;
+}
+
+#user-update-btn {
+  height: 41px;
+  margin-top: 20px;
+  width: 221px;
+  background-color: #0070E0;
+}
+
+#custom-input[type=file]{
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  opacity: 0;
+  cursor: pointer;
+}

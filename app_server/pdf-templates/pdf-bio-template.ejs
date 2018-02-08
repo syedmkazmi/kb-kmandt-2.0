@@ -1,0 +1,236 @@
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700" rel="stylesheet">
+    <meta charset="utf8">
+
+
+    <title>SuitArt Business Card</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: 500;
+            background: #fff;
+            font-size: 8px;
+            -webkit-print-color-adjust: exact;
+            box-sizing: border-box;
+            color: #fff;
+        }
+
+        .page {
+            position: relative;
+            /*height: 90mm;
+            width: 50mm;*/
+            display: block;
+            background: #fff;
+            page-break-after: auto;
+            color: #fff;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #fff;
+            }
+
+            .page {
+                margin: 0;
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .page.first {
+            border-left: 5px solid green;
+        }
+
+        .bottom {
+            position: absolute;
+            left: 5mm;
+            right: 5mm;
+            bottom: 5mm;
+        }
+
+        .group {
+            margin-top: 3mm;
+        }
+
+        .line {
+            color: black;
+            position: relative;
+            border: 5px solid green;
+            border-radius: 5px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .logo {
+            position: relative;
+            width: 20%;
+            left: 10%;
+            top: 15%;
+            border-radius: 100%;
+        }
+
+        .test {
+            position: relative;
+            padding: 20px;
+
+        }
+
+        .test2 {
+            position: static;
+            padding: 20px;
+
+        }
+
+        h1 {
+            font-size: 22px;
+            color: #356FB3;
+            margin: 0px;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: 16px;
+            font-weight: 100;
+            margin: 0px;
+        }
+
+        h3 {
+            color: #356FB3;
+            font-size: 14px;
+            margin: 0px;
+            font-weight: bold;
+        }
+
+        p {
+            line-height: 14px;
+            font-weight: 400;
+        }
+
+        h1:first-letter {
+            text-transform: uppercase;
+        }
+
+        h2:first-letter {
+            text-transform: uppercase;
+        }
+
+        h3:first-letter {
+            text-transform: uppercase;
+        }
+
+        .col-sm-4 {
+            min-width: 33%;
+            width: 33%;
+            display: -webkit-inline-box;
+        }
+
+        .col-sm-8 {
+            width: 66%;
+            display: -webkit-inline-box;
+            background-color: red;
+        }
+
+        .row {
+
+            overflow: hidden;
+        }
+
+        .a {
+            background: #fff;
+            width: 24%;
+            color: black;
+            display: inline-block;
+            margin-top: 10px;
+
+        }
+
+        .b {
+            width: 74%;
+            color: black;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        img {
+            margin-bottom: 50px;
+            width: 100px;
+
+        }
+
+        .a, .b {
+            vertical-align: top;
+        }
+
+        .skillsList {
+            border-radius: 2px;
+            display: inline-block;
+            background-color: #CDE6F6;
+
+            color: black;
+            margin: 2px;
+            padding: 2px 3px 2px 3px;
+            font-size: 7px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="row">
+        <div class="a">
+            <img style="border-radius: 100%" src="<%= photo %>">
+            <img src="src/<%= iconOne %>">
+            <img src="src/<%= iconTwo %>">
+            <img src="src/<%= iconThree %>">
+            <img src="src/<%= iconFour %>">
+        </div>
+        <div class="b">
+            <div style="">
+                <h1>Syed Kazmi</h1>
+                <h2><%= jobTitle %></h2>
+                <br>
+                <p><%- background %></p>
+
+                <h3>Skills</h3>
+                <br>
+
+                <div>
+                    <% for(var i = 0; i < skills.length; i++) { %>
+                    <div class="skillsList"><%= skills[i] %></div>
+                    <% } %>
+                </div>
+
+            <br>
+                <h3>Experience</h3>
+                <div style="page-break-inside: avoid;">
+                    <p><%= exp1 %></p>
+                </div>
+                <div style="page-break-inside: avoid;">
+                    <p><%= exp2 %></p>
+                </div>
+                <div style="page-break-inside: avoid;">
+                    <p><%= exp3 %></p>
+                </div>
+                <div style="page-break-after: avoid"></div>
+                <div>
+                    <p style="page-break-inside: avoid;"><%= exp4 %></p>
+                </div>
+                <div style="page-break-inside: avoid;">
+                    <p><%= exp5 %></p>
+                </div>
+                <div style="page-break-inside: avoid;">
+                    <p><%= exp6 %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

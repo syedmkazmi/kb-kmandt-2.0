@@ -19,7 +19,7 @@ passport.use(new LocalStrategy({
             if(!user.validPassword(password)){
                 return done(null, false, {message: 'Incorrect Password.'});
             }
-            if(user.account.verified === 'false'){
+            if(user.accountVerified === 'false'){
                 return done(null, false, {message: 'Looks like your accounts not verified'});
             }
             return done(null, user)

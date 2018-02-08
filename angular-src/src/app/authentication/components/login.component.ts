@@ -12,15 +12,23 @@ export class LoginComponent implements OnInit {
   title: string = `Welcome to the Knowledge Base
  you can login below`;
   loginForm: FormGroup;
-  isLoggedIn: boolean = false;
+  backgroundImages: string [] = ["assets/images/backgrounds/login-bg.jpg", "assets/images/backgrounds/login-bg-2.jpg", "assets/images/backgrounds/login-bg-3.jpg", "assets/images/backgrounds/login-bg-4.jpg", "assets/images/backgrounds/login-bg-5.jpg", "assets/images/backgrounds/login-bg-6.jpg", "assets/images/backgrounds/login-bg-7.jpg", "assets/images/backgrounds/login-bg-8.jpg", "assets/images/backgrounds/login-bg-9.jpg", "assets/images/backgrounds/login-bg-10.jpg", "assets/images/backgrounds/login-bg-11.jpg", "assets/images/backgrounds/login-bg-12.jpg", "assets/images/backgrounds/login-bg-13.jpg", "assets/images/backgrounds/login-bg-14.jpg", "assets/images/backgrounds/login-bg-15.jpg"];
+  setBgImage: string;
 
   constructor(private _fb: FormBuilder, private _authService: AuthenticationService, private _notificationService: NotificationsService) {
   }
 
   ngOnInit() {
+
+    let element = document.getElementById("bg");
+    this.setBgImage = this.backgroundImages[this.randomImage()];
+    element.setAttribute('style', 'background-image: url(' + this.setBgImage +');');
+
+    //this.setBgImage = this.backgroundImages[this.randomImage()];
+
     this.loginForm = this._fb.group({
-      email: ['', [Validators.required, Validators.pattern('^[A-Za-z0-9._%+-]+@kmandt.com$')]],
-      password: ['', Validators.required]
+      email: ['', {updateOn: 'blur', validators: [Validators.required, Validators.pattern('^[A-Za-z0-9._%+-]+@kmandt.com$')]}],
+      password: ['',  [Validators.required]]
     });
   }
 
@@ -42,6 +50,10 @@ export class LoginComponent implements OnInit {
           }
         }
       )
+  }
+
+  private randomImage() {
+    return Math.floor((Math.random() * 14));
   }
 
 }

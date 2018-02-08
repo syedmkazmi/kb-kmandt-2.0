@@ -1,0 +1,119 @@
+* {
+  text-transform: capitalize;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.proposalDetailView {
+  padding: 20px 40px 20px 40px;
+}
+
+#proposal-id {
+  color: #0070E0;
+  font-size: 26px;
+  line-height: 33px;
+}
+
+#proposal-id img {
+  margin-right: 5px;
+}
+
+.section-title {
+  color: #333333;
+  font-size: 24px;
+  font-weight: 600;
+  padding-top: 40px;
+  padding-bottom: 10px;
+  line-height: 31px;
+}
+
+.live {
+  color: #f9a615;
+}
+
+.won {
+  color: #13CE66;
+}
+
+.lost {
+  color: #ff5346;
+}
+
+.status-circle-live {
+  display: inline-block;
+  background-color: #f9a615;
+  border-collapse: collapse;
+  margin: 2px 6px 2px 2px;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  vertical-align: text-bottom;
+}
+
+.status-circle-lost {
+  display: inline-block;
+  background-color: #ff5346;
+  border-collapse: collapse;
+  margin: 2px 6px 2px 2px;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  vertical-align: text-bottom;
+}
+
+.status-circle-won {
+  display: inline-block;
+  background-color: #13CE66;
+  border-collapse: collapse;
+  margin: 2px 6px 2px 2px;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  vertical-align: text-bottom;
+}
+
+.proposal-info {
+
+}
+
+.data-field {
+  border-top: 1px solid #E5E5E5;
+  padding: 20px 0 20px 0;
+}
+
+.field-title {
+  display: inline-block;
+  width: 50%;
+  margin-left: 5%;
+  color: #121212;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.field-title > span {
+  margin-right: 10px;
+}
+
+.field-value {
+  display: inline-block;
+  color: #ACB6C0;
+}
+
+#sticky-edit-button {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  height: 91px;
+  width: 100%;
+  background-color: #FFFFFF;
+  box-shadow: 0 -2px 11px 0 rgba(228, 228, 228, 0.5)
+}
+
+#sticky-edit-button > button {
+  height: 50px;
+  width: 404px;
+  color: #FFFFFF;
+  background-color: #0070E0;
+  font-size: 16px;
+  line-height: 20px;
+}
+

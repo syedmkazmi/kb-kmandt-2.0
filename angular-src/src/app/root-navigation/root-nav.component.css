@@ -2,6 +2,11 @@
   box-sizing: border-box
 }
 
+a {
+  font-size: 17px;
+  color: #121212;
+}
+
 #nav {
   width: 240px;
   background-color: #f7f9fa;
@@ -10,45 +15,108 @@
   bottom: 0;
 }
 
+.uk-nav > li > a {
+  padding-bottom: 0;
+  padding-top: 0;
+  padding-left: 40px;
+}
+
+.uk-nav > li > a:active {
+  padding-bottom: 0;
+  padding-top: 0;
+  padding-left: 36px;
+}
+
+#nav > ul > li {
+  padding-bottom: 18px;
+}
+
 #nav > ul > #header-logo {
-  width: 50%;
-  margin: 35px 35px 35px 35px;
-}
-
-#nav > ul {
-}
-
-#nav > ul > li > a {
-  color: #0070e0;
-  padding: 15px 0 10px 30px;
+  width: 94px;
+  height: 72px;
+  margin-top: 40px;
+  margin-bottom: 66px;
+  margin-left: 40px;
 }
 
 #nav > ul > li > a:hover {
-  background-color: #0070e0;
-  color: #ffffff;
+  color: #0070e0;
   animation-timing-function: ease-in;
   transition: 0.3s;
 }
 
-#nav > ul > li > a:active {
+#previous-page-btn {
+  color: #121212;
+  cursor: pointer;
+}
+
+/*#nav > ul > li > a:active {
   background-color: #0070e0;
   color: #ffffff;
+}*/
+
+.active {
+  color: #0070E0;
+  border-left: 5px solid #0070E0;
+  padding-left: 36px;
+}
+
+.active a {
+  padding-left: 36px;
 }
 
 #header {
   margin-left: 240px;
-  border-bottom: 2px solid #f7f9fa;
-  padding: 20px;
+  padding: 20px 120px 20px 20px;
   position: relative;
-  height: 60px;
+  height: 70px;
+  box-shadow: 0 1px 10px 0 rgba(196, 205, 213, 0.55);
 }
 
-#header > button {
-  position: absolute;
-  top: 15px;
-  right: 60px;
+#header > #add-btn {
+  float: right;
   color: #ffffff;
   line-height: 30px;
+  margin-right: 10px;
+  margin-top: -0.1%;
+  cursor: copy;
+}
+
+#header > #add-btn:focus {
+  outline: none;
+}
+
+#header > #add-btn > img {
+  width: 35px;
+}
+
+#user-profile-img {
+  float: right;
+  line-height: 30px;
+  margin-right: 10px;
+  margin-top: -0.5%;
+}
+
+#user-profile-img > img {
+  width: 40px;
+  border-radius: 100%;
+}
+
+#user-profile-btn {
+  float: right;
+  text-decoration: underline;
+  color: #121212;
+  font-size: 16px;
+  line-height: 25px;
+  text-transform: capitalize;
+}
+
+#user-profile-btn > a > span {
+  margin-left: 3px;
+}
+
+#user-profile-btn > a > .uk-icon {
+  width: 15px;
 }
 
 .uk-offcanvas-bar {
@@ -58,6 +126,6 @@
 @media screen and (max-width: 600px) {
   #nav {
     display: none;
-    width: 0px;
+    width: 0;
   }
 }

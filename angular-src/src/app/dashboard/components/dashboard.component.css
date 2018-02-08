@@ -1,0 +1,41 @@
+#dashboard {
+  margin-left: 240px;
+  padding-left: 60px;
+  padding-top: 40px;
+  padding-right: 60px;
+}
+
+#user-proposals {
+  width: 50%;
+  height: 200px;
+  border: 1px solid lightgrey;
+}
+
+#user-bios {
+  width: 50%;
+  height: 200px;
+  border: 1px solid lightgrey;
+}
+
+.uk-container {
+  padding-top: 100px;
+}
+
+.uk-card-body {
+  padding: 20px;
+  height: 250px;
+}
+
+#col1, #col2 {
+  min-width: 200px;
+}
+
+#proposals {
+  margin-left: 0 !important;
+}
+
+@media screen and (max-width: 600px) {
+  #dashboard {
+    margin-left: 0px;
+  }
+}

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from "../authentication/services/authentication.service";
+import {CropperSettings} from 'ng2-img-cropper';
 
 @Component({
   templateUrl: './welcome.component.html',
@@ -9,13 +9,23 @@ export class WelcomeComponent implements OnInit {
 
   title: string = `Welcome to your
 Dashboard`;
-
-  constructor(private _authService: AuthenticationService) {
+  data: any;
+  cropperSettings: CropperSettings;
+  constructor() {
   }
 
   ngOnInit() {
-    const isLoggedIn: boolean = this._authService.isLoggedIn();
-    this._authService.sendMessage(isLoggedIn);
+
+    this.cropperSettings = new CropperSettings();
+    this.cropperSettings.width = 300;
+    this.cropperSettings.height = 300;
+    this.cropperSettings.croppedWidth = 600;
+    this.cropperSettings.croppedHeight = 600;
+    this.cropperSettings.canvasWidth = 300;
+    this.cropperSettings.canvasHeight = 300;
+    this.cropperSettings.compressRatio = 10.0;
+
+    this.data = {};
   }
 
 

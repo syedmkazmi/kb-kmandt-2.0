@@ -1,0 +1,148 @@
+<div id="proposalAddForm">
+  <h1>{{title}}</h1>
+  <div class="grid-container" uk-grid>
+
+    <!--------------------------------------------------------------->
+    <!------------------------- SECTION ONE ------------------------->
+    <!--------------------------------------------------------------->
+    <div class="section-one">
+      <!------------------------- PROPOSAL ADD FORM ------------------------->
+      <form (ngSubmit)="save()" [formGroup]="proposalForm" novalidate>
+        <!----- SELECT REGION ------>
+        <label class="uk-form-label" for="title">Select Region</label>
+        <div id="select-region">
+          <input type='radio' value='UK' formControlName="proposalRegion" id="region-title-uk"/><label
+          for="region-title-uk"><span id="uk-icon"><img src="assets/images/region-icons/united-kingdom.svg"></span><span id="uk">United Kingdom</span></label>
+          <input type='radio' value='NA' formControlName="proposalRegion" id="region-title-na"/><label
+          for="region-title-na"><span id="na-icon"><img src="assets/images/region-icons/north-america.svg"></span><span id="na">North America</span></label>
+          <input type='radio' value='AU' formControlName="proposalRegion" id="region-title-au"/><label
+          for="region-title-au"><span id="au-icon"><img src="assets/images/region-icons/australia.svg"></span><span id="au">Asia Pacific</span></label>
+        </div>
+
+        <!----- ENTER TITLE------>
+        <div class="uk-margin">
+          <label class="uk-form-label" for="title" [ngClass]="{'error': proposalForm.get('proposalTitle').touched && proposalForm.get('proposalTitle').hasError('required')}">{{proposalForm.get('proposalTitle').touched && proposalForm.get('proposalTitle').hasError('required') ? "Title is Required" : "Proposal Title"}}</label>
+          <div class="uk-form-controls">
+            <input class="uk-input" type="text" placeholder="Enter Proposal Title" id="title" formControlName="proposalTitle">
+          </div>
+        </div>
+
+        <!----- SELECT OWNER ------>
+        <div class="uk-margin">
+          <label class="uk-form-label" for="owner" [ngClass]="{'error': proposalForm.get('owner').touched && proposalForm.get('owner').hasError('required')}">{{proposalForm.get('owner').touched && proposalForm.get('owner').hasError('required') ? "Proposal Owner is Required" : "Proposal Owner"}}</label>
+          <div class="uk-form-controls">
+            <select class="uk-select"  formControlName="owner" id="owner" (change)="setOwnerEmail()">
+              <option value="" disabled selected>Select User</option>
+              <option *ngFor="let user of users" value="{{user.firstName}} {{user.lastName}}">{{user.firstName}} {{user.lastName}}</option>
+            </select>
+          </div>
+        </div>
+
+        <!------------------------- CLIENT INFORMATION ------------------------->
+        <fieldset class="uk-fieldset">
+          <legend class="uk-legend">Client Information</legend>
+
+          <div class="uk-grid-small" uk-grid>
+            <!----- SELECT SECTOR ------>
+            <div class="uk-width-1-2@s">
+              <label class="uk-form-label" for="title" [ngClass]="{'error': proposalForm.get('sector').touched && proposalForm.get('sector').hasError('required')}">{{proposalForm.get('sector').touched && proposalForm.get('sector').hasError('required') ? "Sector is Required" : "Sector"}}</label>
+              <div class="uk-form-controls">
+                <select class="uk-select" formControlName="sector" id="sector">
+                  <option value="" disabled selected>Select Sector</option>
+                  <option *ngFor="let sector of sectors" value="{{sector.sectorName}}">{{sector.sectorName}}</option>
+                </select>
+              </div>
+            </div>
+            <!----- SELECT CLIENT ------>
+            <div class="uk-width-1-2@s">
+              <label class="uk-form-label" for="title" [ngClass]="{'error': proposalForm.get('client').touched && proposalForm.get('client').hasError('required')}">{{proposalForm.get('client').touched && proposalForm.get('client').hasError('required') ? "Client is Required" : "Client"}}</label>
+              <div class="uk-form-controls">
+                <select class="uk-select" formControlName="client" id="client" *ngIf="!newClient">
+                  <option value="" disabled selected>Select Sector</option>
+                  <optgroup *ngFor="let sector of sectors" label="{{sector.sectorName}}">
+                    <option *ngFor="let client of sector.sectorClients" value="{{client}}">{{client}}</option>
+                  </optgroup>
+                </select>
+                <input class="uk-input" type="text" placeholder="Enter Client Name" formControlName="client" *ngIf="newClient">
+              </div>
+            </div>
+            <div class="new-client-toggle" *ngIf="!newClient"><a (click)="addNewClient()">Add new client</a></div>
+            <div class="new-client-toggle" *ngIf="newClient"><a (click)="addNewClient()">Choose from existing clients</a></div>
+          </div>
+        </fieldset>
+
+        <!----- ENTER CLIENT CONTACT ------>
+        <div class="uk-margin">
+          <label class="uk-form-label" for="title" [ngClass]="{'error': proposalForm.get('clientContact').touched && proposalForm.get('clientContact').hasError('required')}">{{proposalForm.get('clientContact').touched && proposalForm.get('clientContact').hasError('required') ? "Client Contact is Required" : "Client Contact"}}</label>
+          <div class="uk-form-controls">
+            <input class="uk-input" type="text" placeholder="Enter Client Contact" formControlName="clientContact">
+          </div>
+        </div>
+
+        <!------------------------- PROPOSAL INFORMATION ------------------------->
+        <fieldset class="uk-fieldset">
+          <legend class="uk-legend">Proposal Information</legend>
+
+          <div class="uk-grid-small" uk-grid>
+            <!----- SELECT ISSUE DATE ------>
+            <div class="uk-width-1-2@s">
+              <label class="uk-form-label" for="title">Issue Date</label>
+              <div class="uk-form-controls">
+                <mat-form-field class="example-full-width">
+                  <input matInput [matDatepicker]="issueDate" formControlName="proposalIssueDate">
+                  <mat-datepicker-toggle matSuffix [for]="issueDate"></mat-datepicker-toggle>
+                  <mat-datepicker #issueDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <!----- SELECT RESPONSE DATE ------>
+            <div class="uk-width-1-2@s">
+              <label class="uk-form-label" for="title">Expected Response Date</label>
+              <div class="uk-form-controls">
+                <mat-form-field class="example-full-width">
+                  <input matInput [matDatepicker]="responseDate" formControlName="responseDate">
+                  <mat-datepicker-toggle matSuffix [for]="responseDate"></mat-datepicker-toggle>
+                  <mat-datepicker #responseDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <!----- ENTER DAYS PROPOSED ------>
+            <div class="uk-width-1-2@s">
+              <label class="uk-form-label" for="title" [ngClass]="{'error': proposalForm.get('totalNumberOfDays').touched && proposalForm.get('totalNumberOfDays').hasError('required')}">{{proposalForm.get('totalNumberOfDays').touched && proposalForm.get('totalNumberOfDays').hasError('required') ? "Days Proposed is Required" : "Days Proposed"}}</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" type="number" placeholder="Enter Total No. of Days" formControlName="totalNumberOfDays">
+              </div>
+            </div>
+            <!----- ENTER DAILY RATE ------>
+            <div class="uk-width-1-2@s">
+              <label class="uk-form-label" for="title" [ngClass]="{'error': proposalForm.get('dailyRate').touched && proposalForm.get('dailyRate').hasError('required')}">{{proposalForm.get('dailyRate').touched && proposalForm.get('dailyRate').hasError('required') ? "Daily Rate is Required" : "Daily Rate"}}</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" type="number" placeholder="Enter Daily Rate" formControlName="dailyRate">
+              </div>
+            </div>
+            <!----- ENTER EXPENSES ------>
+            <div class="uk-width-1-2@s">
+              <label class="uk-form-label" for="title" [ngClass]="{'error': proposalForm.get('expenses').touched && proposalForm.get('expenses').hasError('required')}">{{proposalForm.get('expenses').touched && proposalForm.get('expenses').hasError('required') ? "Expenses are Required" : "Expenses"}}</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" type="number" placeholder="Expenses" (change)="calculateTotal()" formControlName="expenses">
+              </div>
+            </div>
+            <!----- ENTER PROJECT VALUE ------>
+            <div class="uk-width-1-2@s">
+              <label class="uk-form-label" for="title" [ngClass]="{'error': proposalForm.get('totalValue').touched && proposalForm.get('totalValue').hasError('required')}">{{proposalForm.get('totalValue').touched && proposalForm.get('totalValue').hasError('required') ? "Total Value is Required" : "Total Value"}}</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" type="number" placeholder="Enter Total Value" formControlName="totalValue">
+              </div>
+            </div>
+
+          </div>
+        </fieldset>
+
+        <!----- SUBMIT BUTTON ------>
+        <button class="uk-button uk-button-primary" id="proposal-create-btn" [disabled]="proposalForm.invalid">{{proposalForm.invalid ? "Complete All Fields To Activate Me" : "CREATE PROPOSAL"}}</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+

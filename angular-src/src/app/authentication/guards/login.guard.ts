@@ -12,7 +12,7 @@ export class LoginGuard implements CanActivate {
     const isLoggedIn = this._authService.isLoggedIn();
     if (isLoggedIn) {
       //it true then DON'T proceed to route and go to welcome.
-      this._router.navigate(['/welcome']);
+      this._router.navigate(['/dashboard']);
       return false;
     }
 

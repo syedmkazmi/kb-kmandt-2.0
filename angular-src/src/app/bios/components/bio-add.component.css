@@ -1,0 +1,252 @@
+* {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+.bioAddForm {
+  margin-left: 240px;
+  padding: 40px 60px 40px 60px;
+}
+
+#section-one {
+  width: 70%;
+}
+
+.user-info {
+  margin-bottom: 50px;
+}
+
+#image {
+  width: 130px;
+  height: 130px;
+  display: inline-block;
+}
+
+#image > img {
+  width: 130px;
+  display: inline-block;
+  border-radius: 100%;
+}
+
+#name {
+  height: 60px;
+  width: 172px;
+  color: #333333;
+  font-size: 32px;
+  font-weight: 600;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: text-bottom;
+  text-transform: capitalize;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+#name > .uk-margin {
+  margin-left: 3px;
+}
+
+label[for=sector] {
+  color: #121212;
+  font-size: 15px;
+}
+
+.uk-select[name=sector] {
+  height: 22px;
+  width: 134px;
+  color: #AFAFBB;
+  font-size: 15px;
+  margin-top: -15px;
+  padding-left: 0;
+  padding-right: 0;
+  border: none;
+}
+
+#background-heading, #skills-heading, #experience-heading {
+  height: 31px;
+  color: #1B1A3D;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 31px;
+}
+
+#background-tip, #skills-tips, #experience-tips, #icon-tips {
+  color: #616171;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+#background-example, #experience-example {
+  margin-top: 20px;
+}
+
+#background-example, #experience-example > div {
+  padding: 15px;
+  border: 2px solid #E9E9EF;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 5px 0 rgba(0, 112, 224, 0.1);
+  color: #1B1A3D;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.uk-accordion-title {
+  color: #1B1A3D;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.uk-accordion-content {
+  margin-left: 4%;
+  color: #616171;
+  font-size: 13px;
+  line-height: 22px;
+}
+
+.uk-textarea {
+  padding: 20px;
+  border-radius: 4px;
+  border: 2px solid #E9E9EF;
+  height: 180px;
+}
+
+.uk-textarea:focus {
+  border: 2px solid #0070E0;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 5px 0 rgba(0, 112, 224, 0.1);
+}
+
+#background-example > div > div > p > span {
+  margin-right: 10px;
+}
+
+#experience-example > div > div > p > span {
+  margin-right: 10px;
+}
+
+#background-example > div > div > p > .uk-icon {
+  color: #0070E0;
+}
+
+#experience-example > div > div > p > .uk-icon {
+  color: #0070E0;
+}
+
+.skills > .uk-margin {
+  -webkit-column-count: 3; /* Chrome, Safari, Opera */
+  -moz-column-count: 3; /* Firefox */
+  column-count: 3;
+}
+
+#skills-label {
+  width: 100%;
+  border: 1px solid #E9E9EF;
+  border-radius: 3px;
+  background-color: #F7F8F9;
+  display: inline-block;
+  margin: 3px;
+  padding: 6px;
+  color: #616171;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+#skills-label > input {
+  float: right;
+}
+
+.uk-checkbox {
+  margin-top: 0;
+  border-radius: 3px;
+  background-color: #FFFFFF;
+}
+
+.uk-checkbox:checked {
+  border: 1px solid #0070E0;
+  border-radius: 3px;
+  background-color: #0070E0;
+}
+
+.uk-checkbox:checked + label {
+  border: 1px solid #0070E0;
+  border-radius: 3px;
+}
+
+.uk-select.ng-valid.ng-touched {
+  border: none;
+}
+
+.uk-select.ng-invalid.ng-touched {
+  border: none;
+}
+
+#experience {
+  margin-top: 20px;
+}
+
+.experience-fields {
+  height: 120px;
+  border: 2px solid #E9E9EF;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 5px 0 rgba(0, 112, 224, 0.1);
+  padding: 20px;
+}
+
+.experience-fields:focus {
+  border: 2px solid #0070E0;
+}
+
+#add-more-exp-btn {
+  border-radius: 4px;
+  background-color: #AFAFBB;
+  box-shadow: 0 0 5px 0 rgba(0, 112, 224, 0.1);
+  color: #FFFFFF;
+  font-size: 14px;
+  line-height: 18px;
+  padding: 10px;
+}
+
+#add-more-exp-btn > .uk-icon {
+  margin-right: 10px;
+}
+
+#section-two {
+  width: 30%;
+  text-align: -webkit-center;
+}
+
+#select-icons {
+  margin-top: 250px;
+}
+
+#select-icons > div {
+  margin-bottom: 10%;
+}
+
+#select-icons > div > img {
+  width: 160px;
+  /*height: 200px;*/
+  object-fit: cover;
+}
+
+.uk-switcher > li {
+  column-count: 5;
+}
+
+#custom-input[type=file]{
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+#image > #add-btn {
+  text-align: center;
+  cursor: pointer;
+  text-decoration: underline;
+  color: #0070E0;
+}

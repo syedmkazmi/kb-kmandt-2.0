@@ -1,0 +1,86 @@
+<section class="bios">
+  <h1>{{title}}</h1>
+
+  <!--<div class="search-bar">
+    <div class="uk-margin" id="search-bar">
+      <div class="uk-search uk-search-default">
+        <span uk-search-icon></span>
+        <input class="uk-search-input" type="search"  [(ngModel)]="_listFilter" placeholder="Search by ">
+      </div>
+    </div>
+
+    <div class="uk-inline" id="filters-btn">
+      <button class="uk-button uk-button-default" type="button">Filters <span uk-icon="icon: settings"></span></button>
+      <div uk-drop="mode: click">
+        <div class="uk-card uk-card-body uk-card-default">
+          <p id="filter-title">Status</p>
+          <fieldset id="status">
+            <div class="filter-options" uk-grid>
+              <div class="option-1"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.bioStatus" value="won" name="status"> Won</label></div>
+              <div class="option-2"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.bioStatus" value="live" name="status"> Live</label></div>
+              <div class="option-3"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.bioStatus" value="lost" name="status"> Lost</label></div>
+            </div>
+          </fieldset>
+
+          <fieldset id="region">
+            <div class="filter-options" uk-grid>
+              <div class="option-1"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.bioRegion" value="UK" name="region"> UK</label></div>
+              <div class="option-2"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.bioRegion" value="NA" name="region"> NA</label></div>
+              <div class="option-3"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.bioRegion" value="AU" name="region"> AU</label></div>
+            </div>
+          </fieldset>
+        </div>
+        <button (click)="filterbios()">Apply</button>
+        <button (click)="bioList()">Clear Filters</button>
+      </div>
+    </div>
+  </div>-->
+
+ <!-- <section *ngIf="!filterStatus" class="unsuccessful-filter">
+    <div>
+      {{filterMessage}}
+    </div>
+  </section>-->
+
+  <section>
+    <table class="uk-table uk-table-middle uk-table-divider">
+      <thead>
+      <tr>
+        <th></th>
+        <th class="uk-width-small">NAME</th>
+        <th>JOB TITLE</th>
+        <th>SECTOR</th>
+        <th>REGION</th>
+        <th>ADDED</th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let bio of bios">
+        <td class="bio-icon-td" id="bio-icon"><img class="bio-icon" src="assets/images/bio-icons/bio-normal.svg"></td>
+        <td class="bio-title" id="bio-title">{{bio.firstName}} {{bio.lastName}}</td>
+        <td>{{bio.jobTitle}}</td>
+        <td id="bio-sector"><span>{{bio.bioForSector}}</span></td>
+        <td id="bio-region">{{bio.region}}</td>
+        <td id="bio-added"><span>{{bio.dateCreated | date }}</span></td>
+        <td id="bio-download">
+          <div>
+            <a [routerLink]="['/bios', bio._id,'pdf']"><i class="material-icons">file_download</i></a>
+          </div>
+        </td>
+        <td id="bio-action">
+          <a class="uk-button uk-button-default" id="edit-btn"  [routerLink]="['/bios', bio._id]">View</a>
+          <!--<button uk-icon="icon: more; ratio: 1"></button>
+          <div uk-dropdown="mode: click">
+            <ul class="uk-nav uk-dropdown-nav"> [routerLink]="['/bios', bio._id]"
+              <li><a (click)="onSelect(bio)" uk-toggle="target: #offcanvas-slide">View</a></li>
+              <li><a [routerLink]="['/bios', bio._id]">Edit</a></li>
+            </ul>
+          </div>-->
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</section>

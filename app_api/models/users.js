@@ -6,14 +6,38 @@ const bcrypt = require('bcrypt-nodejs');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 
-const userSchema =  new mongoose.Schema({
+const userSchema = new mongoose.Schema({
+
+    firstName: String,
+    lastName: String,
     email: String,
     password: String,
-    fullName: String,
+    jobTitle: String,
+    photo: {data: Buffer, contentType: String},
+
+    startDate: {type: Date},
+    birthday: {type: Date},
+    lastLogin: {type: Date},
+
+    region: String,
+    sector: String,
+
     usersProposals: [],
-    account: {
-        verified: {type: String, default: 'false'}
-    }
+    isLineManager: {type: String, default: 'false'},
+    lineManagerEmail: String,
+    accessLevel: [],
+
+    biosPending: [String],
+    biosApproved: [{bioID: String, date: {type: Date, default: Date.now}}],
+
+    caseStudyPending: [String],
+
+    resetPasswordToken: String,
+    resetPasswordDate: Date,
+
+    accountConfirmationToken: String,
+    accountConfirmationTokenExpires: Date,
+    accountVerified: {type: String, default: 'false'}
 });
 
 
@@ -34,11 +58,14 @@ userSchema.methods.generateJwt = function () {
     expiry.setDate(expiry.getDate() + 7);
     //console.log("EXPIRY " + expiry.getTime()/1000);
     return jwt.sign({
-       _id: this._id,
+        _id: this._id,
         email: this.email,
-        fullName: this.fullName,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        region: this.region,
+        jobTitle: this.jobTitle,
+        lineManagerEmail: this.lineManagerEmail
     }, process.env.JWT_SECRET, {expiresIn: '1h'});
-
 };
 
 mongoose.model('Users', userSchema);

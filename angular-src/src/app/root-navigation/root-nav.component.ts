@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../authentication/services/authentication.service";
 import {Subscription} from "rxjs/Subscription";
+import {UserService} from "../users/services/user.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-root-nav',
@@ -9,12 +11,39 @@ import {Subscription} from "rxjs/Subscription";
 })
 export class RootNavComponent implements OnInit {
 
-  subscription: Subscription;
-  message: any;
-  constructor(private _authService: AuthenticationService) { }
+  subscription1: Subscription;
+  subscription2: Subscription;
+  isLoggedIn: any;
+  name: string;
+  _id: string;
+  profileImage: string;
+
+  constructor(private _authService: AuthenticationService, private _userService: UserService, private _location: Location) {
+    this.getUserInfo();
+  }
 
   ngOnInit() {
-    this.subscription = this._authService.getMessage().subscribe(message => { this.message = message; });
+    this.subscription1 = this._authService.getMessage().subscribe(message => {
+      this.isLoggedIn = message;
+    });
+
+    this.subscription2 = this._userService.getMessage().subscribe(data => {
+      this.profileImage = data;
+    });
+  }
+
+  private getUserInfo(){
+    if(localStorage.getItem("userInfo")){
+        this.name = JSON.parse(localStorage.getItem("userInfo")).firstName + " " + JSON.parse(localStorage.getItem("userInfo")).lastName;
+        this._id = JSON.parse(localStorage.getItem("userInfo"))._id;
+        this.profileImage = localStorage.getItem("profile-img");
+    } else {
+      console.log("no user info") //TODO: put function here to get user data if local storage is empty
+    }
+  }
+
+  public goBack() {
+    this._location.back();
   }
 
 }

@@ -1,0 +1,288 @@
+<div class="bioAddForm" uk-grid>
+  <!--------------------------------------------------------------->
+  <!------------------------- SECTION ONE ------------------------->
+  <!--------------------------------------------------------------->
+  <div id="section-one">
+    <!------------------------- BIO ADD FORM ------------------------->
+    <form (ngSubmit)="save()" [formGroup]="bioForm" novalidate>
+      <div class="user-info">
+        <!----- BIO IMAGE ----->
+        <div id="image">
+          <img id="user-img" src="{{userImage}}" onerror="this.src='/assets/images/user-profile-icon/default-user.svg'">
+          <div id="add-btn">
+            <div>
+              <input id="custom-input" type="file" (change)="imageCropperListener($event)">
+              <a class="uk-link-muted" type="button" tabindex="-1">Set New Image</a>
+            </div>
+          </div>
+        </div>
+        <!----- USER NAME & SELECT SECTOR ----->
+        <div class="uk-text-top" id="name">
+          {{userName}}
+          <div class="uk-margin">
+            <label for="sector">Sector</label>
+            <select class="uk-select" formControlName="bioForSector" id="sector" name="sector">
+              <option value="" disabled selected>Select Sector</option>
+              <option *ngFor="let sector of sectors" value="{{sector.sectorName}}">{{sector.sectorName}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!------------------------- BACKGROUND & OVERVIEW FIELD ------------------------->
+      <div class="background-and-overview">
+        <h1 id="background-heading">Background and Overview</h1>
+        <!----- TIP ----->
+        <div id="background-tip">
+          Write a detailed statement into your background. (Where you came from e.g. Toyota, Healthcare, Engineering)
+          Write about yourself in the third tense, as if describing somebody else.
+          Highlight the sector experience and years in industry.
+          Include your experience in the relevant sectors/industries (e.g. Supply Chain, Theatres, Emergency Department,
+          Mining, Rail, etc.)
+        </div>
+        <!----- EXAMPLE ----->
+        <div id="background-example">
+          <div uk-accordion>
+            <div>
+              <p class="uk-accordion-title" href="#"><span uk-icon="icon: info"></span>Background and Overview Example
+              </p>
+              <div class="uk-accordion-content">
+                Adam is an experienced Consultant who has led Lean programmes in a range of sectors including
+                healthcare, manufacturing, FMCG, public services, retail and utilities. He has a broad range of
+                knowledge and practical experience of Lean principles, tools and techniques.
+
+                He has more than 15 years’ experience of delivering Lean transformational change and supplier
+                development. His background also includes engineering and operations management in manufacturing and
+                retail including senior global supply chain management delivering savings through supply chain redesign
+              </div>
+            </div>
+          </div>
+        </div>
+        <!----- VALIDATORS ----->
+        <div *ngIf="bioForm.get('background').dirty">
+          <div *ngIf="bioForm.get('background').hasError('maxlength')">
+            <div class="uk-alert-danger" uk-alert>You are over the word limit.</div>
+          </div>
+        </div>
+
+        <div class="uk-margin">
+          <textarea class="uk-textarea" rows="5" placeholder="Enter Background and Overview here"
+                    formControlName="background"></textarea>
+        </div>
+      </div>
+      <!------------------------- SKILLS FIELD ------------------------->
+      <div class="skills">
+        <h1 id="skills-heading">Skills</h1>
+        <!----- TIP ----->
+        <div id="skills-tips">
+          From the list below, select all the different skills you are able to deliver.
+        </div>
+        <div class="uk-margin">
+          <div *ngFor="let data of skills">
+            <label id="skills-label" *ngFor="let skill of data.allSkills">
+              <input class="uk-checkbox" type="checkbox" (change)="skillsOnChange(skill, $event.target.checked)">
+              {{skill}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <!------------------------- EXPERIENCE FIELD ------------------------->
+      <div class="experience">
+        <h1 id="experience-heading">Experience</h1>
+        <!----- TIP ----->
+        <div id="experience-tips">
+          The experience section should help demonstrate the ROI achieved in various projects, included points such as:
+
+          - % Reductions
+          - Money saved, monthly and yearly
+          - Hours saved
+
+          Each text field below represents 1 bullet point. You can have a maximum of 6 bullet points & a minimum of
+          atleast 4 for your experience.
+        </div>
+        <!----- EXAMPLE ----->
+        <div id="experience-example">
+          <div uk-accordion>
+            <div>
+              <p class="uk-accordion-title" href="#"><span uk-icon="icon: info"></span>Experience Example
+              </p>
+              <div class="uk-accordion-content">
+                - Delivered £127M savings by completely redesigning the business process landscape of a major Utilities
+                Infrastructure company and implementing a new Lean business process from the end-to-end of the business
+                resulting in an efficiency improvement of +40%.
+                - Project managed a MRO project for a leading aviation company, generating a 25% reduction in lead time
+                on
+                major overhauls.
+                - Delivered “Opportunity Searches” within a hospital trust identifying £13m benefits to be delivered
+                within 2 years. Similar opportunity searches have been done within the Gas Utility industry to improve
+                productivity and reduce costs.
+                - Managed the assembly and commission phase of a $120 million locomotive delivery contract on-time,
+                on-budget and to quality requirements for a blue-chip rail business in Australia.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="experience" formGroupName="experience">
+          <!----- VALIDATORS ----->
+          <div *ngIf="bioForm.get('experience.field0').dirty">
+            <div *ngIf="bioForm.get('experience.field0').hasError('maxlength')">
+              <div class="uk-alert-danger" uk-alert>You are over the word limit.</div>
+            </div>
+          </div>
+          <div class="uk-margin">
+            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
+                      formControlName="field0"></textarea>
+          </div>
+          <!----- VALIDATORS ----->
+          <div *ngIf="bioForm.get('experience.field1').dirty">
+            <div *ngIf="bioForm.get('experience.field1').hasError('maxlength')">
+              <div class="uk-alert-danger" uk-alert>You are over the word limit.</div>
+            </div>
+          </div>
+          <div class="uk-margin">
+            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
+                      formControlName="field1"></textarea>
+          </div>
+          <!----- VALIDATORS ----->
+          <div *ngIf="bioForm.get('experience.field2').dirty">
+            <div *ngIf="bioForm.get('experience.field2').hasError('maxlength')">
+              <div class="uk-alert-danger" uk-alert>You are over the word limit.</div>
+            </div>
+          </div>
+          <div class="uk-margin">
+            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
+                      formControlName="field2"></textarea>
+          </div>
+          <!----- VALIDATORS ----->
+          <div *ngIf="bioForm.get('experience.field3').dirty">
+            <div *ngIf="bioForm.get('experience.field3').hasError('maxlength')">
+              <div class="uk-alert-danger" uk-alert>You are over the word limit.</div>
+            </div>
+          </div>
+          <div class="uk-margin">
+            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
+                      formControlName="field3"></textarea>
+          </div>
+
+          <!----- OPTIONAL EXPERIENCE FIELDS ----->
+          <div id="optional-experience" *ngIf="addMoreExperience">
+            <!----- VALIDATORS ----->
+            <div *ngIf="bioForm.get('experience.field4').dirty">
+              <div *ngIf="bioForm.get('experience.field4').hasError('maxlength')">
+                <div class="uk-alert-danger" uk-alert>You are over the word limit.</div>
+              </div>
+            </div>
+            <div class="uk-margin">
+              <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
+                        formControlName="field4"></textarea>
+            </div>
+            <!----- VALIDATORS ----->
+            <div *ngIf="bioForm.get('experience.field5').dirty">
+              <div *ngIf="bioForm.get('experience.field5').hasError('maxlength')">
+                <div class="uk-alert-danger" uk-alert>You are over the word limit.</div>
+              </div>
+            </div>
+            <div class="uk-margin">
+              <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
+                        formControlName="field5"></textarea>
+            </div>
+          </div>
+          <!----- OPTIONAL EXPERIENCE FIELD ----->
+          <a (click)="addMoreExp()">Add More Experience</a>
+        </div>
+      </div>
+      <!------------------------- SUBMIT BUTTON ------------------------->
+      <button class="uk-button uk-button-primary uk-margin-top" [disabled]="bioForm.invalid">{{bioForm.invalid ? "Fill All Fields To Activate Me" : "SAVE"}}</button>
+    </form>
+  </div>
+
+  <!--------------------------------------------------------------->
+  <!------------------------- SECTION TWO ------------------------->
+  <!--------------------------------------------------------------->
+  <div id="section-two">
+    <!------------------------- SELECT ICONS FIELDS ------------------------->
+    <div id="select-icons">
+      <!------ TIP ------>
+      <div id="icon-tips">
+        Use the icon selectors below to chose what icons to display on your bio.
+      </div>
+      <!------ ICON 1 ------>
+      <div>
+        <img id="image1" (click)="getBioIconElementId($event)" src="{{image1}}"
+             onerror="this.src='/assets/images/add-image-icon/add-image-icon.png'" href="#modal-sections" uk-toggle>
+      </div>
+      <!------ ICON 2 ------>
+      <div>
+        <img id="image2" (click)="getBioIconElementId($event)" src="{{image2}}"
+             onerror="this.src='/assets/images/add-image-icon/add-image-icon.png'"
+             href="#modal-sections" uk-toggle>
+      </div>
+      <!------ ICON 3 ------>
+      <div>
+        <img id="image3" (click)="getBioIconElementId($event)" src="{{image3}}"
+             onerror="this.src='/assets/images/add-image-icon/add-image-icon.png'"
+             href="#modal-sections" uk-toggle>
+      </div>
+      <!------ ICON 4 ------>
+      <div>
+        <img id="image4" (click)="getBioIconElementId($event)" src="{{image4}}"
+             onerror="this.src='/assets/images/add-image-icon/add-image-icon.png'"
+             href="#modal-sections" uk-toggle>
+      </div>
+    </div>
+
+    <div id="modal-sections" uk-modal>
+      <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+          <h2 class="uk-modal-title">Select Icon</h2>
+        </div>
+        <div class="uk-modal-body">
+          <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+            <li><a href="#">All</a></li>
+            <li><a href="#">Healthcare</a></li>
+            <li><a href="#">Manufacturing</a></li>
+            <li><a href="#">Other</a></li>
+          </ul>
+
+          <ul class="uk-switcher uk-margin">
+            <li *ngFor="let data of icons">
+              <div *ngFor="let icon of data.url">
+                <img class="uk-modal-close" src="{{icon}}" (click)="setBioIcon(icon)">
+              </div>
+            </li>
+            <li>Hello again!</li>
+            <li>Bazinga!</li>
+            <li>Bazinga!</li>
+          </ul>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!------------------------------------------------------------------------->
+<!------------------------- BIO ICONS POPUP MODAL ------------------------->
+<!------------------------------------------------------------------------->
+<div id="modal-container" class="uk-modal-container" uk-modal>
+  <div class="uk-modal-dialog">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title">Set Profile Picture</h2>
+    </div>
+    <div class="uk-modal-body">
+      <img-cropper #cropper [image]="croppedImage" [settings]="cropperSettings"></img-cropper>
+      <br>
+      <span class="result rounded" *ngIf="croppedImage.image">
+        <img [src]="croppedImage.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+      </span>
+    </div>
+    <div class="uk-modal-footer uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+      <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="setBioImage()">Save</button>
+    </div>
+  </div>
+</div>

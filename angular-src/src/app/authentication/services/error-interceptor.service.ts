@@ -17,7 +17,11 @@ export class ErrorInterceptorService implements HttpInterceptor {
         err => {
           if (err instanceof HttpErrorResponse) {
             if (err.status === 401) {
+              console.log("Inside error interceptor");
               this._router.navigate(['/login']);
+            } else if (err.status === 500){
+              console.log("Inside error interceptor");
+              this._router.navigate(['/']);
             }
           }
         });

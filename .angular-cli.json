@@ -21,7 +21,8 @@
       "prefix": "app",
       "styles": [
         "../../node_modules/uikit/dist/css/uikit.css",
-        "styles.css"
+        "styles.css",
+        "../../node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
       ],
       "scripts": [
         "../../node_modules/jquery/dist/jquery.slim.min.js",
