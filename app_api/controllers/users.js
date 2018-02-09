@@ -5,6 +5,7 @@ const fs = require("fs");
 const mongoose = require('mongoose');
 const User = mongoose.model('Users');
 const Proposal = mongoose.model('Proposals');
+const Bio      = mongoose.model('Bios');
 mongoose.Promise = Promise;
 
 let sendJsonResponse = (res, status, content) => {
@@ -49,6 +50,28 @@ let userProposals = (req, res) => {
                 sendJsonResponse(res, 404, {"message": "You have not added any proposals yet"})
             } else if (!data) {
                 sendJsonResponse(res, 404, {"message": "Unable to find user proposals"})
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            sendJsonResponse(res, 500, err)
+        })
+};
+
+// =======================================================
+// GET A SINGLE USERS  BIOS      =========================
+// =======================================================
+let userBios = (req, res) => {
+    Bio.find({'userID': req.params.id})
+        .sort([['dateCreated', -1]])
+        .exec()
+        .then((data) => {
+            if (data.length >= 1) {
+                sendJsonResponse(res, 200, data)
+            } else if (data.length <= 0) {
+                sendJsonResponse(res, 404, {"message": "You have not added any bios yet"})
+            } else if (!data) {
+                sendJsonResponse(res, 404, {"message": "Unable to find user bios"})
             }
         })
         .catch(err => {
@@ -104,5 +127,6 @@ module.exports = {
     getAllUsers,
     getOne,
     upload,
-    userProposals
+    userProposals,
+    userBios
 };

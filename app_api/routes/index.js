@@ -4,7 +4,7 @@
 
 const express = require('express');
 const router = express.Router();
-const {getAllUsers: findUser, getOne: user, upload: photo, userProposals: proposals} = require('../controllers/users');
+const {getAllUsers: findUser, getOne: user, upload: photo, userProposals: proposals, userBios: userbios} = require('../controllers/users');
 const {create: newProposal, update: updateExisting, get: getAll, getOne: getOne, upload: uploadFile, filter: filter , test: test} = require('../controllers/proposals');
 const {create: newBio, getOne: bio, get: bios, update: existingBio, pdfBio: pdfBio} = require('../controllers/bios');
 const {register: registerUser, login: loginUser} = require('../controllers/authentication');
@@ -58,6 +58,9 @@ router
 router
     .route('/users/:id/proposals')
     .get(proposals);
+router
+    .route('/users/:id/bios')
+    .get(userbios);
 
 // middleware for token authentication
 router.use((req, res, next)=>{
