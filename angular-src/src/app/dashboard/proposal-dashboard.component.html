@@ -1,5 +1,5 @@
 <section id="proposals-dashboard">
-  <h1>{{title}}</h1>
+  <h1>{{title}} - ({{proposals?.length}})</h1>
 
   <section>
     <table class="uk-table uk-table-middle uk-table-divider">
@@ -8,12 +8,12 @@
         <th></th>
         <th class="uk-width-small">NAME</th>
         <th>STATUS</th>
-        <th></th>
-        <th></th>
+        <th>FILE</th>
+        <th>EDIT</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let proposal of proposals | filter: _listFilter">
+      <tr *ngFor="let proposal of proposals | slice:0:show;">
         <td class="proposal-icon-td" id="proposal-icon"><img class="proposal-icon" src="assets/images/proposal-icons/proposal-normal.svg"></td>
         <td class="proposal-title" id="proposal-title" (click)="onSelect(proposal)" uk-toggle="target: #offcanvas-slide"><span id="title">{{proposal.proposalNo}} - <span>{{(proposal.proposalTitle.length>30) ? (proposal.proposalTitle | slice:0:30)+'...':(proposal.proposalTitle) }}</span></span>
           <span
@@ -37,6 +37,9 @@
       </tr>
       </tbody>
     </table>
+    <div class="loadMore">
+      <a (click)="loadMore()" *ngIf="show != proposals?.length">load more</a>
+    </div>
   </section>
 </section>
 

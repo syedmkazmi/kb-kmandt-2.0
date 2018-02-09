@@ -9,3 +9,15 @@ h1 {
   font-weight: 600 !important;
   line-height: 31px !important;
 }
+
+.loadMore {
+  text-align: center;
+  width: 60%;
+}
+
+.loadMore > a {
+  color: #0070e0;
+}
+.loadMore > a:hover {
+  font-weight: 600;
+}
