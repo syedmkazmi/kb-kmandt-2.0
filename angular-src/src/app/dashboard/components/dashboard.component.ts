@@ -13,7 +13,8 @@ export class DashboardComponent implements OnInit {
   proposals: IProposal[];
   userID: string;
 
-  constructor(private _ds: DashboardService) { }
+  constructor(private _ds: DashboardService) {
+  }
 
   ngOnInit() {
     this._getUserId();

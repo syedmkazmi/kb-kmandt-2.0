@@ -69,7 +69,7 @@ h1 {
 
 #proposal-title {
   width: 350px;
-  cursor: help;
+  cursor: pointer;
 }
 
 #proposal-icon {
