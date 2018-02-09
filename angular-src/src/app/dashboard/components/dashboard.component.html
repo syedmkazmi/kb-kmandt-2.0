@@ -4,32 +4,6 @@
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
   </div>
 
-  <!--<div>
-    <img-cropper [image]="data" [settings]="cropperSettings"></img-cropper><br>
-    <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
-  </div>
-  <br>
-  {{data.image}}-->
   <proposal-dashboard [proposals]="proposals"></proposal-dashboard>
-  <div class="uk-child-width-expand" uk-grid>
-    <div id="col1">
-      <h3>Proposals</h3>
-      <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-        <h3 class="uk-card-title"></h3>
-        <div id="plist">
-
-        </div>
-      </div>
-    </div>
-
-    <div id="col2">
-      <h3>Bios</h3>
-      <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-        <h3 class="uk-card-title"></h3>
-        <div id="blist">
-
-        </div>
-      </div>
-    </div>
-  </div>
+  <bio-dashboard [bios]="bios"></bio-dashboard>
 </section>

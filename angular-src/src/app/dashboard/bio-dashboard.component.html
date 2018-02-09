@@ -1,0 +1,36 @@
+<section class="bios-dashboard">
+  <h1>{{title}} - ({{bios?.length || 0}})</h1>
+  <section>
+    <table class="uk-table uk-table-middle uk-table-divider">
+      <thead>
+      <tr>
+        <th></th>
+        <th class="uk-width-small">NAME</th>
+        <th>SECTOR</th>
+        <th>ADDED</th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let bio of bios | slice:0:show;">
+        <td class="bio-icon-td" id="bio-icon"><img class="bio-icon" src="assets/images/bio-icons/bio-normal.svg"></td>
+        <td class="bio-title" id="bio-title">{{bio.firstName}} {{bio.lastName}}</td>
+        <td id="bio-sector"><span>{{bio.bioForSector}}</span></td>
+        <td id="bio-added"><span>{{bio.dateCreated | date }}</span></td>
+        <td id="bio-download">
+          <div>
+            <a [routerLink]="['/bios', bio._id,'pdf']"><i class="material-icons">file_download</i></a>
+          </div>
+        </td>
+        <td id="bio-action">
+          <a class="uk-button uk-button-default" id="edit-btn"  [routerLink]="['/bios', bio._id]">View</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="loadMore">
+      <a (click)="loadMore()" *ngIf="show != bios?.length">load more</a>
+    </div>
+  </section>
+</section>
