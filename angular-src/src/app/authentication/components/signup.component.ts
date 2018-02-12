@@ -13,14 +13,15 @@ import {NotificationsService} from "../../root/services/notifications.service";
 export class SignupComponent implements OnInit {
   title: string = "Sign up";
   signupForm: FormGroup;
-  user: IUser[];
+
 
   constructor(private _fb: FormBuilder, private _authenticationService: AuthenticationService, private _notificationService: NotificationsService) {
   }
 
   ngOnInit() {
     this.signupForm = this._fb.group({
-      fullName: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
@@ -29,7 +30,8 @@ export class SignupComponent implements OnInit {
 
   signUp() {
     this._authenticationService.signUp({
-      "fullName": this.signupForm.value.fullName,
+      "firstName": this.signupForm.value.firstName,
+      "lastName": this.signupForm.value.lastName,
       "email": this.signupForm.value.email,
       "password": this.signupForm.value.password
     })

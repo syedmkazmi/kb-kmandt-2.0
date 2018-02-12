@@ -1,4 +1,4 @@
-*{
+* {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -16,6 +16,14 @@ h1 {
   padding-top: 40px;
   padding-right: 60px;
   padding-bottom: 40px;
+}
+
+#main-title {
+  font-weight: 600;
+}
+
+#sub-title {
+  font-weight: lighter;
 }
 
 #user-proposals {

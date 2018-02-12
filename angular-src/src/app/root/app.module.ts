@@ -29,6 +29,7 @@ import {UsersModule} from "../users/users.module";
 import {SharedModule} from "../shared/shared.module";
 import {DashboardModule} from "../dashboard/dashboard.module";
 import {DashboardService} from "../dashboard/services/dashboard.service";
+import {AssociatesModule} from "../associates/associates.module";
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {DashboardService} from "../dashboard/services/dashboard.service";
     ProposalModule,
     BioModule,
     UsersModule,
+    AssociatesModule,
     AppRoutingModule
   ],
   providers: [

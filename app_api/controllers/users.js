@@ -1,7 +1,6 @@
 /**
  * Created by syedkazmi on 22/08/2017.
  */
-const fs = require("fs");
 const mongoose = require('mongoose');
 const User = mongoose.model('Users');
 const Proposal = mongoose.model('Proposals');

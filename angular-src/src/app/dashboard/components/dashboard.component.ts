@@ -10,7 +10,7 @@ import {IBio} from "../../bios/interfaces/Bio";
 })
 export class DashboardComponent implements OnInit {
 
-  title: string = "Dashboard";
+  title: string = "Welcome to your Dashboard";
   proposals: IProposal[];
   bios: IBio[];
   userID: string;
