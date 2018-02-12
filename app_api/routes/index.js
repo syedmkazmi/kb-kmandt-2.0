@@ -7,7 +7,7 @@ const router = express.Router();
 const {getAllUsers: findUser, getOne: user, upload: photo, userProposals: proposals, userBios: userbios} = require('../controllers/users');
 const {create: newProposal, update: updateExisting, get: getAll, getOne: getOne, upload: uploadFile, filter: filter , test: test} = require('../controllers/proposals');
 const {create: newBio, getOne: bio, get: bios, update: existingBio, pdfBio: pdfBio} = require('../controllers/bios');
-const {register: registerUser, login: loginUser} = require('../controllers/authentication');
+const {register: registerUser, login: loginUser, verify: verify} = require('../controllers/authentication');
 const {get: sectors} = require('../controllers/sectors');
 const {get: skills} = require('../controllers/skills');
 const {get: icons} = require('../controllers/icons');
@@ -49,6 +49,9 @@ router
 router
     .route('/users')
     .get(findUser);
+router
+    .route('/users/verify/:token')
+    .get(verify);
 router
     .route('/users/:id')
     .get(user);
