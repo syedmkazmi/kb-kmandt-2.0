@@ -59,8 +59,7 @@ let register = (req, res) => {
                             if (err) {
                                 console.log(err);
                             } else {
-                                console.log(response);
-                                sendJsonResponse(res, 200, response)
+                                sendJsonResponse(res, 200, {"message": "Great! You have successfully registered."})
                             }
                         })
                     }

@@ -13,16 +13,23 @@ import {NotificationsService} from "../../root/services/notifications.service";
 export class SignupComponent implements OnInit {
   title: string = "Sign up";
   signupForm: FormGroup;
-
+  backgroundImages: string [] = ["assets/images/backgrounds/login-bg.jpg", "assets/images/backgrounds/login-bg-2.jpg", "assets/images/backgrounds/login-bg-3.jpg", "assets/images/backgrounds/login-bg-4.jpg", "assets/images/backgrounds/login-bg-5.jpg", "assets/images/backgrounds/login-bg-6.jpg", "assets/images/backgrounds/login-bg-7.jpg", "assets/images/backgrounds/login-bg-8.jpg", "assets/images/backgrounds/login-bg-9.jpg", "assets/images/backgrounds/login-bg-10.jpg", "assets/images/backgrounds/login-bg-11.jpg", "assets/images/backgrounds/login-bg-12.jpg", "assets/images/backgrounds/login-bg-13.jpg", "assets/images/backgrounds/login-bg-14.jpg", "assets/images/backgrounds/login-bg-15.jpg"];
+  registrationSuccess: boolean = false;
+  setBgImage: string;
 
   constructor(private _fb: FormBuilder, private _authenticationService: AuthenticationService, private _notificationService: NotificationsService) {
   }
 
   ngOnInit() {
+
+    let element = document.getElementById("bg");
+    this.setBgImage = this.backgroundImages[this.randomImage()];
+    element.setAttribute('style', 'background-image: url(' + this.setBgImage +');');
+
     this.signupForm = this._fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', {updateOn: 'blur', validators: [Validators.required, Validators.pattern('^[A-Za-z0-9._%+-]+@kmandt.com$')]}],
       password: ['', Validators.required]
     });
   }
@@ -37,7 +44,7 @@ export class SignupComponent implements OnInit {
     })
       .subscribe(
         data => {
-          console.log("REG " + data);
+            this.registrationSuccess = true;
         },
         (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
@@ -53,6 +60,9 @@ export class SignupComponent implements OnInit {
       )
   }
 
+  private randomImage() {
+    return Math.floor((Math.random() * 14));
+  }
   /*signup() {
 
     this._userService.getUsers().subscribe(
