@@ -10,14 +10,14 @@ const userSchema = new mongoose.Schema({
 
     firstName: String,
     lastName: String,
-    email: String,
+    email: {type: String, set: toLower},
     password: String,
     jobTitle: String,
     photo: {data: Buffer, contentType: String},
 
     startDate: {type: Date},
     birthday: {type: Date},
-    lastLogin: {type: Date},
+    lastLogin: {type: Date}, //TODO: Set last login date on login
 
     region: String,
     sector: String,
@@ -67,5 +67,10 @@ userSchema.methods.generateJwt = function () {
         lineManagerEmail: this.lineManagerEmail
     }, process.env.JWT_SECRET, {expiresIn: '1h'});
 };
+
+function toLower(data) {
+    return data.toLowerCase();
+}
+
 
 mongoose.model('Users', userSchema);

@@ -30,6 +30,8 @@ import {SharedModule} from "../shared/shared.module";
 import {DashboardModule} from "../dashboard/dashboard.module";
 import {DashboardService} from "../dashboard/services/dashboard.service";
 import {AssociatesModule} from "../associates/associates.module";
+import {UserDetailsGuard} from "../authentication/guards/user-details.guard";
+import { PromptUserDetailsComponent } from './prompt-user-details.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import {AssociatesModule} from "../associates/associates.module";
     WelcomeComponent,
     RootNavComponent,
     //NotificationsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PromptUserDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ import {AssociatesModule} from "../associates/associates.module";
     SkillResolverService,
     IconResolverService,
     AuthGuard,
+    UserDetailsGuard,
     LoginGuard,
     {
       provide: HTTP_INTERCEPTORS,

@@ -82,7 +82,10 @@
         </div>
 
         <!----- SUBMIT BUTTON ----->
-        <button type="submit" [disabled]="signupForm.invalid" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom" id="submit-btn">{{signupForm.invalid ? "FILL FIELDS TO SIGN UP" : "SIGN UP"}}</button>
+        <button type="submit" *ngIf="!buttonLoading" [disabled]="signupForm.invalid" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom submit-btn"> {{signupForm.invalid ? "FILL FIELDS TO SIGN UP" : "SIGN UP"}}</button>
+
+        <!----- PROCESSING BUTTON ----->
+        <button type="submit" *ngIf="buttonLoading" [disabled]="signupForm.invalid" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom submit-btn"><span id="btn-loading-spinner" uk-spinner></span> <span id="btn-loading-text">LOADING...</span></button>
       </form>
 
       <div id="dont-have-an-account">Already have an account? <a [routerLink]="['/login']">Login</a></div>

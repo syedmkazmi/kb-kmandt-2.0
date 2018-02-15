@@ -200,6 +200,7 @@ export class BioEditComponent implements OnInit {
       this.onSaveComplete();
     }
   }
+
   onSaveComplete(): void {
     this.bioEditForm.reset();
     this._router.navigate(['/bios']);

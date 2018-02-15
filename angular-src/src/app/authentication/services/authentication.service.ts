@@ -8,12 +8,13 @@ import {Router} from "@angular/router";
 import {Subject} from 'rxjs/Subject';
 import * as moment from "moment";
 import {environment} from "../../../environments/environment";
+import {UserService} from "../../users/services/user.service";
 
 @Injectable()
 export class AuthenticationService {
   private subject = new Subject<any>();
 
-  constructor(private _http: HttpClient, private _router: Router) {
+  constructor(private _http: HttpClient, private _router: Router, private _userService: UserService) {
   }
 
   signUp(body): Observable<IAuthToken> {
@@ -33,7 +34,7 @@ export class AuthenticationService {
   }
 
   login(body): Observable<IAuthToken> {
-    //const DEV_BASE_URL = "http://localhost:3000";
+
     const BASE_URL = environment.apiUrl;
 
     return this._http.post<IAuthToken>(BASE_URL + '/api/login', body)
@@ -51,7 +52,7 @@ export class AuthenticationService {
             localStorage.setItem("userInfo", JSON.stringify(userInfo));
             this._router.navigate(['/'])
           }
-          return token;
+          return data;
         }),
         catchError(err => {
           // do whatever you want when error occurs

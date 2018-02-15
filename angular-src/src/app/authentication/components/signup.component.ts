@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {IUser} from "../../users/interfaces/user";
 import {HttpErrorResponse} from "@angular/common/http";
 import {AuthenticationService} from "../services/authentication.service";
 import {NotificationsService} from "../../root/services/notifications.service";
+import {flatMap} from "tslint/lib/utils";
 
 @Component({
   templateUrl: './signup.component.html',
@@ -16,6 +16,7 @@ export class SignupComponent implements OnInit {
   backgroundImages: string [] = ["assets/images/backgrounds/login-bg.jpg", "assets/images/backgrounds/login-bg-2.jpg", "assets/images/backgrounds/login-bg-3.jpg", "assets/images/backgrounds/login-bg-4.jpg", "assets/images/backgrounds/login-bg-5.jpg", "assets/images/backgrounds/login-bg-6.jpg", "assets/images/backgrounds/login-bg-7.jpg", "assets/images/backgrounds/login-bg-8.jpg", "assets/images/backgrounds/login-bg-9.jpg", "assets/images/backgrounds/login-bg-10.jpg", "assets/images/backgrounds/login-bg-11.jpg", "assets/images/backgrounds/login-bg-12.jpg", "assets/images/backgrounds/login-bg-13.jpg", "assets/images/backgrounds/login-bg-14.jpg", "assets/images/backgrounds/login-bg-15.jpg"];
   registrationSuccess: boolean = false;
   setBgImage: string;
+  buttonLoading: boolean = false;
 
   constructor(private _fb: FormBuilder, private _authenticationService: AuthenticationService, private _notificationService: NotificationsService) {
   }
@@ -36,6 +37,8 @@ export class SignupComponent implements OnInit {
 
 
   signUp() {
+    this.buttonLoading = true;
+
     this._authenticationService.signUp({
       "firstName": this.signupForm.value.firstName,
       "lastName": this.signupForm.value.lastName,
@@ -44,7 +47,8 @@ export class SignupComponent implements OnInit {
     })
       .subscribe(
         data => {
-            this.registrationSuccess = true;
+          this.registrationSuccess = true;
+          this.buttonLoading = false;
         },
         (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
@@ -53,6 +57,7 @@ export class SignupComponent implements OnInit {
           } else {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
+            this.buttonLoading = false;
             this._notificationService.sendNotification(err.error.message);
             console.log(`Backend returned code ${err.status}, body was: ${err.error.message}`);
           }

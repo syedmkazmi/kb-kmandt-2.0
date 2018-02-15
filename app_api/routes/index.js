@@ -4,7 +4,7 @@
 
 const express = require('express');
 const router = express.Router();
-const {getAllUsers: findUser, getOne: user, upload: photo, userProposals: proposals, userBios: userbios} = require('../controllers/users');
+const {getAllUsers: findUser, getOne: user, upload: photo, userProposals: proposals, userBios: userbios, update: updateUser} = require('../controllers/users');
 const {create: newProposal, update: updateExisting, get: getAll, getOne: getOne, upload: uploadFile, filter: filter , test: test} = require('../controllers/proposals');
 const {create: newBio, getOne: bio, get: bios, update: existingBio, pdfBio: pdfBio} = require('../controllers/bios');
 const {register: registerUser, login: loginUser, verify: verify} = require('../controllers/authentication');
@@ -54,7 +54,8 @@ router
     .get(verify);
 router
     .route('/users/:id')
-    .get(user);
+    .get(user)
+    .put(updateUser);
 router
     .route('/users/:id/photo')
     .put(photo);

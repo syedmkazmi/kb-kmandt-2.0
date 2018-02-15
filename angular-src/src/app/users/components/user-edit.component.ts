@@ -5,9 +5,11 @@ import {Router} from "@angular/router";
 import {IUser} from "../interfaces/user";
 import {ISector} from "../../root/interfaces/sector";
 import {UserService} from "../services/user.service";
+import {NotificationsService} from "../../root/services/notifications.service";
 import {ViewChild} from "@angular/core";
 import {ImageCropperComponent, CropperSettings} from "ng2-img-cropper";
 import UIkit from 'uikit'
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'user-edit',
@@ -25,7 +27,7 @@ export class UserEditComponent implements OnInit {
   imageType: string;
   UIkit: any;
 
-  constructor(private _route: ActivatedRoute, private _fb: FormBuilder, private _router: Router, private _userService: UserService) {
+  constructor(private _route: ActivatedRoute, private _fb: FormBuilder, private _router: Router, private _userService: UserService, private _notificationService: NotificationsService) {
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.noFileInput = true;
     this.data = {};
@@ -123,7 +125,36 @@ export class UserEditComponent implements OnInit {
   }
 
   save() {
+    if (this.userEditForm.dirty && this.userEditForm.touched) {
+      let p = Object.assign({}, this.user, this.userEditForm.value);
+      let id = this._route.snapshot.paramMap.get('id');
 
+      this._userService.update(p, id)
+        .subscribe(
+          () => {
+            this._updateLocalStorage();
+            this.onSaveComplete()
+          },
+          (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+              // A client-side or network error occurred. Handle it accordingly.
+              console.log('An error occurred:', err.error.message);
+            } else {
+              // The backend returned an unsuccessful response code.
+              // The response body may contain clues as to what went wrong,
+              this._notificationService.sendNotification(err.error.message); //TODO Does not show server 500 error.
+              console.log(`Backend returned code ${err.status}, body was: ${err.error.message}`);
+            }
+          }
+        )
+    } else if (!this.userEditForm.dirty) {
+      this.onSaveComplete();
+    }
+  }
+
+  onSaveComplete(): void {
+    this.userEditForm.reset();
+    this._router.navigate(['/']);
   }
 
   saveProfileImage() {
@@ -190,6 +221,15 @@ export class UserEditComponent implements OnInit {
 
   private _stripBase64(image) {
     return image.replace(/^data:image\/[a-z]+;base64,/, "");
+  }
+
+  private _updateLocalStorage() {
+    let userInfo = {
+      _id: JSON.parse(localStorage.getItem("userInfo"))._id,
+      firstName: this.userEditForm.controls['firstName'].value,
+      lastName: this.userEditForm.controls['lastName'].value
+    };
+    localStorage.setItem("userInfo", JSON.stringify(userInfo));
   }
 
 }

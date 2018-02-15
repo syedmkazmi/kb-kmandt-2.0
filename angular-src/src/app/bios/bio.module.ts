@@ -14,6 +14,7 @@ import {BioListComponent} from './components/bio-list.component';
 import {BioListResolverService} from "./services/bio-list-resolver.service";
 import {SharedModule} from "../shared/shared.module";
 import {BioPdfComponent} from './components/bio-pdf.component';
+import {UserDetailsGuard} from "../authentication/guards/user-details.guard";
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import {BioPdfComponent} from './components/bio-pdf.component';
     RouterModule.forChild([
       {
         path: 'bios',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, UserDetailsGuard],
         resolve: {icon: IconResolverService, skill: SkillResolverService, sector: SectorResolverService},
         children: [
           {

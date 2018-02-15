@@ -13,18 +13,15 @@ import UIkit from 'uikit'
 
 export class AppComponent implements OnInit, AfterViewInit {
 
-  isLoggedIn: boolean;
   public loading: boolean = false;
-  UIkit: any;
 
   constructor(private _router: Router, private _authService: AuthenticationService, private _spinnerService: SpinnerService) {
     _router.events.subscribe((routerEvent: RouterEvent) => {
       if (routerEvent instanceof NavigationStart) {
         this.loading = true;
-      } else if (routerEvent instanceof NavigationError || routerEvent instanceof NavigationCancel || routerEvent instanceof NavigationEnd){
-        //console.log("end");
+      } else if (routerEvent instanceof NavigationError || routerEvent instanceof NavigationCancel || routerEvent instanceof NavigationEnd) {
         this.loading = false;
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
       }
     });
   }
@@ -33,17 +30,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    /*this._spinnerService.loaderStatus.subscribe((val: boolean) => {
-        this.loading = val;
-    });*/
-
-    /*UIkit.notification({
-      message: '<span id="notification-icon" uk-icon=\'icon: check\'></span> my-message!',
-      status: 'primary',
-      pos: 'top-right',
-      timeout: 5000
-    });*/
-
   }
 
 }

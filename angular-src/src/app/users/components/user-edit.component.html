@@ -26,6 +26,13 @@
           </div>
         </div>
 
+        <div class="uk-margin">
+          <label class="uk-form-label" for="title">Job Title</label>
+          <div class="uk-form-controls">
+            <input class="uk-input" type="text" placeholder="Enter Your Job Title" id="jobTitle" formControlName="jobTitle">
+          </div>
+        </div>
+
         <div class="uk-grid-small" uk-grid>
           <div class="uk-width-1-2@s">
             <label class="uk-form-label" for="startDate">Start Date</label>
@@ -82,9 +89,7 @@
         </div>
 
         <div class="uk-margin">
-          <button class="uk-button uk-button-primary" id="user-update-btn" [disabled]="userEditForm.invalid">UPDATE
-            DETAILS
-          </button>
+          <button class="uk-button uk-button-primary" id="user-update-btn" [disabled]="userEditForm.invalid">UPDATE DETAILS</button>
         </div>
       </form>
 

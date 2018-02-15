@@ -52,13 +52,14 @@ let register = (req, res) => {
                         const input = {
                             'id': 2,
                             'to': req.body.email,
-                            'attr': {"TOKEN": 'http://' + req.headers.host + '/api/users/verify/' + token}
+                            'attr': {"TOKEN": req.headers.host + '/api/users/verify/' + token}
                         };
 
                         sendinObj.send_transactional_template(input, function (err, response) {
                             if (err) {
                                 console.log(err);
                             } else {
+                                console.log(response);
                                 sendJsonResponse(res, 200, {"message": "Great! You have successfully registered."})
                             }
                         })
@@ -76,7 +77,6 @@ let register = (req, res) => {
 // login function
 let login = (req, res) => {
     if (!req.body.email || !req.body.password) {
-        console.log("Server " + JSON.stringify(req.headers));
         sendJsonResponse(res, 400, {"message": "All fields required"});
         return;
     }
@@ -94,11 +94,17 @@ let login = (req, res) => {
             // Below code does not work
             //let base64data= JSON.stringify(user.photo).toString('base64');
             // let x = encodeURIComponent(base64data);
+            let registration = false;
+
+            if(user.jobTitle == null || user.sector == null || user.region == null || user.startDate == null || user.birthday == null || user.lineManagerEmail ==  null){
+                registration = true;
+            }
 
             sendJsonResponse(res, 200, {
                 "token": token,
                 "expiresIn": 60,
-                "userInfo": {"firstName": user.firstName, "lastName": user.lastName, "_id": user._id}
+                "userInfo": {"_id": user._id, "firstName": user.firstName, "lastName": user.lastName},
+                "registration": registration
             });
         } else {
             sendJsonResponse(res, 401, info);
