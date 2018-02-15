@@ -3,6 +3,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {AuthenticationService} from "../services/authentication.service";
 import {NotificationsService} from "../../root/services/notifications.service";
+import {Router} from "@angular/router";
 
 @Component({
   templateUrl: './login.component.html',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   backgroundImages: string [] = ["assets/images/backgrounds/login-bg.jpg", "assets/images/backgrounds/login-bg-2.jpg", "assets/images/backgrounds/login-bg-3.jpg", "assets/images/backgrounds/login-bg-4.jpg", "assets/images/backgrounds/login-bg-5.jpg", "assets/images/backgrounds/login-bg-6.jpg", "assets/images/backgrounds/login-bg-7.jpg", "assets/images/backgrounds/login-bg-8.jpg", "assets/images/backgrounds/login-bg-9.jpg", "assets/images/backgrounds/login-bg-10.jpg", "assets/images/backgrounds/login-bg-11.jpg", "assets/images/backgrounds/login-bg-12.jpg", "assets/images/backgrounds/login-bg-13.jpg", "assets/images/backgrounds/login-bg-14.jpg", "assets/images/backgrounds/login-bg-15.jpg"];
   setBgImage: string;
 
-  constructor(private _fb: FormBuilder, private _authService: AuthenticationService, private _notificationService: NotificationsService) {
+  constructor(private _fb: FormBuilder, private _authService: AuthenticationService, private _notificationService: NotificationsService, private _router: Router) {
   }
 
   ngOnInit() {
@@ -35,8 +36,8 @@ export class LoginComponent implements OnInit {
   logIn() {
     this._authService.login({"email": this.loginForm.value.email, "password": this.loginForm.value.password})
       .subscribe(
-        data => {
-          console.log("Login Token" + data)
+        () => {
+              console.log("Successfully LoggedIn")
         },
         (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {

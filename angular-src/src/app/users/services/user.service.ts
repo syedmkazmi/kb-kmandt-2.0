@@ -7,7 +7,6 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 import { IUser } from "../interfaces/user";
 import {environment} from "../../../environments/environment";
-import {IProposal} from "../../proposals/interfaces/proposal";
 import {HttpHeaders} from "@angular/common/http";
 import {Subject} from 'rxjs/Subject';
 
@@ -34,7 +33,7 @@ export class UserService {
   getOne(id): Observable <IUser>{
     const BASE_URL = environment.apiUrl;
 
-    return this._http.get<IProposal>(`${BASE_URL}/api/users/${id}`)
+    return this._http.get<IUser>(`${BASE_URL}/api/users/${id}`)
       .catch(err => {
         // do whatever you want when error occurs
         console.log(err);
@@ -44,6 +43,21 @@ export class UserService {
       });
   }
 
+  update(body, id): Observable<IUser> {
+    const BASE_URL = environment.apiUrl;
+
+    return this._http.put<IUser>(`${BASE_URL}/api/users/${id}`, body)
+      .map(data => {
+        return data;
+      })
+      .catch(err => {
+        // do whatever you want when error occurs
+        console.log(err);
+
+        // re-throw error so you can catch it when subscribing, fallback to generic error code
+        return Observable.throw(err || 'API_ERROR');
+      });
+  }
 
   setProfileImage(id, body): Observable <IUser>{
     const BASE_URL = environment.apiUrl;
@@ -73,4 +87,5 @@ export class UserService {
   getMessage(): Observable<any> {
     return this.subject.asObservable();
   }
+
 }

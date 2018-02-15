@@ -2,5 +2,6 @@
 export interface IAuthToken {
   token: string,
   expiresIn: string,
-  userInfo: string
+  userInfo: string,
+  registration: boolean
 }

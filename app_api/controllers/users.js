@@ -4,7 +4,7 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('Users');
 const Proposal = mongoose.model('Proposals');
-const Bio      = mongoose.model('Bios');
+const Bio = mongoose.model('Bios');
 mongoose.Promise = Promise;
 
 let sendJsonResponse = (res, status, content) => {
@@ -101,6 +101,31 @@ let getOne = (req, res) => {
         })
 };
 
+// =======================================================
+// UPDATE A SINGLE USER          =========================
+// =======================================================
+
+let update = (req, res) => {
+
+    User.findByIdAndUpdate(req.params.id, {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        jobTitle: req.body.jobTitle,
+        startDate: req.body.startDate,
+        birthday: req.body.birthday,
+        region: req.body.region,
+        sector: req.body.sector,
+        lineManagerEmail: req.body.lineManagerEmail
+    }, {safe: true, new: true})
+        .exec()
+        .then(() => {
+            sendJsonResponse(res, 200, {"message": "user updated"})
+        })
+        .catch(err => {
+            sendJsonResponse(res, 500, err)
+        })
+};
+
 let upload = (req, res) => {
 
     let b64string = req.body;
@@ -125,6 +150,7 @@ let _proposals = (proposals) => {
 module.exports = {
     getAllUsers,
     getOne,
+    update,
     upload,
     userProposals,
     userBios
