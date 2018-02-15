@@ -3,7 +3,6 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {AuthenticationService} from "../services/authentication.service";
 import {NotificationsService} from "../../root/services/notifications.service";
-import {flatMap} from "tslint/lib/utils";
 
 @Component({
   templateUrl: './signup.component.html',
