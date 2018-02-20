@@ -24,6 +24,7 @@ import {IBio} from "../interfaces/Bio";
 import {ISector} from "../../root/interfaces/sector";
 import {ISkill} from "../../root/interfaces/skill";
 import {IIcon} from "../../root/interfaces/icon";
+import {IUser} from "../../users/interfaces/user";
 
 @Component({
   templateUrl: './bio-pdf.component.html',
@@ -31,7 +32,7 @@ import {IIcon} from "../../root/interfaces/icon";
 })
 export class BioPdfComponent implements OnInit {
   // COMPONENT VARIABLES
-  title: String = "Edit Bio";
+  title: String = "Generate Bio";
   userName: string;
   userImage: string;
   image1: string;
@@ -52,6 +53,7 @@ export class BioPdfComponent implements OnInit {
   skills: ISkill;
   sectors: ISector;
   icons: IIcon;
+  user: IUser;
 
   // IMAGE CROPPER
   cropperSettings: CropperSettings;
@@ -70,6 +72,10 @@ export class BioPdfComponent implements OnInit {
 
     // Setting Up the fields for the Bio Edit Form
     this.bioPdfForm = this._fb.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      jobTitle: ['', [Validators.required]],
+      region: ['', [Validators.required]],
       photo: ['', [Validators.required]],
       bioForSector: ['', [Validators.required]],
       background: ['', [Validators.required, Validators.maxLength(1500)]],
@@ -148,10 +154,16 @@ export class BioPdfComponent implements OnInit {
       this.imageType = this._getImageMimeType(this.bio.photo);
       this.bio.photo = `data:${this.imageType};base64,${this.bio.photo}`;
       this.userImage = this.bio.photo;
+
+      console.log(this.userImage);
     }
 
     // Use "patchValue" method to assign values to reactive form controls so they can be edited.
     this.bioPdfForm.patchValue({
+      firstName: this.bio.firstName,
+      lastName: this.bio.lastName,
+      jobTitle: this.bio.jobTitle,
+      region: this.bio.region,
       photo: this.bio.photo || "",
       bioForSector: this.bio.bioForSector,
       background: this.bio.background,
@@ -207,7 +219,7 @@ export class BioPdfComponent implements OnInit {
 
   onSaveComplete(): void {
     this.bioPdfForm.reset();
-    this._router.navigate(['/welcome']);
+    this._router.navigate(['/dashboard']);
   }
 
   // =======================================================

@@ -8,6 +8,13 @@
   padding: 40px 60px 40px 60px;
 }
 
+h1{
+  text-transform: capitalize;
+  font-size: 38px;
+  font-weight: normal;
+  line-height: 1;
+}
+
 #section-one {
   width: 70%;
 }
@@ -46,23 +53,17 @@
   margin-left: 3px;
 }
 
-label[for=sector] {
+.uk-form-controls {
+  margin-top: 10px;
+}
+
+.uk-form-label {
   color: #121212;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.uk-select[name=sector] {
-  height: 22px;
-  width: 134px;
-  color: #AFAFBB;
-  font-size: 15px;
-  margin-top: -15px;
-  padding-left: 0;
-  padding-right: 0;
-  border: none;
-}
-
-#background-heading, #skills-heading, #experience-heading {
+#background-heading, #skills-heading, #experience-heading, #sector-heading {
   height: 31px;
   color: #1B1A3D;
   font-size: 24px;
@@ -172,14 +173,6 @@ label[for=sector] {
 .uk-checkbox:checked + label {
   border: 1px solid #0070E0;
   border-radius: 3px;
-}
-
-.uk-select.ng-valid.ng-touched {
-  border: none;
-}
-
-.uk-select.ng-invalid.ng-touched {
-  border: none;
 }
 
 #experience {
