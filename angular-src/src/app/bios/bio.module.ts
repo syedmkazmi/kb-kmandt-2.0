@@ -15,6 +15,7 @@ import {BioListResolverService} from "./services/bio-list-resolver.service";
 import {SharedModule} from "../shared/shared.module";
 import {BioPdfComponent} from './components/bio-pdf.component';
 import {UserDetailsGuard} from "../authentication/guards/user-details.guard";
+import {BioUserResolverService} from "./services/bio-user-resolver.service";
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import {UserDetailsGuard} from "../authentication/guards/user-details.guard";
       {
         path: 'bios',
         canActivate: [AuthGuard, UserDetailsGuard],
-        resolve: {icon: IconResolverService, skill: SkillResolverService, sector: SectorResolverService},
+        resolve: {icon: IconResolverService, skill: SkillResolverService, sector: SectorResolverService, user: BioUserResolverService},
         children: [
           {
             path: '',

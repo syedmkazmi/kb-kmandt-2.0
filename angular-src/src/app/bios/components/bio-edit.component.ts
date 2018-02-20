@@ -65,6 +65,10 @@ export class BioEditComponent implements OnInit {
 
     // Setting Up the fields for the Bio Edit Form
     this.bioEditForm = this._fb.group({
+      firstName: [{value:'', disabled: true}, [Validators.required]],
+      lastName: [{value:'', disabled: true}, [Validators.required]],
+      jobTitle: ['', [Validators.required]],
+      region: [{value:'', disabled: true}, [Validators.required]],
       photo: ['', [Validators.required]],
       bioForSector: ['', [Validators.required]],
       background: ['', [Validators.required, Validators.maxLength(1500)]],
@@ -140,6 +144,10 @@ export class BioEditComponent implements OnInit {
 
     // Use "patchValue" method to assign values to reactive form controls so they can be edited.
     this.bioEditForm.patchValue({
+      firstName: this.bio.firstName,
+      lastName: this.bio.lastName,
+      jobTitle: this.bio.jobTitle,
+      region: this.bio.region,
       photo: this.bio.photo || "",
       bioForSector: this.bio.bioForSector,
       background: this.bio.background,

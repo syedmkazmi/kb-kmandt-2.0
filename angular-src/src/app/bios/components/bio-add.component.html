@@ -3,29 +3,56 @@
   <!------------------------- SECTION ONE ------------------------->
   <!--------------------------------------------------------------->
   <div id="section-one">
+    <h1>{{title}}</h1>
     <!------------------------- BIO ADD FORM ------------------------->
     <form (ngSubmit)="save()" [formGroup]="bioForm" novalidate>
       <div class="user-info">
-        <!----- BIO IMAGE ----->
-        <div id="image">
-          <img id="user-img" src="{{userImage}}" onerror="this.src='/assets/images/user-profile-icon/default-user.svg'">
-          <div id="add-btn">
-            <div>
-              <input id="custom-input" type="file" (change)="imageCropperListener($event)">
-              <a class="uk-link-muted" type="button" tabindex="-1">Set New Image</a>
+
+        <div class="uk-grid-small" uk-grid>
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="firstName">First Name</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" type="text" placeholder="First Name" id="firstName" formControlName="firstName">
             </div>
           </div>
-        </div>
-        <!----- USER NAME & SELECT SECTOR ----->
-        <div class="uk-text-top" id="name">
-          {{userName}}
-          <div class="uk-margin">
-            <label for="sector">Sector</label>
-            <select class="uk-select" formControlName="bioForSector" id="sector" name="sector">
-              <option value="" disabled selected>Select Sector</option>
-              <option *ngFor="let sector of sectors" value="{{sector.sectorName}}">{{sector.sectorName}}</option>
-            </select>
+
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="lastName">Last Name</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" type="text" placeholder="Last Name" id="lastName" formControlName="lastName">
+            </div>
           </div>
+
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="jobTitle">Job Title</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" type="text" placeholder="Job title" id="jobTitle"  formControlName="jobTitle">
+            </div>
+          </div>
+
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="region">Region</label>
+            <div class="uk-form-controls">
+              <select class="uk-select" id="region" formControlName="region">
+                <option value="" disabled selected>Select Region</option>
+                <option value="UK">United Kingdom</option>
+                <option value="NA">North America</option>
+                <option VALUE="AU">Asia Pacific</option>
+              </select>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sector">
+        <h1 id="sector-heading">Sector</h1>
+        <div class="uk-margin">
+          <select class="uk-select" formControlName="bioForSector" id="sector" name="sector">
+            <option value="" disabled selected>Select Sector</option>
+            <option *ngFor="let sector of sectors" value="{{sector.sectorName}}">{{sector.sectorName}}</option>
+          </select>
         </div>
       </div>
       <!------------------------- BACKGROUND & OVERVIEW FIELD ------------------------->
@@ -65,8 +92,7 @@
         </div>
 
         <div class="uk-margin">
-          <textarea class="uk-textarea" rows="5" placeholder="Enter Background and Overview here"
-                    formControlName="background"></textarea>
+          <textarea class="uk-textarea" rows="5" placeholder="Enter Background and Overview here" formControlName="background" (change)="autoSave()"></textarea>
         </div>
       </div>
       <!------------------------- SKILLS FIELD ------------------------->
@@ -79,7 +105,7 @@
         <div class="uk-margin">
           <div *ngFor="let data of skills">
             <label id="skills-label" *ngFor="let skill of data.allSkills">
-              <input class="uk-checkbox" type="checkbox" (change)="skillsOnChange(skill, $event.target.checked)">
+              <input class="uk-checkbox" type="checkbox" [checked]="bioForm.controls['skills'].value.indexOf(skill) > - 1" (change)="skillsOnChange(skill, $event.target.checked)">
               {{skill}}
             </label>
           </div>
@@ -129,8 +155,7 @@
             </div>
           </div>
           <div class="uk-margin">
-            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
-                      formControlName="field0"></textarea>
+            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....." formControlName="field0" (change)="autoSave()"></textarea>
           </div>
           <!----- VALIDATORS ----->
           <div *ngIf="bioForm.get('experience.field1').dirty">
@@ -139,8 +164,7 @@
             </div>
           </div>
           <div class="uk-margin">
-            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
-                      formControlName="field1"></textarea>
+            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....." formControlName="field1" (change)="autoSave()"></textarea>
           </div>
           <!----- VALIDATORS ----->
           <div *ngIf="bioForm.get('experience.field2').dirty">
@@ -149,8 +173,7 @@
             </div>
           </div>
           <div class="uk-margin">
-            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
-                      formControlName="field2"></textarea>
+            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....." formControlName="field2" (change)="autoSave()"></textarea>
           </div>
           <!----- VALIDATORS ----->
           <div *ngIf="bioForm.get('experience.field3').dirty">
@@ -159,8 +182,7 @@
             </div>
           </div>
           <div class="uk-margin">
-            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
-                      formControlName="field3"></textarea>
+            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....." formControlName="field3" (change)="autoSave()"></textarea>
           </div>
 
           <!----- OPTIONAL EXPERIENCE FIELDS ----->
@@ -172,8 +194,7 @@
               </div>
             </div>
             <div class="uk-margin">
-              <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
-                        formControlName="field4"></textarea>
+              <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....." formControlName="field4" (change)="autoSave()"></textarea>
             </div>
             <!----- VALIDATORS ----->
             <div *ngIf="bioForm.get('experience.field5').dirty">
@@ -182,8 +203,7 @@
               </div>
             </div>
             <div class="uk-margin">
-              <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
-                        formControlName="field5"></textarea>
+              <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....." formControlName="field5" (change)="autoSave()"></textarea>
             </div>
           </div>
           <!----- OPTIONAL EXPERIENCE FIELD ----->
@@ -201,6 +221,17 @@
   <div id="section-two">
     <!------------------------- SELECT ICONS FIELDS ------------------------->
     <div id="select-icons">
+      <!----- BIO IMAGE ----->
+      <div id="image">
+        <img id="user-img" src="{{userImage}}" onerror="this.src='/assets/images/user-profile-icon/default-user.svg'">
+        <div id="add-btn">
+          <div>
+            <input id="custom-input" type="file" (change)="imageCropperListener($event)">
+            <a class="uk-link-muted" type="button" tabindex="-1">Set New Image</a>
+          </div>
+        </div>
+      </div>
+
       <!------ TIP ------>
       <div id="icon-tips">
         Use the icon selectors below to chose what icons to display on your bio.

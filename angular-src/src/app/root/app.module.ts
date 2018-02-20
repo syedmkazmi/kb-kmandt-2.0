@@ -32,6 +32,7 @@ import {DashboardService} from "../dashboard/services/dashboard.service";
 import {AssociatesModule} from "../associates/associates.module";
 import {UserDetailsGuard} from "../authentication/guards/user-details.guard";
 import { PromptUserDetailsComponent } from './prompt-user-details.component';
+import {BioUserResolverService} from "../bios/services/bio-user-resolver.service";
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { PromptUserDetailsComponent } from './prompt-user-details.component';
     SectorResolverService,
     SkillResolverService,
     IconResolverService,
+    BioUserResolverService,
     AuthGuard,
     UserDetailsGuard,
     LoginGuard,

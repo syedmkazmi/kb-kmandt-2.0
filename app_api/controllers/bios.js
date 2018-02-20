@@ -14,9 +14,14 @@ let html = fs.readFileSync('./app_server/pdf-templates/pdf-bio-template.ejs', 'u
 const base = path.resolve("./angular-src/src");
 const options = {format: 'A4', timeout: 50000, base: `file://${base}`, border: "40px"};
 
+const sendinblue = require('sendinblue-api');
+const parameters = {"apiKey": process.env.SEND_IN_BLUE, "timeout": 5000};
+const sendinObj = new sendinblue(parameters);
+
 
 // Mongoose Data Schemas
 const Bio = mongoose.model('Bios');
+const User = mongoose.model('Users');
 
 let sendJsonResponse = (res, status, content) => {
     res
@@ -47,20 +52,19 @@ let get = (req, res) => {
 // CREATE NEW BIO                =========================
 // =======================================================
 let create = (req, res) => {
-    console.log(req.body.photo);
+
     let b64string = req.body.photo;
     let bufferedData = Buffer.from(JSON.stringify(b64string), 'base64');
-    console.log(bufferedData);
 
     let newBio = new Bio();
 
-    newBio.firstName = req.decoded.firstName;
-    newBio.lastName = req.decoded.lastName;
-    newBio.jobTitle = req.decoded.jobTitle;
+    newBio.firstName = req.body.firstName;
+    newBio.lastName = req.body.lastName;
+    newBio.jobTitle = req.body.jobTitle;
     newBio.userID = req.decoded._id;
     newBio.photo = bufferedData;
     newBio.lineManagerEmail = req.decoded.lineManagerEmail;
-    newBio.region = req.decoded.region;
+    newBio.region = req.body.region;
     newBio.bioStatus = "pending";
     newBio.background = req.body.background;
     newBio.experience = req.body.experience;
@@ -74,10 +78,10 @@ let create = (req, res) => {
     //newBio.approvalStage = "Line Manager";
 
     newBio.save()
-        .then(data => sendJsonResponse(res, 200, data))
-        .catch(err => {
-            sendJsonResponse(res, 500, err)
-        })
+        .then(data => {return _findUser(data)})
+        .then(user => {return _emailBioCopy(user, req.body)})
+        .then(() => sendJsonResponse(res, 200, "done"))
+        .catch(err => {sendJsonResponse(res, 500, err)})
 };
 
 // =======================================================
@@ -134,7 +138,7 @@ let update = (req, res) => {
             if (data) {
                 sendJsonResponse(res, 200, data)
             } else if (!data) {
-                sendJsonResponse(res, 404, {"message": "Unable to find proposal to edit."})
+                sendJsonResponse(res, 404, {"message": "Unable to find bio to edit."})
             }
         })
         .catch(err => {
@@ -253,6 +257,34 @@ let _generateShareableLink = (filename) => {
                 }
             }
         })
+    })
+};
+
+let _findUser = (bio) => {
+   return User.findById(bio.userID).exec()
+};
+
+let _emailBioCopy = (user, bio) => {
+
+    console.log(bio.skills);
+    console.log(bio.experience);
+
+    const input = {
+        'id': 6,
+        'to': user.email,
+        'attr': {"BACKGROUND": bio.background, "SKILLS": bio.skills.toString(), "EXPERIENCE0": bio.experience.field0,
+            "EXPERIENCE1": bio.experience.field1,"EXPERIENCE2": bio.experience.field2, "EXPERIENCE3": bio.experience.field3,
+            "EXPERIENCE4": bio.experience.field4, "EXPERIENCE5": bio.experience.field5}
+    };
+
+   return sendinObj.send_transactional_template(input, function (err, response) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(response);
+            console.log("email sent");
+            return response;
+        }
     })
 };
 

@@ -9,29 +9,57 @@
   <!------------------------- SECTION ONE ------------------------->
   <!--------------------------------------------------------------->
   <div id="section-one">
+    <h1>{{title}}</h1>
     <!------------------------- BIO ADD FORM ------------------------->
     <form (ngSubmit)="pdf()" [formGroup]="bioPdfForm" novalidate>
       <div class="user-info">
-        <!----- BIO IMAGE ----->
-        <div id="image">
-          <img id="user-img" src="{{userImage}}" onerror="this.src='/assets/images/user-profile-icon/default-user.svg'">
-          <div id="add-btn">
-            <div>
-              <input id="custom-input" type="file" (change)="imageCropperListener($event)">
-              <a class="uk-link-muted" type="button" tabindex="-1">Set New Image</a>
+
+        <div class="uk-grid-small" uk-grid>
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="firstName">First Name</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" type="text" placeholder="First Name" id="firstName" formControlName="firstName">
             </div>
           </div>
-        </div>
-        <!----- USER NAME & SELECT SECTOR ----->
-        <div class="uk-text-top" id="name">
-          {{userName}}
-          <div class="uk-margin">
-            <label for="sector">Sector</label>
-            <select class="uk-select" formControlName="bioForSector" id="sector" name="sector">
-              <option value="" disabled selected>Select Sector</option>
-              <option *ngFor="let sector of sectors" value="{{sector.sectorName}}">{{sector.sectorName}}</option>
-            </select>
+
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="lastName">Last Name</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" type="text" placeholder="Last Name" id="lastName" formControlName="lastName">
+            </div>
           </div>
+
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="jobTitle">Job Title</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" type="text" placeholder="Job title" id="jobTitle"  formControlName="jobTitle">
+            </div>
+          </div>
+
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="region">Region</label>
+            <div class="uk-form-controls">
+              <select class="uk-select" id="region" formControlName="region">
+                <option value="" disabled selected>Select Region</option>
+                <option value="UK">United Kingdom</option>
+                <option value="NA">North America</option>
+                <option VALUE="AU">Asia Pacific</option>
+              </select>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="sector">
+        <h1 id="sector-heading">Sector</h1>
+        <div class="uk-margin">
+          <select class="uk-select" formControlName="bioForSector" id="sector" name="sector">
+            <option value="" disabled selected>Select Sector</option>
+            <option *ngFor="let sector of sectors" value="{{sector.sectorName}}">{{sector.sectorName}}</option>
+          </select>
         </div>
       </div>
       <!------------------------- BACKGROUND & OVERVIEW FIELD ------------------------->
@@ -206,6 +234,16 @@
   <div id="section-two">
     <!------------------------- SELECT ICONS FIELDS ------------------------->
     <div id="select-icons">
+      <!----- BIO IMAGE ----->
+      <div id="image">
+        <img id="user-img" src="{{userImage}}" onerror="this.src='/assets/images/user-profile-icon/default-user.svg'">
+        <div id="add-btn">
+          <div>
+            <input id="custom-input" type="file" (change)="imageCropperListener($event)">
+            <a class="uk-link-muted" type="button" tabindex="-1">Set New Image</a>
+          </div>
+        </div>
+      </div>
       <!------ TIP ------>
       <div id="icon-tips">
         Use the icon selectors below to chose what icons to display on your bio.
