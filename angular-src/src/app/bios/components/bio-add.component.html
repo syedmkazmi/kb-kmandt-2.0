@@ -26,7 +26,7 @@
           <div class="uk-width-1-2@s">
             <label class="uk-form-label" for="jobTitle">Job Title</label>
             <div class="uk-form-controls">
-              <input class="uk-input" type="text" placeholder="Job title" id="jobTitle"  formControlName="jobTitle">
+              <input class="uk-input" type="text" placeholder="Job title" id="jobTitle" formControlName="jobTitle">
             </div>
           </div>
 
@@ -92,7 +92,8 @@
         </div>
 
         <div class="uk-margin">
-          <textarea class="uk-textarea" rows="5" placeholder="Enter Background and Overview here" formControlName="background" (change)="autoSave()"></textarea>
+          <textarea class="uk-textarea" rows="5" placeholder="Enter Background and Overview here"
+                    formControlName="background" (change)="autoSave()"></textarea>
         </div>
       </div>
       <!------------------------- SKILLS FIELD ------------------------->
@@ -105,7 +106,9 @@
         <div class="uk-margin">
           <div *ngFor="let data of skills">
             <label id="skills-label" *ngFor="let skill of data.allSkills">
-              <input class="uk-checkbox" type="checkbox" [checked]="bioForm.controls['skills'].value.indexOf(skill) > - 1" (change)="skillsOnChange(skill, $event.target.checked)">
+              <input class="uk-checkbox" type="checkbox"
+                     [checked]="bioForm.controls['skills'].value.indexOf(skill) > - 1"
+                     (change)="skillsOnChange(skill, $event.target.checked)">
               {{skill}}
             </label>
           </div>
@@ -149,13 +152,14 @@
         </div>
         <div id="experience" formGroupName="experience">
           <!----- VALIDATORS ----->
-          <div *ngIf="bioForm.get('experience.field0').dirty">
+          <div *ngIf="bioForm.get('experience.field0').dirty || bioForm.get('experience.field0').untouched">
             <div *ngIf="bioForm.get('experience.field0').hasError('maxlength')">
               <div class="uk-alert-danger" uk-alert>You are over the word limit.</div>
             </div>
           </div>
           <div class="uk-margin">
-            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....." formControlName="field0" (change)="autoSave()"></textarea>
+            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
+                      formControlName="field0" (change)="autoSave()"></textarea>
           </div>
           <!----- VALIDATORS ----->
           <div *ngIf="bioForm.get('experience.field1').dirty">
@@ -164,7 +168,8 @@
             </div>
           </div>
           <div class="uk-margin">
-            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....." formControlName="field1" (change)="autoSave()"></textarea>
+            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
+                      formControlName="field1" (change)="autoSave()"></textarea>
           </div>
           <!----- VALIDATORS ----->
           <div *ngIf="bioForm.get('experience.field2').dirty">
@@ -173,7 +178,8 @@
             </div>
           </div>
           <div class="uk-margin">
-            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....." formControlName="field2" (change)="autoSave()"></textarea>
+            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
+                      formControlName="field2" (change)="autoSave()"></textarea>
           </div>
           <!----- VALIDATORS ----->
           <div *ngIf="bioForm.get('experience.field3').dirty">
@@ -182,7 +188,8 @@
             </div>
           </div>
           <div class="uk-margin">
-            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....." formControlName="field3" (change)="autoSave()"></textarea>
+            <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....."
+                      formControlName="field3" (change)="autoSave()"></textarea>
           </div>
 
           <!----- OPTIONAL EXPERIENCE FIELDS ----->
@@ -194,7 +201,9 @@
               </div>
             </div>
             <div class="uk-margin">
-              <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....." formControlName="field4" (change)="autoSave()"></textarea>
+              <textarea class="uk-textarea experience-fields" type="text"
+                        placeholder="Detail your experience here ....." formControlName="field4"
+                        (change)="autoSave()"></textarea>
             </div>
             <!----- VALIDATORS ----->
             <div *ngIf="bioForm.get('experience.field5').dirty">
@@ -203,7 +212,9 @@
               </div>
             </div>
             <div class="uk-margin">
-              <textarea class="uk-textarea experience-fields" type="text" placeholder="Detail your experience here ....." formControlName="field5" (change)="autoSave()"></textarea>
+              <textarea class="uk-textarea experience-fields" type="text"
+                        placeholder="Detail your experience here ....." formControlName="field5"
+                        (change)="autoSave()"></textarea>
             </div>
           </div>
           <!----- OPTIONAL EXPERIENCE FIELD ----->
@@ -211,25 +222,22 @@
         </div>
       </div>
       <!------------------------- SUBMIT BUTTON ------------------------->
-      <button class="uk-button uk-button-primary uk-margin-top" [disabled]="bioForm.invalid">{{bioForm.invalid ? "Fill All Fields To Activate Me" : "SAVE"}}</button>
+      <button class="uk-button uk-button-primary uk-margin-top" *ngIf="!buttonLoading" [disabled]="bioForm.invalid">{{bioForm.invalid ? "Fill All Fields To Activate Me" : "SAVE"}}</button>
+
+      <!----- PROCESSING BUTTON ----->
+      <button type="submit" *ngIf="buttonLoading" [disabled]="bioForm.invalid" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom submit-btn uk-margin-top"><span id="btn-loading-spinner" uk-spinner></span> <span id="btn-loading-text">LOADING...</span></button>
     </form>
   </div>
-
   <!--------------------------------------------------------------->
   <!------------------------- SECTION TWO ------------------------->
   <!--------------------------------------------------------------->
   <div id="section-two">
     <!------------------------- SELECT ICONS FIELDS ------------------------->
     <div id="select-icons">
+
       <!----- BIO IMAGE ----->
       <div id="image">
         <img id="user-img" src="{{userImage}}" onerror="this.src='/assets/images/user-profile-icon/default-user.svg'">
-        <div id="add-btn">
-          <div>
-            <input id="custom-input" type="file" (change)="imageCropperListener($event)">
-            <a class="uk-link-muted" type="button" tabindex="-1">Set New Image</a>
-          </div>
-        </div>
       </div>
 
       <!------ TIP ------>
@@ -295,25 +303,3 @@
   </div>
 </div>
 
-<!------------------------------------------------------------------------->
-<!------------------------- BIO ICONS POPUP MODAL ------------------------->
-<!------------------------------------------------------------------------->
-<div id="modal-container" class="uk-modal-container" uk-modal>
-  <div class="uk-modal-dialog">
-    <button class="uk-modal-close-default" type="button" uk-close></button>
-    <div class="uk-modal-header">
-      <h2 class="uk-modal-title">Set Profile Picture</h2>
-    </div>
-    <div class="uk-modal-body">
-      <img-cropper #cropper [image]="croppedImage" [settings]="cropperSettings"></img-cropper>
-      <br>
-      <span class="result rounded" *ngIf="croppedImage.image">
-        <img [src]="croppedImage.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
-      </span>
-    </div>
-    <div class="uk-modal-footer uk-text-right">
-      <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-      <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="setBioImage()">Save</button>
-    </div>
-  </div>
-</div>

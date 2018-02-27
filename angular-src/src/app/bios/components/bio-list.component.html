@@ -36,11 +36,11 @@
     </div>
   </div>-->
 
- <!-- <section *ngIf="!filterStatus" class="unsuccessful-filter">
-    <div>
-      {{filterMessage}}
-    </div>
-  </section>-->
+  <!-- <section *ngIf="!filterStatus" class="unsuccessful-filter">
+     <div>
+       {{filterMessage}}
+     </div>
+   </section>-->
 
   <section>
     <table class="uk-table uk-table-middle uk-table-divider">
@@ -58,7 +58,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let bio of bios">
-        <td class="bio-icon-td" id="bio-icon"><img class="bio-icon" src="assets/images/bio-icons/bio-normal.svg"></td>
+        <td class="bio-icon-td" id="bio-icon"><img class="bio-icon" src="{{bio.photo}}"></td>
         <td class="bio-title" id="bio-title">{{bio.firstName}} {{bio.lastName}}</td>
         <td>{{bio.jobTitle}}</td>
         <td id="bio-sector"><span>{{bio.bioForSector}}</span></td>
@@ -70,7 +70,7 @@
           </div>
         </td>
         <td id="bio-action">
-          <a class="uk-button uk-button-default" id="edit-btn"  [routerLink]="['/bios', bio._id]">View</a>
+          <a class="uk-button uk-button-default" id="edit-btn" (click)="onSelect(bio)" uk-toggle="target: #bio-detail">View</a>
           <!--<button uk-icon="icon: more; ratio: 1"></button>
           <div uk-dropdown="mode: click">
             <ul class="uk-nav uk-dropdown-nav"> [routerLink]="['/bios', bio._id]"
@@ -84,3 +84,25 @@
     </table>
   </section>
 </section>
+
+<!-- This is a button toggling the modal -->
+<button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #bio-detail">Open
+</button>
+
+<!-- This is the modal -->
+<div id="bio-detail" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+
+    <section *ngIf="downloadFile" class="loading">
+      <div id="loading-spinner" uk-spinner></div>
+      <h1 id="main-heading">Hold onto something!</h1>
+      <h2 id="sub-heading">We're about to do some magic.</h2>
+    </section>
+
+    <bio-detail *ngIf="!downloadFile" [bio]="selectedBio"></bio-detail>
+    <p class="uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button">CLOSE</button>
+      <button class="uk-button uk-button-primary" type="button" (click)="pdf(selectedBio)">DOWNLOAD AS PDF</button>
+    </p>
+  </div>
+</div>

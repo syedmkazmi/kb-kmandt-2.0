@@ -1,0 +1,51 @@
+
+<section class="bio-detail">
+  <div uk-grid>
+    <div id="left-side">
+      <div id="user-img">
+        <img src="{{bio?.photo}}" onerror="this.src='/assets/images/add-image-icon/add-image-icon.png'">
+      </div>
+
+      <div class="all-icons">
+      <div class="icons">
+        <img src="{{bio?.iconOne}}">
+      </div>
+
+      <div class="icons">
+        <img src="{{bio?.iconTwo}}">
+      </div>
+
+      <div class="icons">
+        <img src="{{bio?.iconThree}}">
+      </div>
+
+      <div class="icons">
+        <img src="{{bio?.iconFour}}">
+      </div>
+      </div>
+    </div>
+
+    <div id="right-side">
+      <div id="fullName"><h1>{{bio?.firstName + " " + bio?.lastName}}</h1></div>
+      <div id="jobTitle"><h2>{{bio?.jobTitle}}</h2></div>
+
+      <div id="background"><p>{{bio?.background}}</p></div>
+
+      <div id="skills-heading"><h2>Skills</h2></div>
+      <div>
+        <div class="all-skills" *ngFor="let skill of bio?.skills">
+          <div id="skills">{{skill}}</div>
+        </div>
+      </div>
+
+      <div id="experience-heading"><h2>Experience</h2></div>
+      <div class="experience"><p>{{bio?.experience["field0"]}}</p></div>
+      <div class="experience"><p>{{bio?.experience["field1"]}}</p></div>
+      <div class="experience"><p>{{bio?.experience["field2"]}}</p></div>
+      <div class="experience"><p>{{bio?.experience["field3"]}}</p></div>
+      <div class="experience"><p>{{bio?.experience["field4"]}}</p></div>
+      <div class="experience"><p>{{bio?.experience["field5"]}}</p></div>
+
+    </div>
+  </div>
+</section>

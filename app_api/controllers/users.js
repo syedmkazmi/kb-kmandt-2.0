@@ -7,6 +7,13 @@ const Proposal = mongoose.model('Proposals');
 const Bio = mongoose.model('Bios');
 mongoose.Promise = Promise;
 
+const cloudinary = require('cloudinary');
+cloudinary.config({
+    cloud_name: 'kb-kmandt',
+    api_key: '945829792861333',
+    api_secret: 'KBwo_DyMYQiBRP_XuZau_pkOJQI'
+}); //TODO: Move these to .env file
+
 let sendJsonResponse = (res, status, content) => {
     res
         .status(status)
@@ -127,20 +134,22 @@ let update = (req, res) => {
 };
 
 let upload = (req, res) => {
+    // console.log(JSON.stringify(b64string));
+    //let bufferedData = Buffer.from(JSON.stringify(b64string), 'base64');
+    cloudinary.v2.uploader.upload(req.body.photo, {public_id: req.body.name, quality: "auto:low"}, function (error, result) {
+        console.log(result);
+        User.findByIdAndUpdate(req.params.id, {
+            photo: result["secure_url"]
+        }, {safe: true, new: true})
+            .exec()
+            .then((data) => {
+                sendJsonResponse(res, 200, data.photo)
+            })
+            .catch(err => {
+                sendJsonResponse(res, 500, err)
+            })
+    });
 
-    let b64string = req.body;
-    let bufferedData = Buffer.from(JSON.stringify(b64string), 'base64');
-
-    User.findByIdAndUpdate(req.params.id, {
-        photo: bufferedData
-    }, {safe: true, new: true})
-        .exec()
-        .then(() => {
-            sendJsonResponse(res, 200, {"message": "photo uploaded"})
-        })
-        .catch(err => {
-            sendJsonResponse(res, 500, err)
-        })
 };
 
 let _proposals = (proposals) => {

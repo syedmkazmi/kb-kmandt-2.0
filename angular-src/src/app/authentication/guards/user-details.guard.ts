@@ -18,7 +18,7 @@ export class UserDetailsGuard implements CanActivate {
 
     return this._http.get<IUser>(`${BASE_URL}/api/users/${id}`)
       .map((data) => {
-        if (data.jobTitle == null || data.sector == null || data.region == null || data.lineManagerEmail == null) {
+        if (!data.jobTitle || !data.sector  || !data.region || !data.lineManagerEmail || !data.photo) {
           // Route To Welcome to ask users to add more details
           this._router.navigate(['/welcome']);
              return false;

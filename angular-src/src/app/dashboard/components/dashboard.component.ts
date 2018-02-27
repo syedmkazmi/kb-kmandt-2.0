@@ -14,6 +14,9 @@ export class DashboardComponent implements OnInit {
   proposals: IProposal[];
   bios: IBio[];
   userID: string;
+  files: any;
+  file: any;
+  link: any;
 
   constructor(private _ds: DashboardService) {
   }
@@ -22,6 +25,7 @@ export class DashboardComponent implements OnInit {
     this._getUserId();
     this.getProposals();
     this.getBios();
+    this.getFiles();
   }
 
   getProposals(){
@@ -40,6 +44,40 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         (data) => {
           this.bios = data;
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+  }
+
+  getFiles(){
+    this._ds.getMarketingFiles()
+      .subscribe(
+        (data) => {
+         // console.log(data);
+          this.file = data;
+          this.files = JSON.parse(this.file).entries;
+         // console.log(JSON.parse(this.file).entries.name);
+          //console.log(JSON.parse(this.files)[0]);
+          //console.log(JSON.parse(JSON.stringify(this.files))["entries"]);
+          //console.log(JSON.parse(JSON.stringify(this.files[0].name)));
+
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+  }
+
+  getFilesUrl(name){
+    this._ds.downloadFile(name)
+      .subscribe(
+        (data) => {
+          this.link =  data;
+          console.log(JSON.parse(this.link).link);
+
+          window.open(JSON.parse(this.link).link);
         },
         (err) => {
           console.log(err);

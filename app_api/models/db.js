@@ -6,7 +6,7 @@ const dbURI = 'mongodb://syed26:plzopen26@ds049864.mlab.com:49864/foliogram';
 // mongodb://syed26:plzopen26@ds049864.mlab.com:49864/foliogram
 // mongodb://syed26:plzopen26@ds011505-a0.mlab.com:11505,ds011505-a1.mlab.com:11505/knowledge-base?replicaSet=rs-ds011505
 
-mongoose.connect(dbURI, { useMongoClient: true });
+mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', () => {
     console.log(`Mongoose is connected to ${dbURI}`);

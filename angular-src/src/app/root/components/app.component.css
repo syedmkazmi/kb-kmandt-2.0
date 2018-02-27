@@ -2,3 +2,16 @@
 .notification {
   padding: 0 120px 0 120px;
 }
+
+.loading > img {
+
+  position: absolute;
+
+  top: 30%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -200px;
+
+  height: 500px;
+
+}

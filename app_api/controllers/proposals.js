@@ -282,7 +282,7 @@ let test = (req, res) => {
             'Authorization': 'Bearer ' + process.env.DROPBOX_API_TOKEN,
             'Content-Type': 'application/json',
         },
-        body: "{\"path\": \"/Homework/math\",\"recursive\": false,\"include_media_info\": false,\"include_deleted\": false,\"include_has_explicit_shared_members\": false,\"include_mounted_folders\": true}"
+        body: "{\"path\": \"/kb-2.0-associate-bios\",\"recursive\": false,\"include_media_info\": false,\"include_deleted\": false,\"include_has_explicit_shared_members\": false,\"include_mounted_folders\": true}"
     };
 
     rp(options)
@@ -295,6 +295,27 @@ let test = (req, res) => {
 
 };
 
+let test2 = (req, res) => {
+    console.log(req.body);
+
+    let options = {
+        method: 'POST',
+        uri: 'https://api.dropboxapi.com/2/files/get_temporary_link',
+        headers: {
+            'Authorization': 'Bearer ' + process.env.DROPBOX_API_TOKEN,
+            'Content-Type': "application/json",
+        }, body: "{\"path\": \"/kb-2.0-associate-bios/" + req.body.fileName + "\"}"
+    };
+
+    rp(options)
+        .then((data) => {
+            sendJsonResponse(res, 200, data)
+        })
+        .catch(function (err) {
+            sendJsonResponse(res, 500, err)
+        });
+};
+
 module.exports = {
     create,
     update,
@@ -302,7 +323,8 @@ module.exports = {
     getOne,
     upload,
     filter,
-    test
+    test,
+    test2
 };
 
 //TODO Research about mongoose upsert true option.

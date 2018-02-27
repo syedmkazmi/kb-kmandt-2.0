@@ -13,8 +13,7 @@ const userSchema = new mongoose.Schema({
     email: {type: String, set: toLower},
     password: String,
     jobTitle: String,
-    photo: {data: Buffer, contentType: String},
-
+    photo: String,
     startDate: {type: Date},
     birthday: {type: Date},
     lastLogin: {type: Date}, //TODO: Set last login date on login

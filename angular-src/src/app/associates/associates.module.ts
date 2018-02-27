@@ -5,7 +5,7 @@ import {BioAssociatePdfComponent} from './components/bio-associate-pdf.component
 import {RouterModule} from "@angular/router";
 import {BioListResolverService} from "../bios/services/bio-list-resolver.service";
 import {BioListComponent} from "../bios/components/bio-list.component";
-
+import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {SkillResolverService} from "../root/services/skill-resolver.service";
 import {SectorResolverService} from "../root/services/sector-resolver.service";
 import {IconResolverService} from "../root/services/icon-resolver.service";
@@ -31,6 +31,8 @@ import {IconResolverService} from "../root/services/icon-resolver.service";
         ]
       }
     ]),
+    ReactiveFormsModule,
+    FormsModule,
     SharedModule
   ],
   declarations: [BioAssociatePdfComponent]

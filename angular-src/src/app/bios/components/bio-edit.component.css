@@ -10,6 +10,7 @@ html {
   margin-left: 240px;
   padding-left: 60px;
   padding-top: 40px;
+  padding-bottom: 40px;
   padding-right: 60px;
 }
 
@@ -255,4 +256,19 @@ h1{
   cursor: pointer;
   text-decoration: underline;
   color: #0070E0;
+}
+
+#btn-loading-spinner {
+  /*position: absolute;*/
+  left: 100px;
+  top: 0;
+  margin: 10px 10px 10px 10px;
+}
+
+#btn-loading-spinner > svg {
+  width: 25px;
+}
+
+#btn-loading-text {
+  vertical-align: center;
 }

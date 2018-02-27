@@ -19,9 +19,12 @@ export class AppComponent implements OnInit, AfterViewInit {
     _router.events.subscribe((routerEvent: RouterEvent) => {
       if (routerEvent instanceof NavigationStart) {
         this.loading = true;
-      } else if (routerEvent instanceof NavigationError || routerEvent instanceof NavigationCancel || routerEvent instanceof NavigationEnd) {
+      } else if (routerEvent instanceof NavigationCancel || routerEvent instanceof NavigationEnd) {
         this.loading = false;
         window.scrollTo(0, 0)
+      } else if (routerEvent instanceof NavigationError) {
+        this.loading = false;
+        _router.navigate(['/welcome'])
       }
     });
   }

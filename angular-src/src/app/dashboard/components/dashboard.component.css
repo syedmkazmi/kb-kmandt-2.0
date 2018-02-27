@@ -18,6 +18,33 @@ h1 {
   padding-bottom: 40px;
 }
 
+.uk-first-column {
+  width: 60%;
+}
+
+.basic-files {
+  width: 40%;
+}
+
+.basic-files > h1 {
+  color: #333333 !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  line-height: 31px !important;
+}
+
+.file-links {
+  cursor: pointer;
+}
+
+.file-links:hover {
+  color: #0070E0;
+}
+
+.file-links > span {
+  float: right;
+}
+
 #main-title {
   font-weight: 600;
 }

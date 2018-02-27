@@ -6,12 +6,6 @@ import {FormGroup, FormControl, FormBuilder, FormArray, Validators} from "@angul
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router, ActivatedRoute} from "@angular/router";
 // =======================================================
-// OTHER IMPORTS                 =========================
-// =======================================================
-import {ViewChild} from "@angular/core";
-import {ImageCropperComponent, CropperSettings} from "ng2-img-cropper";
-import UIkit from 'uikit'
-// =======================================================
 // SERVICE IMPORTS               =========================
 // =======================================================
 import {NotificationsService} from "../../root/services/notifications.service";
@@ -40,13 +34,16 @@ export class BioPdfComponent implements OnInit {
   image3: string;
   image4: string;
   iconIndex: any;
-  addMoreExperience: boolean = false;
-  downloadFile: boolean = false;
   nativeWindow: any;
+  downloadLink: string;
 
   //FORM GROUP
   bioPdfForm: FormGroup;
-  generatingPdf: string = "Processing your file....";
+
+  //BOOLEAN VALUES
+  generatingPdf: boolean = false;
+  addMoreExperience: boolean = false;
+  downloadFile: boolean = false;
 
   //INTERFACES
   bio: IBio;
@@ -54,11 +51,6 @@ export class BioPdfComponent implements OnInit {
   sectors: ISector;
   icons: IIcon;
   user: IUser;
-
-  // IMAGE CROPPER
-  cropperSettings: CropperSettings;
-  croppedImage: any;
-  imageType: any;
 
   //UIKit
   UIkit: any;
@@ -78,7 +70,7 @@ export class BioPdfComponent implements OnInit {
       region: ['', [Validators.required]],
       photo: ['', [Validators.required]],
       bioForSector: ['', [Validators.required]],
-      background: ['', [Validators.required, Validators.maxLength(1500)]],
+      background: ['', [Validators.required, Validators.maxLength(1000)]],
       experience: this._fb.group({
         field0: ['', [Validators.required, Validators.maxLength(500)]],
         field1: ['', [Validators.required, Validators.maxLength(500)]],
@@ -95,23 +87,6 @@ export class BioPdfComponent implements OnInit {
     });
 
     this._setUserName();
-
-    // Image Cropper Settings
-    this.cropperSettings = new CropperSettings();
-    this.cropperSettings.noFileInput = true;
-    this.cropperSettings.width = 200;
-    this.cropperSettings.height = 200;
-
-    this.cropperSettings.croppedWidth = 200;
-    this.cropperSettings.croppedHeight = 200;
-
-    this.cropperSettings.canvasWidth = 400;
-    this.cropperSettings.canvasHeight = 400;
-
-    this.cropperSettings.minWidth = 200;
-    this.cropperSettings.minHeight = 200;
-    this.cropperSettings.compressRatio = 1.0;
-    this.croppedImage = {};
 
     // Get all skills from skills resolver service
     this._route.data.subscribe(data => {
@@ -151,11 +126,9 @@ export class BioPdfComponent implements OnInit {
 
     // If the retrieved bio contains a photo
     if (this.bio.photo) {
-      this.imageType = this._getImageMimeType(this.bio.photo);
-      this.bio.photo = `data:${this.imageType};base64,${this.bio.photo}`;
+      //this.imageType = this._getImageMimeType(this.bio.photo);
+      //this.bio.photo = `data:${this.imageType};base64,${this.bio.photo}`;
       this.userImage = this.bio.photo;
-
-      console.log(this.userImage);
     }
 
     // Use "patchValue" method to assign values to reactive form controls so they can be edited.
@@ -198,10 +171,12 @@ export class BioPdfComponent implements OnInit {
 
     this._bioService.pdfBio(p, id)
       .subscribe((data) => {
-          let parser = document.createElement('a');
+          /*let parser = document.createElement('a');
           parser.href = data;
-          parser.dispatchEvent(new MouseEvent('click'));
-          this.downloadFile = false;
+          parser.dispatchEvent(new MouseEvent('click'));*/
+          this.downloadLink = data;
+          this.generatingPdf = true;
+          //this.downloadFile = false;
         },
         (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
@@ -229,15 +204,6 @@ export class BioPdfComponent implements OnInit {
   // Gets users name from browser local storage & assigns the name to local variable on component initialisation
   private _setUserName() {
     this.userName = JSON.parse(localStorage.getItem("userInfo")).firstName + " " + JSON.parse(localStorage.getItem("userInfo")).lastName;
-  }
-
-  // Returns the passed in base64 strings mimeType (jpg/png)
-  private _getImageMimeType(data) {
-    if (data.charAt(0) == '/') {
-      return "image/jpeg";
-    } else if (data.charAt(0) == 'i') {
-      return "image/png";
-    }
   }
 
   // =======================================================
@@ -280,33 +246,7 @@ export class BioPdfComponent implements OnInit {
   public addMoreExp() {
     this.addMoreExperience = !this.addMoreExperience;
   }
-// Set the image cropped by user (using the image cropper function) to the bioForm "photo" control
-  public setBioImage(){
-    this.bioPdfForm.controls['photo'].setValue(this.croppedImage.image);
-    this.userImage = this.croppedImage.image
-  }
-
-  // =======================================================
-  // IMAGE CROPPER FUNCTION        =========================
-  // =======================================================
-  @ViewChild('cropper', undefined)
-  cropper: ImageCropperComponent;
-  imageCropperListener($event) {
-    UIkit.modal('#modal-container').show();
-
-    let image: any = new Image();
-    let file: File = $event.target.files[0];
-    let myReader: FileReader = new FileReader();
-    let that = this;
-    myReader.onloadend = function (loadEvent: any) {
-      image.src = loadEvent.target.result;
-      setTimeout(() => {
-        that.cropper.setImage(image);
-      }, 0);
-    };
-
-    myReader.readAsDataURL(file);
-  }
 
 }
+
 

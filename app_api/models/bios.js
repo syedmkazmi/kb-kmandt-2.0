@@ -8,7 +8,7 @@ const bioSchema = new mongoose.Schema({
     lastName: String,
     jobTitle: String,
     userID: String,
-    photo: {type: Buffer, contentType: String},
+    photo: String,
     region: String,
     lineManagerEmail: String,
     bioStatus: String,

@@ -4,9 +4,11 @@
 
 const express = require('express');
 const router = express.Router();
+const {associatePdfBio: associateBio} = require('../controllers/associates');
 const {getAllUsers: findUser, getOne: user, upload: photo, userProposals: proposals, userBios: userbios, update: updateUser} = require('../controllers/users');
-const {create: newProposal, update: updateExisting, get: getAll, getOne: getOne, upload: uploadFile, filter: filter , test: test} = require('../controllers/proposals');
+const {create: newProposal, update: updateExisting, get: getAll, getOne: getOne, upload: uploadFile, filter: filter} = require('../controllers/proposals');
 const {create: newBio, getOne: bio, get: bios, update: existingBio, pdfBio: pdfBio} = require('../controllers/bios');
+const {marketing: marketingFiles, humanResources: hrFiles, clients: clientFiles, download: file} = require('../controllers/templates');
 const {register: registerUser, login: loginUser, verify: verify} = require('../controllers/authentication');
 const {get: sectors} = require('../controllers/sectors');
 const {get: skills} = require('../controllers/skills');
@@ -45,6 +47,12 @@ router
 router
     .route('/icons')
     .get(icons);
+
+// associates
+router
+    .route('/associates/bios')
+    .post(associateBio);
+
 // users
 router
     .route('/users')
@@ -98,14 +106,12 @@ router
     .route('/proposals')
     .get(getAll)
     .post(newProposal);
-    //.post(test);
 router
     .route('/proposals/:id')
     .put(updateExisting)
     .get(getOne)
     .post(upload.single('proposal'), uploadFile); //TODO setup upload progress bar functionality. Tip: Look at  xhr.upload.addEventListener("progress")
                                                 // TODO replace POST with PATCH
-
 
 // bios
 router
@@ -120,5 +126,18 @@ router
     .route('/bios/:id/pdf')
     .post(pdfBio);
 
+// marketing
+router
+    .route('/templates/marketing')
+    .post(marketingFiles);
+router
+    .route('/templates/hr')
+    .post(hrFiles);
+router
+    .route('/templates/clients')
+    .post(clientFiles);
+router
+    .route('/templates/download')
+    .post(file);
 
 module.exports = router;
