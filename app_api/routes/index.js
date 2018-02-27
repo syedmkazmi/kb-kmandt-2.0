@@ -134,7 +134,7 @@ router
     .route('/templates/hr')
     .post(hrFiles);
 router
-    .route('/templates/clients')
+    .route('/templates/client')
     .post(clientFiles);
 router
     .route('/templates/download')
