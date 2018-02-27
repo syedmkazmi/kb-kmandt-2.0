@@ -1,4 +1,4 @@
-<div id="header" *ngIf="isLoggedIn">
+<div id="header" *ngIf="isLoggedIn || associateView">
   <span id="previous-page-btn" uk-icon="icon: arrow-left; ratio: 2" (click)="goBack()"></span>
   <div id="user-profile-btn"><a [routerLink]="['/users', _id]">{{name}}<span uk-icon="icon: chevron-down"></span></a></div>
   <div id="user-profile-img"><img src="{{profileImage}}" onerror="this.src='/assets/images/user-profile-icon/default-user.svg'"></div>
@@ -6,7 +6,7 @@
 </div>
 
 <!--data:image/png;base64, {{name}}-->
-<div class="uk-offcanvas-content" *ngIf="isLoggedIn">
+<div class="uk-offcanvas-content" *ngIf="isLoggedIn || associateView">
   <section id="nav">
     <ul uk-nav>
       <img id="header-logo" src="/assets/images/Logo.svg">

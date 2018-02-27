@@ -83,10 +83,9 @@ h1{
 
 #background-example, #experience-example > div {
   padding: 15px;
-  border: 2px solid #E9E9EF;
+  border: 1px solid #E9E9EF;
   border-radius: 4px;
   background-color: #FFFFFF;
-  box-shadow: 0 0 5px 0 rgba(0, 112, 224, 0.1);
   color: #1B1A3D;
   font-size: 14px;
   line-height: 18px;
@@ -116,7 +115,6 @@ h1{
   border: 2px solid #0070E0;
   border-radius: 4px;
   background-color: #FFFFFF;
-  box-shadow: 0 0 5px 0 rgba(0, 112, 224, 0.1);
 }
 
 #background-example > div > div > p > span {
@@ -184,7 +182,6 @@ h1{
   border: 2px solid #E9E9EF;
   border-radius: 4px;
   background-color: #FFFFFF;
-  box-shadow: 0 0 5px 0 rgba(0, 112, 224, 0.1);
   padding: 20px;
 }
 
@@ -195,7 +192,6 @@ h1{
 #add-more-exp-btn {
   border-radius: 4px;
   background-color: #AFAFBB;
-  box-shadow: 0 0 5px 0 rgba(0, 112, 224, 0.1);
   color: #FFFFFF;
   font-size: 14px;
   line-height: 18px;
@@ -242,4 +238,19 @@ h1{
   cursor: pointer;
   text-decoration: underline;
   color: #0070E0;
+}
+
+#btn-loading-spinner {
+  /*position: absolute;*/
+  left: 100px;
+  top: 0;
+  margin: 10px 10px 10px 10px;
+}
+
+#btn-loading-spinner > svg {
+  width: 25px;
+}
+
+#btn-loading-text {
+  vertical-align: center;
 }

@@ -96,6 +96,28 @@ export class BioService {
       });
   }
 
+  associatePdfBio(body): Observable<any> {
+    const BASE_URL = environment.apiUrl;
+
+    return this._http.post(BASE_URL + '/api/associates/bios', body, { responseType: 'text' })
+      .map(data => {
+        console.log(data);
+        let test = data.replace("?dl=0", "?dl=1");
+        let url = test.replace(/['"]+/g, '');
+        //let url = test + '?dl=1';
+        console.log(url);
+        console.log(JSON.stringify(test));
+        return url;
+      })
+      .catch(err => {
+        // do whatever you want when error occurs
+        console.log(err);
+
+        // re-throw error so you can catch it when subscribing, fallback to generic error code
+        return Observable.throw(err || 'API_ERROR');
+      });
+  }
+
 
 
 }

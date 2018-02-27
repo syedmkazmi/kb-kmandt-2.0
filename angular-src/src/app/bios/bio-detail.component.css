@@ -1,0 +1,108 @@
+* {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+p {
+  color: #333333;
+  font-size: 13px;
+  line-height: 19px;
+  text-align: justify;
+}
+
+#left-side {
+  width: 30%;
+  text-align: -webkit-center;
+}
+
+#right-side {
+  width: 70%;
+}
+
+#fullName > h1 {
+  color: #333333;
+  font-size: 29px;
+  font-weight: 600;
+  line-height: 37px;
+  margin-bottom: 5px;
+}
+
+#jobTitle > h2 {
+  color: #AFAFBB;
+  font-size: 19px;
+  line-height: 24px;
+}
+
+#skills-heading > h2 {
+  color: #333333;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 25px;
+}
+
+.all-skills {
+  display: inline-block;
+}
+
+#skills {
+  border-radius: 2px;
+  display: inline-block;
+  background-color: #CDE6F6;
+
+  color: black;
+  margin: 2px;
+  padding: 2px 3px 2px 3px;
+  font-size: 12px;
+}
+
+#experience-heading > h2 {
+  color: #333333;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 25px;
+  margin-top: 5%;
+}
+
+.experience {
+  margin-bottom: 5px;
+}
+
+#user-img > img {
+  width: 75%;
+  height: 75%;
+  border-radius: 100%;
+  margin-top: -10%;
+  border: 1px solid #979797;
+}
+
+.all-icons {
+  margin-top: 25%;
+}
+
+.icons {
+  margin-bottom: 40%;
+}
+
+.icons > img {
+  width: 150px;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.loading {
+  text-align: -webkit-center;
+}
+
+#main-heading {
+  color: #333333;
+  font-size: 37px;
+  line-height: 48px;
+  margin-bottom: 0;
+}
+
+#sub-heading {
+  color: #333333;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 48px;
+  margin-top: 5px;
+}

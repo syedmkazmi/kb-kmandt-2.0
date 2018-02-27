@@ -7,7 +7,7 @@ import {ISector} from "../../root/interfaces/sector";
 import {UserService} from "../services/user.service";
 import {NotificationsService} from "../../root/services/notifications.service";
 import {ViewChild} from "@angular/core";
-import {ImageCropperComponent, CropperSettings} from "ng2-img-cropper";
+import {ImageCropperComponent, CropperSettings} from "ngx-img-cropper";
 import UIkit from 'uikit'
 import {HttpErrorResponse} from "@angular/common/http";
 
@@ -21,7 +21,8 @@ export class UserEditComponent implements OnInit {
   userEditForm: FormGroup;
   user: IUser;
   sectors: ISector[];
-  profileImage: string;
+  profileImage: any;
+  userName: any;
   data: any;
   cropperSettings: CropperSettings;
   imageType: string;
@@ -49,21 +50,6 @@ export class UserEditComponent implements OnInit {
     this.cropperSettings.minWidth = 200;
     this.cropperSettings.minHeight = 200;
     this.cropperSettings.compressRatio = 1.0;
-    this.data = {};
-
-    /*this.cropperSettings = new CropperSettings();
-    this.cropperSettings.width = 200;
-    this.cropperSettings.height = 200;
-
-    this.cropperSettings.croppedWidth = 200;
-    this.cropperSettings.croppedHeight = 200;
-
-    this.cropperSettings.canvasWidth = 400;
-    this.cropperSettings.canvasHeight = 400;
-
-    this.cropperSettings.minWidth = 200;
-    this.cropperSettings.minHeight = 200;
-    this.cropperSettings.compressRatio = 1.0;*/
 
     this.data = {};
 
@@ -72,7 +58,7 @@ export class UserEditComponent implements OnInit {
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required]],
       jobTitle: ['', [Validators.required]],
-      //photo: ['', [Validators.required]],
+      photo: ['', [Validators.required]],
       startDate: ['', [Validators.required]],
       birthday: ['', [Validators.required]],
       region: ['', [Validators.required]],
@@ -95,7 +81,7 @@ export class UserEditComponent implements OnInit {
     );
 
     // Get users profile picture from local storage
-    this.profileImage = localStorage.getItem("profile-img");
+    //this.profileImage = localStorage.getItem("profile-img");
   }
 
   onUserRetrieved(user: IUser) {
@@ -103,18 +89,19 @@ export class UserEditComponent implements OnInit {
       this.userEditForm.reset();
     }
 
-    if (user.photo != null) {
-      this.imageType = this._getImageMimeType(user.photo);
+    this.user = user;
+
+    if (this.user.photo != null) {
+      this.profileImage = this.user.photo;
     }
 
-    this.user = user;
 
     this.userEditForm.patchValue({
       firstName: this.user.firstName,
       lastName: this.user.lastName,
       email: this.user.email,
       jobTitle: this.user.jobTitle,
-      //photo: this.user.photo,
+      photo: this.user.photo,
       startDate: this.user.startDate,
       birthday: this.user.birthday,
       region: this.user.region,
@@ -157,11 +144,35 @@ export class UserEditComponent implements OnInit {
     this._router.navigate(['/']);
   }
 
-  saveProfileImage() {
+  /*saveProfileImage() {
     localStorage.setItem("profile-img", this.data.image);
     this.profileImage = localStorage.getItem("profile-img");
 
     this._userService.sendMessage(this.profileImage);
+  }*/
+
+  saveProfileImage() {
+    let id = this._route.snapshot.paramMap.get('id');
+    this.userName = JSON.parse(localStorage.getItem("userInfo")).lastName;
+
+    this._userService.setProfileImage(id, {photo: this.data.image, name: this.userName})
+      .subscribe( (img) => {
+          this.profileImage = img;
+          this._userService.sendMessage(img);
+          localStorage.setItem("profile-img", this.profileImage);
+          this.userEditForm.controls['photo'].patchValue(this.profileImage);
+        },
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            // A client-side or network error occurred. Handle it accordingly.
+            console.log('An error occurred:', err.error.message);
+          } else {
+            // The backend returned an unsuccessful response code.
+            // The response body may contain clues as to what went wrong,
+            this._notificationService.sendNotification(err.error.message); //TODO Does not show server 500 error.
+            console.log(`Backend returned code ${err.status}, body was: ${err.error.message}`);
+          }
+        })
   }
 
   @ViewChild('cropper', undefined)

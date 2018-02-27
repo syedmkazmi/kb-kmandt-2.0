@@ -18,7 +18,6 @@ const sendinblue = require('sendinblue-api');
 const parameters = {"apiKey": process.env.SEND_IN_BLUE, "timeout": 5000};
 const sendinObj = new sendinblue(parameters);
 
-
 // Mongoose Data Schemas
 const Bio = mongoose.model('Bios');
 const User = mongoose.model('Users');
@@ -53,8 +52,8 @@ let get = (req, res) => {
 // =======================================================
 let create = (req, res) => {
 
-    let b64string = req.body.photo;
-    let bufferedData = Buffer.from(JSON.stringify(b64string), 'base64');
+    //let b64string = req.body.photo;
+    //let bufferedData = Buffer.from(JSON.stringify(b64string), 'base64');
 
     let newBio = new Bio();
 
@@ -62,7 +61,7 @@ let create = (req, res) => {
     newBio.lastName = req.body.lastName;
     newBio.jobTitle = req.body.jobTitle;
     newBio.userID = req.decoded._id;
-    newBio.photo = bufferedData;
+    newBio.photo = req.body.photo;
     newBio.lineManagerEmail = req.decoded.lineManagerEmail;
     newBio.region = req.body.region;
     newBio.bioStatus = "pending";
@@ -93,12 +92,14 @@ let getOne = (req, res) => {
         .exec()
         .then((data) => {
             if (data) {
-                if (data.photo != null) {
+
+                return data;
+                /*if (data.photo != null) {
                     data.photo = data.photo.toString('base64');
                     return data;
                 } else {
                     return data;
-                }
+                }*/
             } else if (!data) {
                 sendJsonResponse(res, 404, {"message": "Unable to find a single bio"})
             }
@@ -115,13 +116,15 @@ let getOne = (req, res) => {
 // UPDATE A BIO                  =========================
 // =======================================================
 let update = (req, res) => {
-    let b64string = req.body.photo;
-    let bufferedData = Buffer.from(JSON.stringify(b64string), 'base64');
+    //let b64string = req.body.photo;
+    //let bufferedData = Buffer.from(JSON.stringify(b64string), 'base64');
 
     Bio.findByIdAndUpdate(req.params.id, {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             lineManagerEmail: req.decoded.lineManagerEmail,
-            region: req.decoded.region,
-            photo: bufferedData,
+            region: req.body.region,
+            photo: req.body.photo,
             background: req.body.background,
             experience: req.body.experience,
             skills: req.body.skills,
@@ -214,6 +217,10 @@ let pdfBio = (req, res) => {
     });
 };
 
+// =======================================================
+// PRIVATE FUNCTIONS             =========================
+// =======================================================
+
 let _deleteLocalFile = (filename) => {
     return new Promise((resolve, reject) => {
         fs.unlink(`${temp_dir}/${filename}.pdf`, (err) => {
@@ -265,10 +272,6 @@ let _findUser = (bio) => {
 };
 
 let _emailBioCopy = (user, bio) => {
-
-    console.log(bio.skills);
-    console.log(bio.experience);
-
     const input = {
         'id': 6,
         'to': user.email,

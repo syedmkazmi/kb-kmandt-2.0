@@ -16,6 +16,7 @@ import {SharedModule} from "../shared/shared.module";
 import {BioPdfComponent} from './components/bio-pdf.component';
 import {UserDetailsGuard} from "../authentication/guards/user-details.guard";
 import {BioUserResolverService} from "./services/bio-user-resolver.service";
+import { BioDetailComponent } from './bio-detail.component';
 
 @NgModule({
   imports: [
@@ -54,7 +55,7 @@ import {BioUserResolverService} from "./services/bio-user-resolver.service";
     MatNativeDateModule,
     SharedModule
   ],
-  declarations: [BioAddComponent, BioEditComponent, BioListComponent, BioPdfComponent],
+  declarations: [BioAddComponent, BioEditComponent, BioListComponent, BioPdfComponent, BioDetailComponent],
   providers: [BioEditResolverService, BioListResolverService]
 })
 export class BioModule {

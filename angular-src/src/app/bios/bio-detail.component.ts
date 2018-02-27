@@ -1,33 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {IBio} from "../interfaces/Bio";
+import { Component, OnInit, Input } from '@angular/core';
+import {IBio} from "./interfaces/Bio";
+import {BioService} from "./services/bio.service";
 import {HttpErrorResponse} from "@angular/common/http";
-import {BioService} from "../services/bio.service";
 
 @Component({
-  templateUrl: './bio-list.component.html',
-  styleUrls: ['./bio-list.component.css']
+  selector: 'bio-detail',
+  templateUrl: './bio-detail.component.html',
+  styleUrls: ['./bio-detail.component.css']
 })
-export class BioListComponent implements OnInit {
-  title: string = "Bio's";
-  bios: IBio[];
-  selectedBio: IBio;
-  downloadFile: boolean = false;
+export class BioDetailComponent implements OnInit {
+@Input() bio?: IBio;
+downloadFile: boolean = false;
 
-  constructor(private _route: ActivatedRoute, private _bioService: BioService) {
-  }
+  constructor(private _bioService: BioService) { }
 
   ngOnInit() {
-    // Get Bios from bios list route resolver service
-    this._route.data.subscribe(
-      data => {
-        this.bios = data['bios'];
-      }
-    );
-  }
-
-  onSelect(bio: IBio) {
-    this.selectedBio = JSON.parse(JSON.stringify(bio));
   }
 
   pdf(bio: IBio) {
@@ -51,6 +38,5 @@ export class BioListComponent implements OnInit {
           }
         })
   }
-
 
 }

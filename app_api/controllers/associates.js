@@ -1,19 +1,18 @@
 /**
- *  Created by syedkazmi on 09/02/2018
+ *  Created by syedkazmi on 26/02/2018
  */
 
-const mongoose = require('mongoose');
-mongoose.Promise = Promise;
 const fs = require("fs");
 const rp = require('request-promise-native');
 const request = require('request');
 const path = require("path");
-const temp_dir = path.join(process.cwd(), 'bios_associate_pdf');
+const temp_dir = path.join(process.cwd(), 'bios_pdf');
 const pdf = require('html-pdf');
 const ejs = require('ejs');
 let html = fs.readFileSync('./app_server/pdf-templates/pdf-bio-template.ejs', 'utf8');
 const base = path.resolve("./angular-src/src");
 const options = {format: 'A4', timeout: 50000, base: `file://${base}`, border: "40px"};
+
 
 let sendJsonResponse = (res, status, content) => {
     res
@@ -22,14 +21,15 @@ let sendJsonResponse = (res, status, content) => {
 };
 
 // =======================================================
-// BIO PDF ASSOCIATES            =========================
+// BIO PDF                       =========================
 // =======================================================
 
-let pdfAssociateBio = (req, res) => {
+let associatePdfBio = (req, res) => {
 
     ejs.renderFile('./app_server/pdf-templates/pdf-bio-template.ejs', {
         photo: req.body.photo,
-        fullName: req.body.fullName,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         jobTitle: req.body.jobTitle,
         iconOne: req.body.iconOne,
         iconTwo: req.body.iconTwo,
@@ -53,7 +53,7 @@ let pdfAssociateBio = (req, res) => {
         }
     });
 
-    pdf.create(html, options).toFile(`./bios_associate_pdf/${req.body.firstName + req.body.lastName}.pdf`, function (err, resp) {
+    pdf.create(html, options).toFile(`./bios_pdf/${req.body.firstName + req.body.lastName}.pdf`, function (err, resp) {
         if (err)
             return sendJsonResponse(res, 500, err);
 
@@ -87,6 +87,10 @@ let pdfAssociateBio = (req, res) => {
 
     });
 };
+
+// =======================================================
+// PRIVATE FUNCTIONS             =========================
+// =======================================================
 
 let _deleteLocalFile = (filename) => {
     return new Promise((resolve, reject) => {
@@ -132,4 +136,8 @@ let _generateShareableLink = (filename) => {
             }
         })
     })
+};
+
+module.exports = {
+    associatePdfBio
 };

@@ -1,10 +1,14 @@
-<section *ngIf="downloadFile" class="downloading-file">
-  <div>
-    {{generatingPdf}}
-  </div>
+<section *ngIf="downloadFile" class="loading">
+  <div *ngIf="!generatingPdf" id="loading-spinner" uk-spinner></div>
+  <div id="main-heading">{{generatingPdf === false ? "Hold on to something!" : "Congratulations!"}}</div>
+  <h2 id="sub-heading">{{generatingPdf === false ? "We're about to do some magic." : "Your bio is ready. Click below to download it."}}</h2>
+
+  <a *ngIf="generatingPdf" href="{{downloadLink}}"><button class="uk-button uk-button-primary uk-margin-top">It's Ready</button></a>
 </section>
 
+
 <section *ngIf="!downloadFile" class="bioPdfForm" uk-grid>
+  <!--------------------------------------------------------------->
   <!--------------------------------------------------------------->
   <!------------------------- SECTION ONE ------------------------->
   <!--------------------------------------------------------------->
@@ -237,12 +241,6 @@
       <!----- BIO IMAGE ----->
       <div id="image">
         <img id="user-img" src="{{userImage}}" onerror="this.src='/assets/images/user-profile-icon/default-user.svg'">
-        <div id="add-btn">
-          <div>
-            <input id="custom-input" type="file" (change)="imageCropperListener($event)">
-            <a class="uk-link-muted" type="button" tabindex="-1">Set New Image</a>
-          </div>
-        </div>
       </div>
       <!------ TIP ------>
       <div id="icon-tips">
@@ -307,25 +305,4 @@
   </div>
 </section>
 
-<!------------------------------------------------------------------------->
-<!------------------------- BIO ICONS POPUP MODAL ------------------------->
-<!------------------------------------------------------------------------->
-<div id="modal-container" class="uk-modal-container" uk-modal>
-  <div class="uk-modal-dialog">
-    <button class="uk-modal-close-default" type="button" uk-close></button>
-    <div class="uk-modal-header">
-      <h2 class="uk-modal-title">Set Profile Picture</h2>
-    </div>
-    <div class="uk-modal-body">
-      <img-cropper #cropper [image]="croppedImage" [settings]="cropperSettings"></img-cropper>
-      <br>
-      <span class="result rounded" *ngIf="croppedImage.image">
-        <img [src]="croppedImage.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
-      </span>
-    </div>
-    <div class="uk-modal-footer uk-text-right">
-      <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-      <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="setBioImage()">Save</button>
-    </div>
-  </div>
-</div>
+
