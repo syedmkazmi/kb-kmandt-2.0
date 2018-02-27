@@ -9,10 +9,10 @@ mongoose.Promise = Promise;
 
 const cloudinary = require('cloudinary');
 cloudinary.config({
-    cloud_name: 'kb-kmandt',
-    api_key: '945829792861333',
-    api_secret: 'KBwo_DyMYQiBRP_XuZau_pkOJQI'
-}); //TODO: Move these to .env file
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 let sendJsonResponse = (res, status, content) => {
     res

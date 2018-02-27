@@ -29,6 +29,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.18.2",
     "bootstrap": "^4.0.0-beta.2",
+    "classlist.js": "^1.1.20150312",
     "cloudinary": "^1.10.0",
     "cookie-parser": "~1.4.3",
     "core-js": "^2.4.1",

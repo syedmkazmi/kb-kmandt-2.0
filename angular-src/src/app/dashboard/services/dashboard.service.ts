@@ -62,6 +62,40 @@ export class DashboardService {
   }
 
   // =======================================================
+  // GET HR FILES                    =======================
+  // =======================================================
+  getHumanResourceFiles(): Observable<any[]> {
+    const BASE_URL = environment.apiUrl;
+
+    return this._http.post<any[]>(`${BASE_URL}/api/templates/hr`,{})
+      .map(data => {return data})
+      .catch(err => {
+        // do whatever you want when error occurs
+        console.log(err);
+
+        // re-throw error so you can catch it when subscribing, fallback to generic error code
+        return Observable.throw(err || 'API_ERROR');
+      });
+  }
+
+  // =======================================================
+  // GET HR FILES                    =======================
+  // =======================================================
+  getClientFiles(): Observable<any[]> {
+    const BASE_URL = environment.apiUrl;
+
+    return this._http.post<any[]>(`${BASE_URL}/api/templates/client`,{})
+      .map(data => {return data})
+      .catch(err => {
+        // do whatever you want when error occurs
+        console.log(err);
+
+        // re-throw error so you can catch it when subscribing, fallback to generic error code
+        return Observable.throw(err || 'API_ERROR');
+      });
+  }
+
+  // =======================================================
   // GET ALL BASIC FILES             =======================
   // =======================================================
   downloadFile(data): Observable<any[]> {

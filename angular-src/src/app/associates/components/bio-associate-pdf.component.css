@@ -1,5 +1,4 @@
 .header {
-  padding: 20px 120px 20px 20px;
   position: relative;
   height: 70px;
   -webkit-box-shadow: 0 1px 10px 0 rgba(196, 205, 213, 0.55);
@@ -7,11 +6,9 @@
 }
 
 #header-logo {
-  width: 94px;
-  height: 72px;
-  margin-top: 40px;
-  margin-bottom: 66px;
-  margin-left: 40px;
+  height: 45px;
+  margin-top: 14px;
+  margin-left: 64px;
 }
 
 * {
@@ -298,6 +295,8 @@ h1{
   font-size: 16px;
   line-height: 25px;
   text-transform: capitalize;
+  margin-top: 20px;
+  margin-right: 50px;
 }
 
 

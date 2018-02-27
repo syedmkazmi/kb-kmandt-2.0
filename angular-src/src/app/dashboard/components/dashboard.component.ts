@@ -14,8 +14,9 @@ export class DashboardComponent implements OnInit {
   proposals: IProposal[];
   bios: IBio[];
   userID: string;
-  files: any;
-  file: any;
+  marketing: any;
+  humanResources: any;
+  clients: any;
   link: any;
 
   constructor(private _ds: DashboardService) {
@@ -25,7 +26,9 @@ export class DashboardComponent implements OnInit {
     this._getUserId();
     this.getProposals();
     this.getBios();
-    this.getFiles();
+    this.marketingFiles();
+    this.humanResourcesFile();
+    this.clientFiles();
   }
 
   getProposals(){
@@ -51,18 +54,40 @@ export class DashboardComponent implements OnInit {
       )
   }
 
-  getFiles(){
+  marketingFiles(){
+    let file: any;
     this._ds.getMarketingFiles()
       .subscribe(
         (data) => {
-         // console.log(data);
-          this.file = data;
-          this.files = JSON.parse(this.file).entries;
-         // console.log(JSON.parse(this.file).entries.name);
-          //console.log(JSON.parse(this.files)[0]);
-          //console.log(JSON.parse(JSON.stringify(this.files))["entries"]);
-          //console.log(JSON.parse(JSON.stringify(this.files[0].name)));
+          file = data;
+          this.marketing = JSON.parse(file).entries;
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+  }
+  humanResourcesFile(){
+    let file: any;
+    this._ds.getHumanResourceFiles()
+      .subscribe(
+        (data) => {
+          file = data;
+          this.humanResources = JSON.parse(file).entries;
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+  }
+  clientFiles(){
+    let file: any;
 
+    this._ds.getClientFiles()
+      .subscribe(
+        (data) => {
+          file = data;
+          this.clients = JSON.parse(file).entries;
         },
         (err) => {
           console.log(err);
@@ -70,7 +95,8 @@ export class DashboardComponent implements OnInit {
       )
   }
 
-  getFilesUrl(name){
+
+  downloadFile(name){
     this._ds.downloadFile(name)
       .subscribe(
         (data) => {

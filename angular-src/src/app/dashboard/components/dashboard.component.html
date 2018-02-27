@@ -20,11 +20,19 @@
       <div class="uk-switcher uk-margin">
         <div>
           <ul class="uk-list uk-list-divider">
-            <li  class="file-links" *ngFor="let f of files" (click)="getFilesUrl(f.path_lower)">{{f.name}} <span uk-icon="download"></span></li>
+            <li  class="file-links" *ngFor="let file of marketing" (click)="downloadFile(file.path_lower)">{{file.name}} <span uk-icon="download"></span></li>
           </ul>
         </div>
-        <div>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-        <div>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sed do eiusmod.</div>
+        <div>
+          <ul class="uk-list uk-list-divider">
+            <li  class="file-links" *ngFor="let file of clients" (click)="downloadFile(file.path_lower)">{{file.name}} <span uk-icon="download"></span></li>
+          </ul>
+        </div>
+        <div>
+          <ul class="uk-list uk-list-divider">
+            <li  class="file-links" *ngFor="let file of humanResources" (click)="downloadFile(file.path_lower)">{{file.name}} <span uk-icon="download"></span></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
