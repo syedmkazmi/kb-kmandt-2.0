@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   proposals: IProposal[];
   bios: IBio[];
   userID: string;
+  userName: string;
   marketing: any;
   humanResources: any;
   clients: any;
@@ -24,6 +25,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this._getUserId();
+    this._getUserName();
     this.getProposals();
     this.getBios();
     this.marketingFiles();
@@ -113,6 +115,10 @@ export class DashboardComponent implements OnInit {
 
   private _getUserId() {
     this.userID = JSON.parse(localStorage.getItem("userInfo"))._id;
+  }
+
+  private _getUserName(){
+    this.userName = JSON.parse(localStorage.getItem("userInfo")).firstName;
   }
 
 }

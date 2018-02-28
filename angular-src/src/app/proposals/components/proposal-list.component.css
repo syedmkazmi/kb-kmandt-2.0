@@ -17,6 +17,10 @@ h1 {
   line-height: 1;
 }
 
+hr {
+  margin-top: 0;
+}
+
 .search-bar {
   float: right;
 }
@@ -31,11 +35,10 @@ h1 {
 
 .unsuccessful-filter {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   margin-top: -50px;
   margin-left: -50px;
-  width: 100%;
   height: 100px;
 }
 
@@ -58,6 +61,23 @@ h1 {
 
 #filters-btn {
   margin-left: -10px;
+}
+
+.filter-title {
+  width: 50px;
+  display: inline-block;
+}
+
+#status {
+  display: inline-block;
+}
+
+.filter-options {
+  display: inline-flex;
+  margin-left: 80px;
+}
+
+.option-1, .option-2, .option-3 {
 }
 
 #proposals {
@@ -197,6 +217,34 @@ h1 {
 
 .uk-offcanvas-close {
   color: #333333;
+}
+
+.uk-drop.uk-open {
+  width: 540px;
+}
+
+#empty-filter-results {
+  padding: 10px 50px 10px 50px;
+}
+
+#empty-filter-message {
+  color: #333333;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 48px;
+}
+
+#clear-filter-btn {
+  font-size: 15px;
+  color: #FF5346;
+  cursor: pointer;
+}
+
+#apply-filter-btn {
+  font-size: 15px;
+  float: right;
+  cursor: pointer;
+  color: #0070E0;
 }
 
 @media screen and (max-width: 600px) {

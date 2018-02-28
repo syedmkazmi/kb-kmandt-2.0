@@ -18,6 +18,16 @@ h1 {
   padding-bottom: 40px;
 }
 
+#dashboard-header {
+  margin-bottom: 40px;
+}
+
+#waving-icon {
+  width: 29px;
+  margin-left: 5px;
+  vertical-align: text-bottom;
+}
+
 .uk-first-column {
   width: 60%;
 }

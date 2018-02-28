@@ -1,3 +1,44 @@
+* {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
 .prompt-user {
   margin-left: 240px;
+}
+
+#placeholder {
+  width: 300px;
+  margin: 80px auto 0 auto;
+}
+
+#main-heading {
+  color: #333333;
+  font-size: 37px;
+  line-height: 48px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+#sub-heading {
+  color: #333333;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 48px;
+  text-align: center;
+}
+
+.click-here-btn {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.click-here-btn > button {
+  height: 41px;
+  width: 221px;
+  background-color: #0070E0;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  border: none;
 }

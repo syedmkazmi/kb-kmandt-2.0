@@ -4,4 +4,5 @@ export interface IAuthToken {
   expiresIn: string,
   userInfo: string,
   registration: boolean
+  profileImg: string
 }

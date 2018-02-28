@@ -104,6 +104,7 @@ let login = (req, res) => {
                 "token": token,
                 "expiresIn": 60,
                 "userInfo": {"_id": user._id, "firstName": user.firstName, "lastName": user.lastName},
+                "profileImg": user.photo || "",
                 "registration": registration
             });
         } else {

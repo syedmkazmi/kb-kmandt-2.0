@@ -80,7 +80,7 @@ a {
   line-height: 30px;
   margin-right: 10px;
   margin-top: -0.1%;
-  cursor: copy;
+  cursor: pointer;
 }
 
 #header > #add-btn:focus {
@@ -122,6 +122,17 @@ a {
 
 .uk-offcanvas-bar {
   background-color: #0070e0;
+}
+
+.uk-dropdown.uk-open {
+  display: block;
+  border: 1px solid #e6e8eb;
+  box-shadow: none;
+  padding-bottom: 10px;
+}
+
+hr {
+  margin-bottom: 10px;
 }
 
 @media screen and (max-width: 600px) {

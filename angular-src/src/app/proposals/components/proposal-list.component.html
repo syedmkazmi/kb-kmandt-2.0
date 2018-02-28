@@ -1,5 +1,5 @@
 <section id="proposals">
-  <h1>{{title}}</h1>
+  <h1>{{title}} - ({{proposals.length}})</h1>
 
   <div class="search-bar">
   <div class="uk-margin" id="search-bar">
@@ -11,34 +11,47 @@
 
     <div class="uk-inline" id="filters-btn">
       <button class="uk-button uk-button-default" type="button">Filters <span uk-icon="icon: settings"></span></button>
-      <div uk-drop="mode: click">
+      <div uk-drop="mode: click; pos: top-right">
         <div class="uk-card uk-card-body uk-card-default">
-          <p id="filter-title">Status</p>
-          <fieldset id="status">
+
+          <div id="status">
+            <p class="filter-title">Status</p>
           <div class="filter-options" uk-grid>
             <div class="option-1"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.proposalStatus" value="won" name="status"> Won</label></div>
             <div class="option-2"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.proposalStatus" value="live" name="status"> Live</label></div>
             <div class="option-3"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.proposalStatus" value="lost" name="status"> Lost</label></div>
           </div>
-          </fieldset>
-
-          <fieldset id="region">
-         <div class="filter-options" uk-grid>
-            <div class="option-1"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.proposalRegion" value="UK" name="region"> UK</label></div>
-            <div class="option-2"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.proposalRegion" value="NA" name="region"> NA</label></div>
-            <div class="option-3"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.proposalRegion" value="AU" name="region"> AU</label></div>
           </div>
-          </fieldset>
+
+          <div id="region">
+            <p class="filter-title">Region</p>
+            <div class="filter-options" uk-grid>
+              <div class="option-1"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.proposalRegion" value="UK" name="region"> UK</label></div>
+              <div class="option-2"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.proposalRegion" value="NA" name="region"> NA</label></div>
+              <div class="option-3"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.proposalRegion" value="AU" name="region"> AU</label></div>
+            </div>
+          </div>
+
+          <div id="clients">
+
+          </div>
+
+          <hr>
+         <div>
+           <p id="apply-filter-btn" (click)="filterProposals()">Apply</p>
+           <p id="clear-filter-btn" (click)="proposalList()">Clear Filters</p>
+         </div>
         </div>
-        <button (click)="filterProposals()">Apply</button>
-        <button (click)="proposalList()">Clear Filters</button>
       </div>
     </div>
   </div>
 
   <section *ngIf="!filterStatus" class="unsuccessful-filter">
+    <div id="empty-filter-results">
+      <img src="/assets/images/mascots/sad-robert.svg">
+    </div>
     <div>
-      {{filterMessage}}
+      <div id="empty-filter-message">{{filterMessage}}</div>
     </div>
   </section>
 
