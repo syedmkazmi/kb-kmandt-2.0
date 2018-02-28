@@ -1,4 +1,15 @@
-<section id="proposals-dashboard">
+<section *ngIf="proposals?.length <= 0" class="placeholder">
+  <h1>{{title}} - ({{proposals?.length || 0}})</h1>
+  <div class="uk-inline">
+    <img src="/assets/images/placeholders/dashboard-placeholder.png">
+    <div class="uk-position-center">
+      <div id="no-proposals">You have no proposals</div>
+      <button class="uk-button uk-button-primary add-bio-btn" [routerLink]="['/proposals/0/new']">Add Proposals</button>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="proposals?.length > 0" id="proposals-dashboard">
   <h1>{{title}} - ({{proposals?.length || 0}})</h1>
 
   <section>

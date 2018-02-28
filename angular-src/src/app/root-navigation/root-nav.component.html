@@ -1,8 +1,26 @@
 <div id="header" *ngIf="isLoggedIn || associateView">
   <span id="previous-page-btn" uk-icon="icon: arrow-left; ratio: 2" (click)="goBack()"></span>
-  <div id="user-profile-btn"><a [routerLink]="['/users', _id]">{{name}}<span uk-icon="icon: chevron-down"></span></a></div>
+  <div id="user-profile-btn" class="uk-inline">
+    <a>{{name}}<span uk-icon="icon: chevron-down"></span></a>
+    <div uk-dropdown="mode: click; pos: top-right">
+      <div>
+        <div><a [routerLink]="['/users', _id]">Account Settings</a></div>
+        <hr>
+        <div><a (click)="logout()">logout</a></div>
+      </div>
+    </div>
+  </div>
   <div id="user-profile-img"><img src="{{profileImage}}" onerror="this.src='/assets/images/user-profile-icon/default-user.svg'"></div>
-  <div id="add-btn"><img src="assets/images/proposal-icons/add_circle.svg" [routerLink]="['/proposals/0/new']"></div>
+  <div id="add-btn" class="uk-inline">
+    <img src="assets/images/proposal-icons/add_circle.svg">
+    <div uk-dropdown="mode: click; pos: top-right">
+      <div>
+        <div><a [routerLink]="['/proposals/0/new']">Create Proposal</a></div>
+         <div class="uk-nav-divider"></div>
+        <div><a [routerLink]="['/bios/0/new']">Create Bio</a></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!--data:image/png;base64, {{name}}-->

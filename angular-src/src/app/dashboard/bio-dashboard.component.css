@@ -1,5 +1,5 @@
 
-table {
+.bios-dashboard {
   width: 60%;
 }
 
@@ -10,9 +10,29 @@ h1 {
   line-height: 31px !important;
 }
 
+.add-bio-btn {
+  width: 150px;
+}
+
+.uk-position-center {
+  text-align: center;
+}
+
+#no-bios {
+  color: #333333;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 31px;
+  margin-bottom: 10px;
+}
+
+.placeholder {
+  width: 60%;
+  margin-bottom: 30px;
+}
+
 .loadMore {
   text-align: center;
-  width: 60%;
 }
 
 .loadMore > a {

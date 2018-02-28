@@ -1,4 +1,7 @@
 
+.placeholder {
+  margin-bottom: 30px;
+}
 
 h1 {
   color: #333333 !important;
@@ -7,9 +10,20 @@ h1 {
   line-height: 31px !important;
 }
 
+.uk-position-center {
+  text-align: center;
+}
+
+#no-proposals {
+  color: #333333;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 31px;
+  margin-bottom: 10px;
+}
+
 .loadMore {
   text-align: center;
-  width: 60%;
 }
 
 .loadMore > a {

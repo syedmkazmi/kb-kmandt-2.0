@@ -45,11 +45,15 @@ export class AuthenticationService {
           const unit: moment.unitOfTime.DurationConstructor = 'hour';
           const expiresIn = moment().add(1, unit);
           const userInfo = data.userInfo;
+          const profileImg =  data.profileImg;
+
+          console.log("adasdas " + profileImg);
 
           if (token) {
             localStorage.setItem("token", JSON.stringify(token));
             localStorage.setItem("expiresIn", JSON.stringify(expiresIn));
             localStorage.setItem("userInfo", JSON.stringify(userInfo));
+            localStorage.setItem("profile-img",profileImg);
             this._router.navigate(['/'])
           }
           return data;
@@ -86,8 +90,11 @@ export class AuthenticationService {
     });*/
   }
 
-  logout(): void {
-    localStorage.removeItem('token');
+
+  public isLoggedOut() {
+    localStorage.removeItem('expiresIn');
+    this._router.navigate(['/login']);
+    this.sendMessage(this.isLoggedIn());
   }
 
   public isLoggedIn(): boolean {

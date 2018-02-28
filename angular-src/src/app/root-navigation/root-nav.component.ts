@@ -55,4 +55,8 @@ export class RootNavComponent implements OnInit {
     this._location.back();
   }
 
+  public logout(){
+    this._authService.isLoggedOut();
+  }
+
 }
