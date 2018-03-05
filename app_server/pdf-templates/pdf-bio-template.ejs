@@ -1,19 +1,14 @@
 <html>
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700" rel="stylesheet">
     <meta charset="utf8">
-
-
     <title>Bio</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700');
-        html, body {
+        body {
             margin: 0;
             padding: 0;
             font-family: 'Source Sans Pro', sans-serif;
-            font-weight: 500;
             background: #fff;
-            font-size: 9px;
             -webkit-print-color-adjust: exact;
             box-sizing: border-box;
             color: #fff;
@@ -32,6 +27,7 @@
         @media print {
             body {
                 background: #fff;
+                font-family: 'Source Sans Pro', sans-serif;
                 color: #fff;
             }
 
@@ -202,8 +198,8 @@
             <img src="src/<%= iconFour %>">
         </div>
         <div class="b">
-            <div style="">
-                <h1><%= firstName%> <%= lastName%></h1>
+            <div>
+                <h1 style="font-family: 'Source Sans Pro', sans-serif"><%= firstName%> <%= lastName%></h1>
                 <h2><%= jobTitle %></h2>
                 <br>
                 <p><%- background %></p>
@@ -217,7 +213,7 @@
                     <% } %>
                 </div>
 
-            <br>
+                <br>
                 <h3>Experience</h3>
                 <div style="page-break-inside: avoid;">
                     <p><%= exp1 %></p>
