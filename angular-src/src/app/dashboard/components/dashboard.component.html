@@ -19,17 +19,17 @@
       <div class="uk-switcher uk-margin">
         <div>
           <ul class="uk-list uk-list-divider">
-            <li  class="file-links" *ngFor="let file of marketing" (click)="downloadFile(file.path_lower)">{{file.name}} <span uk-icon="download"></span></li>
+            <li  class="file-links" *ngFor="let file of marketing" (click)="downloadFile(file.path_lower)"><img class="pdf-icon" src="/assets/images/dashboard-icons/pdf-icon.svg">{{file.name}} <span uk-icon="download"></span></li>
           </ul>
         </div>
         <div>
           <ul class="uk-list uk-list-divider">
-            <li  class="file-links" *ngFor="let file of clients" (click)="downloadFile(file.path_lower)">{{file.name}} <span uk-icon="download"></span></li>
+            <li  class="file-links" *ngFor="let file of clients" (click)="downloadFile(file.path_lower)"><img class="pdf-icon" src="/assets/images/dashboard-icons/pdf-icon.svg">{{file.name}} <span uk-icon="download"></span></li>
           </ul>
         </div>
         <div>
           <ul class="uk-list uk-list-divider">
-            <li  class="file-links" *ngFor="let file of humanResources" (click)="downloadFile(file.path_lower)">{{file.name}} <span uk-icon="download"></span></li>
+            <li  class="file-links" *ngFor="let file of humanResources" (click)="downloadFile(file.path_lower)"><img class="pdf-icon" src="/assets/images/dashboard-icons/pdf-icon.svg">{{file.name}} <span uk-icon="download"></span></li>
           </ul>
         </div>
       </div>

@@ -41,3 +41,7 @@ h1 {
 .loadMore > a:hover {
   font-weight: 600;
 }
+
+#bio-icon > img {
+  width: 100px;
+}

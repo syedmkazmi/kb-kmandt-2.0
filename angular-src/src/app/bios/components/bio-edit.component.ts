@@ -243,9 +243,11 @@ export class BioEditComponent implements OnInit {
     const skillsArray = <FormArray>this.bioEditForm.controls.skills;
     if (isChecked) {
       skillsArray.push(new FormControl(skill));
+      this._changeFormState();
     } else {
       let index = skillsArray.controls.findIndex(x => x.value == skill);
       skillsArray.removeAt(index);
+      this._changeFormState();
     }
   }
   // Show & Hide optional experience fields

@@ -28,6 +28,11 @@ h1 {
   vertical-align: text-bottom;
 }
 
+.pdf-icon {
+  width: 24px;
+  margin-right: 10px;
+}
+
 .uk-first-column {
   width: 60%;
 }
@@ -45,6 +50,8 @@ h1 {
 
 .file-links {
   cursor: pointer;
+  color: #121212;
+  font-size: 14px;
 }
 
 .file-links:hover {

@@ -50,7 +50,7 @@
   border: 1px solid #C4CDD5;
 }
 
-#submit-btn {
+.submit-btn {
   height: 50px;
   background-color: #0070E0;
   color: #FFFFFF;
@@ -60,11 +60,12 @@
   text-align: center;
 }
 
-#submit-btn:disabled {
+.submit-btn:disabled {
   color: #FFFFFF;
   background-color: #C4CDD1;
   border-color: transparent;
 }
+
 
 #logo {
   padding-bottom: 80px;
@@ -105,4 +106,22 @@
   font-weight: 600;
   margin-top: 10%;
   line-height: 60px;
+}
+
+.uk-form-controls {
+  margin-top: 10px;
+}
+
+#btn-loading-spinner {
+  left: 100px;
+  top: 0;
+  margin: 10px 10px 10px 10px;
+}
+
+#btn-loading-spinner > svg {
+  width: 25px;
+}
+
+#btn-loading-text {
+  vertical-align: center;
 }
