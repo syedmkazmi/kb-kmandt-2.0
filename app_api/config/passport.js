@@ -22,6 +22,9 @@ passport.use(new LocalStrategy({
             if(user.accountVerified === 'false'){
                 return done(null, false, {message: 'Looks like your accounts not verified'});
             }
+            if(user) {
+                user.lastLogin = Date.now();
+            }
             return done(null, user)
         });
     }
