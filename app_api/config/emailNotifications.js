@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 const Proposal = mongoose.model('Proposals');
 const sendinblue = require('sendinblue-api');
-const parameters = {"apiKey": process.env.SEND_IN_BLUE, "timeout": 5000}; //TODO Move API Key to env process.env.JWT_SECRET
+const parameters = {"apiKey": process.env.SEND_IN_BLUE, "timeout": 60000};
 const sendinObj = new sendinblue(parameters);
 
 let sendJsonResponse = (res, status, content) => {
@@ -18,15 +18,19 @@ let sendJsonResponse = (res, status, content) => {
 // REMINDER EMAILS FOR PROPOSAL STATUS     ===============
 // =======================================================
 let proposalStatus = (req,res) => {
-    Proposal.aggregate([{"$match": {"status": "live"}},{"$group":{_id:"$owner", projects:{ $push: "$title"}}}])
+
+    Proposal.aggregate([{ $match: { $and: [ { "proposalStatus": "live" }, { "responseDate": { $lt: new Date() } } ] } },{"$group":{_id:"$ownerEmail", projects:{ $push: "$proposalTitle"}}}])
         .exec()
         .then((data) => {
             return new Promise((resolve, reject) => {
                 data.map((val) => {
+
+                    let proposals = val.projects.toString();
+
                     const input =	{
                         'id': 1,
                         'to': val._id,
-                        'attr': {"NAME": val._id, "PLIST": val.projects.toString()}
+                        'attr': {"NAME": val._id, "PLIST": proposals.replace(/,/g, '<br><br>')}
                     };
 
                     sendinObj.send_transactional_template(input, function(err, response){

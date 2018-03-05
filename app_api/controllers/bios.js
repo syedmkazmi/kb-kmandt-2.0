@@ -15,7 +15,7 @@ const base = path.resolve("./angular-src/src");
 const options = {format: 'A4', timeout: 50000, base: `file://${base}`, border: "40px"};
 
 const sendinblue = require('sendinblue-api');
-const parameters = {"apiKey": process.env.SEND_IN_BLUE, "timeout": 5000};
+const parameters = {"apiKey": process.env.SEND_IN_BLUE, "timeout": 60000};
 const sendinObj = new sendinblue(parameters);
 
 // Mongoose Data Schemas
@@ -272,10 +272,12 @@ let _findUser = (bio) => {
 };
 
 let _emailBioCopy = (user, bio) => {
+    console.log("In side mail function");
+
     const input = {
         'id': 6,
         'to': user.email,
-        'attr': {"BACKGROUND": bio.background, "SKILLS": bio.skills.toString(), "EXPERIENCE0": bio.experience.field0,
+        'attr': {"USERNAME": user.firstName, "BACKGROUND": bio.background, "SKILLS": bio.skills.toString(), "EXPERIENCE0": bio.experience.field0,
             "EXPERIENCE1": bio.experience.field1,"EXPERIENCE2": bio.experience.field2, "EXPERIENCE3": bio.experience.field3,
             "EXPERIENCE4": bio.experience.field4, "EXPERIENCE5": bio.experience.field5}
     };

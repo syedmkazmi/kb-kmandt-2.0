@@ -16,46 +16,55 @@
     <h1>{{title}}</h1>
     <!------------------------- BIO ADD FORM ------------------------->
     <form (ngSubmit)="pdf()" [formGroup]="bioPdfForm" novalidate>
-      <div class="user-info">
+      <div class="main-grid" uk-grid>
+        <div class="left-side">
+          <!----- USER INFO ----->
+          <div class="user-info">
+            <div class="uk-grid-small" uk-grid>
+              <div class="uk-width-1-2@s">
+                <label class="uk-form-label" for="firstName">First Name</label>
+                <div class="uk-form-controls">
+                  <input class="uk-input" type="text" placeholder="First Name" id="firstName" formControlName="firstName">
+                </div>
+              </div>
 
-        <div class="uk-grid-small" uk-grid>
-          <div class="uk-width-1-2@s">
-            <label class="uk-form-label" for="firstName">First Name</label>
-            <div class="uk-form-controls">
-              <input class="uk-input" type="text" placeholder="First Name" id="firstName" formControlName="firstName">
+              <div class="uk-width-1-2@s">
+                <label class="uk-form-label" for="lastName">Last Name</label>
+                <div class="uk-form-controls">
+                  <input class="uk-input" type="text" placeholder="Last Name" id="lastName" formControlName="lastName">
+                </div>
+              </div>
+
+              <div class="uk-width-1-2@s">
+                <label class="uk-form-label" for="region">Region</label>
+                <div class="uk-form-controls">
+                  <select class="uk-select" id="region" formControlName="region">
+                    <option value="" disabled selected>Select Region</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="NA">North America</option>
+                    <option VALUE="AU">Asia Pacific</option>
+                  </select>
+
+                </div>
+              </div>
+
+              <div class="uk-width-1-2@s">
+                <label class="uk-form-label" for="jobTitle">Job Title</label>
+                <div class="uk-form-controls">
+                  <input class="uk-input" type="text" placeholder="Job title" id="jobTitle"  formControlName="jobTitle">
+                </div>
+              </div>
+
             </div>
           </div>
-
-          <div class="uk-width-1-2@s">
-            <label class="uk-form-label" for="lastName">Last Name</label>
-            <div class="uk-form-controls">
-              <input class="uk-input" type="text" placeholder="Last Name" id="lastName" formControlName="lastName">
-            </div>
+        </div>
+        <div class="right-side">
+          <!----- BIO IMAGE ----->
+          <div id="image">
+            <img id="user-img" src="{{userImage}}" onerror="this.src='/assets/images/user-profile-icon/default-user.svg'">
           </div>
-
-          <div class="uk-width-1-2@s">
-            <label class="uk-form-label" for="jobTitle">Job Title</label>
-            <div class="uk-form-controls">
-              <input class="uk-input" type="text" placeholder="Job title" id="jobTitle"  formControlName="jobTitle">
-            </div>
-          </div>
-
-          <div class="uk-width-1-2@s">
-            <label class="uk-form-label" for="region">Region</label>
-            <div class="uk-form-controls">
-              <select class="uk-select" id="region" formControlName="region">
-                <option value="" disabled selected>Select Region</option>
-                <option value="UK">United Kingdom</option>
-                <option value="NA">North America</option>
-                <option VALUE="AU">Asia Pacific</option>
-              </select>
-
-            </div>
-          </div>
-
         </div>
       </div>
-
 
       <div class="sector">
         <h1 id="sector-heading">Sector</h1>
@@ -81,13 +90,14 @@
         <div id="background-example">
           <div uk-accordion>
             <div>
-              <p class="uk-accordion-title" href="#"><span uk-icon="icon: info"></span>Background and Overview Example
+              <p class="uk-accordion-title" href="#"><span uk-icon="icon: info"></span>Background and Overview Example - (Click Here)
               </p>
               <div class="uk-accordion-content">
                 Adam is an experienced Consultant who has led Lean programmes in a range of sectors including
                 healthcare, manufacturing, FMCG, public services, retail and utilities. He has a broad range of
                 knowledge and practical experience of Lean principles, tools and techniques.
-
+                <br>
+                <br>
                 He has more than 15 years’ experience of delivering Lean transformational change and supplier
                 development. His background also includes engineering and operations management in manufacturing and
                 retail including senior global supply chain management delivering savings through supply chain redesign
@@ -128,10 +138,12 @@
         <!----- TIP ----->
         <div id="experience-tips">
           The experience section should help demonstrate the ROI achieved in various projects, included points such as:
-
-          - % Reductions
-          - Money saved, monthly and yearly
-          - Hours saved
+          <br>
+          <ul>
+            <li>% Reductions</li>
+            <li>Money saved, monthly and yearly</li>
+            <li>Hours saved</li>
+          </ul>
 
           Each text field below represents 1 bullet point. You can have a maximum of 6 bullet points & a minimum of
           atleast 4 for your experience.
@@ -140,20 +152,24 @@
         <div id="experience-example">
           <div uk-accordion>
             <div>
-              <p class="uk-accordion-title" href="#"><span uk-icon="icon: info"></span>Experience Example
+              <p class="uk-accordion-title" href="#"><span uk-icon="icon: info"></span>Experience Example - (Click Here)
               </p>
               <div class="uk-accordion-content">
-                - Delivered £127M savings by completely redesigning the business process landscape of a major Utilities
-                Infrastructure company and implementing a new Lean business process from the end-to-end of the business
-                resulting in an efficiency improvement of +40%.
-                - Project managed a MRO project for a leading aviation company, generating a 25% reduction in lead time
-                on
-                major overhauls.
-                - Delivered “Opportunity Searches” within a hospital trust identifying £13m benefits to be delivered
-                within 2 years. Similar opportunity searches have been done within the Gas Utility industry to improve
-                productivity and reduce costs.
-                - Managed the assembly and commission phase of a $120 million locomotive delivery contract on-time,
-                on-budget and to quality requirements for a blue-chip rail business in Australia.
+                <ul>
+                  <li>Delivered £127M savings by completely redesigning the business process landscape of a major Utilities
+                    Infrastructure company and implementing a new Lean business process from the end-to-end of the business
+                    resulting in an efficiency improvement of +40%.</li>
+
+                  <li>Project managed a MRO project for a leading aviation company, generating a 25% reduction in lead time
+                    on major overhauls.</li>
+
+                  <li>Delivered “Opportunity Searches” within a hospital trust identifying £13m benefits to be delivered
+                    within 2 years. Similar opportunity searches have been done within the Gas Utility industry to improve
+                    productivity and reduce costs.</li>
+
+                  <li>Managed the assembly and commission phase of a $120 million locomotive delivery contract on-time,
+                    on-budget and to quality requirements for a blue-chip rail business in Australia.</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -224,7 +240,7 @@
             </div>
           </div>
           <!----- OPTIONAL EXPERIENCE FIELD ----->
-          <a (click)="addMoreExp()">Add More Experience</a>
+          <a (click)="addMoreExp()">{{addMoreExperience ? "Hide extra fields" : "Show extra fields"}}</a>
         </div>
       </div>
       <!------------------------- SUBMIT BUTTON ------------------------->
@@ -238,10 +254,6 @@
   <div id="section-two">
     <!------------------------- SELECT ICONS FIELDS ------------------------->
     <div id="select-icons">
-      <!----- BIO IMAGE ----->
-      <div id="image">
-        <img id="user-img" src="{{userImage}}" onerror="this.src='/assets/images/user-profile-icon/default-user.svg'">
-      </div>
       <!------ TIP ------>
       <div id="icon-tips">
         Use the icon selectors below to chose what icons to display on your bio.

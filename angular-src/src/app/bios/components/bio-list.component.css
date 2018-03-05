@@ -247,3 +247,7 @@ h1 {
   line-height: 48px;
   margin-top: 5px;
 }
+
+#bio-icon > img {
+  width: 100px;
+}

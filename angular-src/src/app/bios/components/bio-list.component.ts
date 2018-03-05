@@ -11,7 +11,7 @@ import {BioService} from "../services/bio.service";
 export class BioListComponent implements OnInit {
   title: string = "Bio's";
   bios: IBio[];
-  selectedBio: IBio;
+  selectedBio: any;
   downloadFile: boolean = false;
 
   constructor(private _route: ActivatedRoute, private _bioService: BioService) {
@@ -26,8 +26,8 @@ export class BioListComponent implements OnInit {
     );
   }
 
-  onSelect(bio: IBio) {
-    this.selectedBio = JSON.parse(JSON.stringify(bio));
+  onSelect(bio) {
+    this.selectedBio = bio;
   }
 
   pdf(bio: IBio) {

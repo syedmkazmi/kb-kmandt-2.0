@@ -161,7 +161,7 @@ export class ProposalEditComponent implements OnInit {
   save() {
     this.proposalEditForm.controls['totalValue'].setValue(this.calculateTotal(this.proposalEditForm.value.totalNumberOfDays, this.proposalEditForm.value.dailyRate, this.proposalEditForm.value.expenses));
 
-    if (this.proposalEditForm.dirty && this.proposalEditForm.touched) {
+    if (this.proposalEditForm.dirty) {
 
       let p = Object.assign({}, this.proposal, this.proposalEditForm.value);
       let id = this._route.snapshot.paramMap.get('id');

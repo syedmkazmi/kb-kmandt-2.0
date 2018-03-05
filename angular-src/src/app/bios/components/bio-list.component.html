@@ -58,7 +58,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let bio of bios">
-        <td class="bio-icon-td" id="bio-icon"><img class="bio-icon" src="{{bio.photo}}"></td>
+        <td class="bio-icon-td" id="bio-icon"><img class="bio-icon" src="{{bio.photo}}"  onerror="this.src='/assets/images/user-profile-icon/default-user.svg'"></td>
         <td class="bio-title" id="bio-title">{{bio.firstName}} {{bio.lastName}}</td>
         <td>{{bio.jobTitle}}</td>
         <td id="bio-sector"><span>{{bio.bioForSector}}</span></td>
