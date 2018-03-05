@@ -18,7 +18,8 @@
 
       <div class="uk-switcher uk-margin">
         <div>
-          <ul class="uk-list uk-list-divider">
+          <div *ngIf="marketing?.length <= 0" id="loading-spinner" uk-spinner></div>
+          <ul class="uk-list uk-list-divider" *ngIf="marketing?.length > 0">
             <li  class="file-links" *ngFor="let file of marketing" (click)="downloadFile(file.path_lower)"><img class="pdf-icon" src="/assets/images/dashboard-icons/pdf-icon.svg">{{file.name}} <span uk-icon="download"></span></li>
           </ul>
         </div>

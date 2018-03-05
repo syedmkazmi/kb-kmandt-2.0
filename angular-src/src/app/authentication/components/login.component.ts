@@ -45,11 +45,13 @@ export class LoginComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
+            this.buttonLoading = false;
             // A client-side or network error occurred. Handle it accordingly.
             console.log('An error occurred:', err.error.message);
           } else {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
+            this.buttonLoading = false;
             this._notificationService.sendNotification(err.error.message);
             console.log(`Backend returned code ${err.status}, body was: ${err.error.message}`);
           }

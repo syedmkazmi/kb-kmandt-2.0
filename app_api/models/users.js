@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
 
     usersProposals: [],
     isLineManager: {type: String, default: 'false'},
-    lineManagerEmail: String,
+    lineManagerEmail: {type: String, set: toLower},
     accessLevel: [],
 
     biosPending: [String],
