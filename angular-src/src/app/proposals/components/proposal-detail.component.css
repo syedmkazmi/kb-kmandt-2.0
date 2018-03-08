@@ -83,7 +83,7 @@
 .field-title {
   display: inline-block;
   width: 50%;
-  margin-left: 5%;
+  margin-left: 0;
   color: #121212;
   font-size: 14px;
   line-height: 18px;

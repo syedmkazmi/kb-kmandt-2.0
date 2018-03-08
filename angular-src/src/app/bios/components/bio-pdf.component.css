@@ -291,3 +291,8 @@ h1{
   width: 50%;
   text-align: center;
 }
+
+#congrats-icon {
+  width: 40px;
+  margin-right: 10px;
+}

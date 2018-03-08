@@ -33,6 +33,8 @@ import {AssociatesModule} from "../associates/associates.module";
 import {UserDetailsGuard} from "../authentication/guards/user-details.guard";
 import { PromptUserDetailsComponent } from './prompt-user-details.component';
 import {BioUserResolverService} from "../bios/services/bio-user-resolver.service";
+import { ErrorComponent } from './components/error.component';
+import { RoadmapComponent } from './components/roadmap.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import {BioUserResolverService} from "../bios/services/bio-user-resolver.service
     RootNavComponent,
     //NotificationsComponent,
     PageNotFoundComponent,
-    PromptUserDetailsComponent
+    PromptUserDetailsComponent,
+    ErrorComponent,
+    RoadmapComponent
   ],
   imports: [
     BrowserModule,

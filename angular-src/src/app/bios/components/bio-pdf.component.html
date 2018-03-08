@@ -1,9 +1,9 @@
 <section *ngIf="downloadFile" class="loading">
   <div *ngIf="!generatingPdf" id="loading-spinner" uk-spinner></div>
-  <div id="main-heading">{{generatingPdf === false ? "Hold on to something!" : "Congratulations!"}}</div>
+  <div id="main-heading"><img *ngIf="generatingPdf" id="congrats-icon" src="/assets/images/bio-icons/party-popper.png">{{generatingPdf === false ? "Hold on to something!" : "Congratulations!"}}</div>
   <h2 id="sub-heading">{{generatingPdf === false ? "We're about to do some magic." : "Your bio is ready. Click below to download it."}}</h2>
 
-  <a *ngIf="generatingPdf" href="{{downloadLink}}"><button class="uk-button uk-button-primary uk-margin-top">It's Ready</button></a>
+  <a *ngIf="generatingPdf" href="{{downloadLink}}"><button class="uk-button uk-button-primary uk-margin-top">Download Here</button></a>
 </section>
 
 

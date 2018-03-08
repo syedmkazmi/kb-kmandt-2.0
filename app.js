@@ -59,4 +59,10 @@ new CronJob('00 43 10 * * 1-5', function() {
     mail.proposalStatus();
 }, null, true, 'Europe/London');
 
+new CronJob('00 26 15 * * 1-5', function() {
+    // Execute code here
+    console.log("Starting second cron job");
+    mail.proposalSummary();
+}, null, true, 'Europe/London');
+
 module.exports = app;

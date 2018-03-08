@@ -135,9 +135,94 @@ let verify = (req, res) => {
         })
 };
 
+// password reset
+let resetPassword = (req, res) => {
+    let token = crypto.randomBytes(20).toString('hex');
+
+    User.findOne({email: req.body.email})
+        .exec()
+        .then((user) => {
+            if(user) {
+                user.resetPasswordToken = token;
+                user.resetPasswordDate = Date.now();
+
+                user.save((err) => {
+                    if (err) {
+                        sendJsonResponse(res, 404, err);
+                    }
+                    else {
+                        const input = {
+                            'id': 8,
+                            'to': req.body.email,
+                            'attr': {"TOKEN": req.headers.host + '/#/password/reset/' + token}
+                        };
+
+                        sendinObj.send_transactional_template(input, function (err, response) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log(response);
+                                sendJsonResponse(res, 200, {"message": "Great! You have successfully reset your password."})
+                            }
+                        })
+                    }
+                })
+            }
+            else if(!user) {
+                sendJsonResponse(res, 404, {message: `No User Account Exists for ${req.body.email}`})
+            }
+        })
+        .catch((err) => {
+            return res
+                .status(500)
+                .json(err)
+        });
+};
+
+// verify reset password
+let resetPasswordVerify = (req, res) => {
+    User.findOne({resetPasswordToken: req.params.token})
+        .exec()
+        .then((user) => {
+            if (!user) {
+                sendJsonResponse(res, 401, {message: "Token is invalid or has expired"})
+            } else {
+                user.password = user.generateHash(req.body.password);
+                user.resetPasswordToken = null;
+                user.resetPasswordDate = null;
+
+                user.save((err) => {
+                    if (err) {
+                        sendJsonResponse(res, 404, err);
+                    } else {
+                        const input = {
+                            'id': 9,
+                            'to': user.email
+                        };
+
+                        sendinObj.send_transactional_template(input, function (err, response) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log(response);
+                                sendJsonResponse(res, 200, {"message": "Great! You have successfully verified your password reset."})
+                            }
+                        })
+                    }
+
+                })
+            }
+        })
+        .catch((err) => {
+            sendJsonResponse(res, 500, err)
+        })
+};
+
 
 module.exports = {
     register,
     login,
-    verify
+    verify,
+    resetPassword,
+    resetPasswordVerify
 };

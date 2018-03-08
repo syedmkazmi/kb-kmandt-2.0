@@ -24,8 +24,15 @@ passport.use(new LocalStrategy({
             }
             if(user) {
                 user.lastLogin = Date.now();
+
+                user.save((err) => {
+                    if(err){
+                        return done (err);
+                    } else {
+                        return done(null, user)
+                    }
+                })
             }
-            return done(null, user)
         });
     }
 ));

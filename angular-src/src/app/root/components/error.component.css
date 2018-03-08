@@ -1,0 +1,51 @@
+* {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.error-container {
+  margin-left: 240px;
+}
+
+.error-div {
+  width: 60%;
+  margin: 10% auto;
+}
+
+#error-heading {
+  color: #333333;
+  font-size: 37px;
+  line-height: 48px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+#error-img {
+  text-align: center;
+}
+
+#error-img > img {
+  width: 15%;
+}
+
+#error-subheading {
+  color: #333333;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 48px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+#goto-dashbaord-btn {
+  background-color: #0070E0;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  height: 41px;
+  width: 221px
+}
+
+#error-btn {
+  text-align: center;
+}
