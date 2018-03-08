@@ -3,6 +3,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {AuthenticationService} from "../services/authentication.service";
 import {NotificationsService} from "../../root/services/notifications.service";
+import {Router} from "@angular/router";
 
 @Component({
   templateUrl: './signup.component.html',
@@ -17,14 +18,14 @@ export class SignupComponent implements OnInit {
   setBgImage: string;
   buttonLoading: boolean = false;
 
-  constructor(private _fb: FormBuilder, private _authenticationService: AuthenticationService, private _notificationService: NotificationsService) {
+  constructor(private _router: Router, private _fb: FormBuilder, private _authenticationService: AuthenticationService, private _notificationService: NotificationsService) {
   }
 
   ngOnInit() {
 
-    let element = document.getElementById("bg");
-    this.setBgImage = this.backgroundImages[this.randomImage()];
-    element.setAttribute('style', 'background-image: url(' + this.setBgImage +');');
+      let element = document.getElementById("bg");
+      this.setBgImage = this.backgroundImages[this.randomImage()];
+      element.setAttribute('style', 'background-image: url(' + this.setBgImage + ');');
 
     this.signupForm = this._fb.group({
       firstName: ['', Validators.required],
@@ -48,6 +49,7 @@ export class SignupComponent implements OnInit {
         data => {
           this.registrationSuccess = true;
           this.buttonLoading = false;
+          this._router.navigate(['/signup/success'])
         },
         (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
@@ -67,6 +69,7 @@ export class SignupComponent implements OnInit {
   private randomImage() {
     return Math.floor((Math.random() * 14));
   }
+
   /*signup() {
 
     this._userService.getUsers().subscribe(

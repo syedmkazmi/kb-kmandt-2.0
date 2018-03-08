@@ -71,7 +71,7 @@
   padding-bottom: 80px;
 }
 
-#dont-have-an-account {
+.dont-have-an-account {
   text-align: center;
   margin-top: 10px;
   height: 20px;
@@ -80,7 +80,7 @@
   line-height: 20px;
 }
 
-#forgot-password {
+.forgot-password {
   height: 20px;
   float: right;
   color: #0070E0;
@@ -112,16 +112,16 @@
   margin-top: 10px;
 }
 
-#btn-loading-spinner {
+.btn-loading-spinner {
   left: 100px;
   top: 0;
   margin: 10px 10px 10px 10px;
 }
 
-#btn-loading-spinner > svg {
+.btn-loading-spinner > svg {
   width: 25px;
 }
 
-#btn-loading-text {
+.btn-loading-text {
   vertical-align: center;
 }

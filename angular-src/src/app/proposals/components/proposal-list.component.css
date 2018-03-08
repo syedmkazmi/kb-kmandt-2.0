@@ -33,6 +33,10 @@ hr {
   border-right: none;
 }
 
+.uk-search-default {
+  width: 230px;
+}
+
 .unsuccessful-filter {
   position: absolute;
   top: 40%;

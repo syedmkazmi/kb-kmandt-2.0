@@ -64,7 +64,7 @@ userSchema.methods.generateJwt = function () {
         region: this.region,
         jobTitle: this.jobTitle,
         lineManagerEmail: this.lineManagerEmail
-    }, process.env.JWT_SECRET, {expiresIn: '1h'});
+    }, process.env.JWT_SECRET, {expiresIn: '168h'});
 };
 
 function toLower(data) {

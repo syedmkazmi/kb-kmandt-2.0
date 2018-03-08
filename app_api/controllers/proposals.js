@@ -43,8 +43,6 @@ let get = (req, res) => {
 // =======================================================
 let create = (req, res) => {
 
-    console.log(req.body);
-
     let newProposal = new Proposal();
 
     newProposal.sector = req.body.sector;
@@ -107,7 +105,8 @@ let update = (req, res) => {
         totalNumberOfDays: req.body.totalNumberOfDays,
         dailyRate: req.body.dailyRate,
         expenses: req.body.expenses,
-        totalValue: req.body.totalValue
+        totalValue: req.body.totalValue,
+        currency: req.body.proposalRegion === "UK" ? "GBP" : req.body.proposalRegion === "NA" ? "CAD" : "AUD"
     },{safe: true, new: true})
         .exec()
         .then(() => {
@@ -165,7 +164,10 @@ let upload = (req, res) => {
             return _generateShareableLink(req.file.originalname)
         })
         .then((shareableLink) => {
-            sendJsonResponse(res, 200, shareableLink)
+            return _updateProposalFile(req.params.id, shareableLink)
+        })
+        .then((data) => {
+            sendJsonResponse(res, 200, data)
         })
         .catch(function (err) {
             sendJsonResponse(res, 500, err)
@@ -177,7 +179,7 @@ let upload = (req, res) => {
 // GET FILTERED PROPOSALS         ========================
 // =======================================================
 
-let filter = (req, res) => {
+/*let filter = (req, res) => {
      let query = {};
 
      if(req.body.proposalStatus){
@@ -185,14 +187,15 @@ let filter = (req, res) => {
      }
 
      if(req.body.proposalRegion){
-         query.propposalRegion = req.body.proposalRegion;
+         query.propposalRegion ={$elemMatch: {proposalRegion: req.body.proposalRegion}}
      }
-console.log("QUERY " + query);
+     console.log("QUERY " + query);
 
      Proposal.find(query)
          .exec()
          .then((data) => {
              if (data) {
+                 console.log(data);
                  sendJsonResponse(res, 200, data)
              } else if (!data) {
                  sendJsonResponse(res, 404, {"message": "Criteria did not match any data."})
@@ -203,7 +206,7 @@ console.log("QUERY " + query);
          })
 
 
-};
+};*/
 
 // Promises methods
 let _updateUser = (userID, savedProposal) => {
@@ -224,6 +227,10 @@ let _updateClientList = (client, body) => {
             new: true
         }).exec();
     }
+};
+
+let _updateProposalFile = (id, url) => {
+    return Proposal.findOneAndUpdate({_id: id}, {proposalUrls: url}).exec();
 };
 
 let _deleteLocalFile = (filename) => {
@@ -273,48 +280,6 @@ let _generateShareableLink = (filename) => {
     })
 };
 
-let test = (req, res) => {
-
-    let options = {
-        method: 'POST',
-        uri: 'https://api.dropboxapi.com/2/files/list_folder',
-        headers: {
-            'Authorization': 'Bearer ' + process.env.DROPBOX_API_TOKEN,
-            'Content-Type': 'application/json',
-        },
-        body: "{\"path\": \"/kb-2.0-associate-bios\",\"recursive\": false,\"include_media_info\": false,\"include_deleted\": false,\"include_has_explicit_shared_members\": false,\"include_mounted_folders\": true}"
-    };
-
-    rp(options)
-        .then((data) => {
-            sendJsonResponse(res, 200, data)
-        })
-        .catch(function (err) {
-            sendJsonResponse(res, 500, err)
-        });
-
-};
-
-let test2 = (req, res) => {
-    console.log(req.body);
-
-    let options = {
-        method: 'POST',
-        uri: 'https://api.dropboxapi.com/2/files/get_temporary_link',
-        headers: {
-            'Authorization': 'Bearer ' + process.env.DROPBOX_API_TOKEN,
-            'Content-Type': "application/json",
-        }, body: "{\"path\": \"/kb-2.0-associate-bios/" + req.body.fileName + "\"}"
-    };
-
-    rp(options)
-        .then((data) => {
-            sendJsonResponse(res, 200, data)
-        })
-        .catch(function (err) {
-            sendJsonResponse(res, 500, err)
-        });
-};
 
 module.exports = {
     create,
@@ -322,9 +287,7 @@ module.exports = {
     get,
     getOne,
     upload,
-    filter,
-    test,
-    test2
+    //filter
 };
 
 //TODO Research about mongoose upsert true option.

@@ -135,6 +135,7 @@ export class ProposalEditComponent implements OnInit {
           });
         }
         console.log(data);
+        this._router.navigate(['/proposals']);
       },(err: HttpErrorResponse) => {
       if (err.error instanceof Error) {
         // A client-side or network error occurred. Handle it accordingly.

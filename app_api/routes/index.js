@@ -6,10 +6,10 @@ const express = require('express');
 const router = express.Router();
 const {associatePdfBio: associateBio} = require('../controllers/associates');
 const {getAllUsers: findUser, getOne: user, upload: photo, userProposals: proposals, userBios: userbios, update: updateUser} = require('../controllers/users');
-const {create: newProposal, update: updateExisting, get: getAll, getOne: getOne, upload: uploadFile, filter: filter} = require('../controllers/proposals');
+const {create: newProposal, update: updateExisting, get: getAll, getOne: getOne, upload: uploadFile} = require('../controllers/proposals');
 const {create: newBio, getOne: bio, get: bios, update: existingBio, pdfBio: pdfBio} = require('../controllers/bios');
 const {marketing: marketingFiles, humanResources: hrFiles, clients: clientFiles, download: file} = require('../controllers/templates');
-const {register: registerUser, login: loginUser, verify: verify} = require('../controllers/authentication');
+const {register: registerUser, login: loginUser, verify: verify, resetPassword: reset, resetPasswordVerify: verifyPassword} = require('../controllers/authentication');
 const {get: sectors} = require('../controllers/sectors');
 const {get: skills} = require('../controllers/skills');
 const {get: icons} = require('../controllers/icons');
@@ -27,17 +27,21 @@ const upload = multer({storage: storage});
 router
     .route('/register')
     .post(registerUser);
-
 // login
 router
     .route('/login')
     .post(loginUser);
-
+// password
+router
+    .route('/password/reset')
+    .post(reset);
+router
+    .route('/password/reset/:token')
+    .post(verifyPassword);
 // sectors
 router
     .route('/sectors')
     .get(sectors);
-
 // skills
 router
     .route('/skills')

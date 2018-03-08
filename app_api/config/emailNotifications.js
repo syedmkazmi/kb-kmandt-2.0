@@ -48,6 +48,35 @@ let proposalStatus = (req,res) => {
         .catch(err => {sendJsonResponse(res, 500, err)})
 };
 
+// =======================================================
+// REMINDER EMAILS FOR PROPOSAL SUMMARY    ===============
+// =======================================================
+let proposalSummary = (req,res) => {
+
+    Proposal.aggregate([{ $match: { $and: [ { "proposalStatus": "live" }, { "responseDate": { $lt: new Date() } } ] } },{"$group":{_id: null, projects:{ $push: "$proposalTitle"}}}])
+        .exec()
+        .then((data) => {
+                    let proposals = data.projects.toString();
+
+                    const input =	{
+                        'id': 7,
+                        'to': 'syed.kazmi@kmandt.com',
+                        'attr': {"PLIST": proposals.replace(/,/g, '<br><br>')}
+                    };
+
+                    sendinObj.send_transactional_template(input, function(err, response){
+                        if(err){
+                            console.log(err);
+                        } else {
+                            console.log(response);
+                        }
+                    })
+        })
+        .then(() => {sendJsonResponse(res, 200, "done")})
+        .catch(err => {sendJsonResponse(res, 500, err)})
+};
+
 module.exports = {
-    proposalStatus
+    proposalStatus,
+    proposalSummary
 };

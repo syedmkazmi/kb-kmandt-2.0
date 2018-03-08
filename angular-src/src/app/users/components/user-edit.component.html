@@ -113,7 +113,6 @@
       </div>
     </div>
   </div>
-
 </section>
 
 <div id="modal-container" class="uk-modal-container" uk-modal>
@@ -130,6 +129,7 @@
        <!-- <input id="custom-input" type="file" (change)="fileChangeListener($event)">
           <button class="uk-button uk-button-default" type="button" tabindex="-1">Select</button>-->
       </div>
+
       <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
       <br>
       <span class="result rounded" *ngIf="data.image" >

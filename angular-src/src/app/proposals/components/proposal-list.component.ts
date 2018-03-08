@@ -61,7 +61,7 @@ export class ProposalListComponent implements OnInit {
           if (data.length === 0) {
             this.filterStatus = false;
             this.filterMessage = "Your criteria did not match any data.";
-          } else if (data.length > 1) {
+          } else if (data.length >= 1) {
             this.filterStatus = true;
             this.proposals = data;
           }

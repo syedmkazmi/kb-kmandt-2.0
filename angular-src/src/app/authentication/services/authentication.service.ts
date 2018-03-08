@@ -43,11 +43,9 @@ export class AuthenticationService {
         map(data => {
           const token = data.token;
           const unit: moment.unitOfTime.DurationConstructor = 'hour';
-          const expiresIn = moment().add(1, unit);
+          const expiresIn = moment().add(168, unit);
           const userInfo = data.userInfo;
           const profileImg =  data.profileImg;
-
-          console.log("adasdas " + profileImg);
 
           if (token) {
             localStorage.setItem("token", JSON.stringify(token));
@@ -90,6 +88,41 @@ export class AuthenticationService {
     });*/
   }
 
+  requestPasswordReset(body): Observable<any> {
+    const BASE_URL = environment.apiUrl;
+
+    return this._http.post<any>(BASE_URL + '/api/password/reset', body)
+      .pipe(
+        tap(data => console.log(JSON.stringify(data))),
+        map(data => {
+          return data;
+        }),
+        catchError(err => {
+          // do whatever you want when error occurs
+          console.log(err);
+
+          // re-throw error so you can catch it when subscribing, fallback to generic error code
+          return Observable.throw(err || 'API_ERROR');
+        }))
+  }
+
+  passwordReset(body, token): Observable<any> {
+    const BASE_URL = environment.apiUrl;
+
+    return this._http.post<any>(BASE_URL + '/api/password/reset/' + token, body)
+      .pipe(
+        tap(data => console.log(JSON.stringify(data))),
+        map(data => {
+          return data;
+        }),
+        catchError(err => {
+          // do whatever you want when error occurs
+          console.log(err);
+
+          // re-throw error so you can catch it when subscribing, fallback to generic error code
+          return Observable.throw(err || 'API_ERROR');
+        }))
+  }
 
   public isLoggedOut() {
     localStorage.removeItem('expiresIn');
