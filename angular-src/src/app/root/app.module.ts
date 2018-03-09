@@ -35,6 +35,7 @@ import { PromptUserDetailsComponent } from './prompt-user-details.component';
 import {BioUserResolverService} from "../bios/services/bio-user-resolver.service";
 import { ErrorComponent } from './components/error.component';
 import { RoadmapComponent } from './components/roadmap.component';
+import { UnderDevelopmentComponent } from './components/under-development.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { RoadmapComponent } from './components/roadmap.component';
     PageNotFoundComponent,
     PromptUserDetailsComponent,
     ErrorComponent,
-    RoadmapComponent
+    RoadmapComponent,
+    UnderDevelopmentComponent
   ],
   imports: [
     BrowserModule,
