@@ -88,7 +88,7 @@ hr {
   margin-left: 240px;
   padding-left: 60px;
   padding-top: 40px;
-  padding-right: 120px;
+  padding-right: 60px;
 }
 
 #proposal-title {
@@ -128,6 +128,10 @@ hr {
 
 .uk-table > tbody > tr:hover .proposal-icon-td > .proposal-icon {
   content:url("../../../assets/images/proposal-icons/proposal-hover.svg");
+}
+
+.uk-table td {
+  padding: 16px 11px;
 }
 
 #proposal-status {
