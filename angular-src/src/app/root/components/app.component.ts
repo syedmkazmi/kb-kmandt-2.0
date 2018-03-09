@@ -25,6 +25,10 @@ public loading: boolean = false;
     _router.events.subscribe((routerEvent: RouterEvent) => {
       if (routerEvent instanceof NavigationStart) {
         this.loading = true;
+
+        if(this.isBrowserIE()){
+          this._router.navigate(['/browser']);
+        }
       } else if (routerEvent instanceof NavigationCancel || routerEvent instanceof NavigationEnd) {
         this.loading = false;
         window.scrollTo(0, 0)
@@ -35,6 +39,7 @@ public loading: boolean = false;
     });
   }
 
+  // Browser Check
   isBrowserIE() {
    return /*@cc_on!@*/false || !!document.documentMode;
   }
@@ -43,7 +48,9 @@ public loading: boolean = false;
   }
 
   ngOnInit() {
-    console.log(this.isBrowserIE());
+    if(this.isBrowserIE()){
+      this._router.navigate(['/browser']);
+    }
   }
 
 }

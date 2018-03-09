@@ -36,6 +36,7 @@ import {BioUserResolverService} from "../bios/services/bio-user-resolver.service
 import { ErrorComponent } from './components/error.component';
 import { RoadmapComponent } from './components/roadmap.component';
 import { UnderDevelopmentComponent } from './components/under-development.component';
+import { BrowserCheckComponent } from './components/browser-check.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { UnderDevelopmentComponent } from './components/under-development.compon
     PromptUserDetailsComponent,
     ErrorComponent,
     RoadmapComponent,
-    UnderDevelopmentComponent
+    UnderDevelopmentComponent,
+    BrowserCheckComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,10 @@
 
 const express = require('express');
 const router = express.Router();
+const fs = require("fs");
+const path = require("path");
+const temp_dir = path.join(process.cwd(), 'uploads');
+
 const {associatePdfBio: associateBio} = require('../controllers/associates');
 const {getAllUsers: findUser, getOne: user, upload: photo, userProposals: proposals, userBios: userbios, update: updateUser} = require('../controllers/users');
 const {create: newProposal, update: updateExisting, get: getAll, getOne: getOne, upload: uploadFile} = require('../controllers/proposals');
@@ -18,7 +22,13 @@ const jwt = require('jsonwebtoken');
 // For handling file uploads using multer library
 const multer  = require('multer');
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {cb(null, 'uploads/')},
+    destination: (req, file, cb) => {
+
+        if (!fs.existsSync(temp_dir))
+            fs.mkdirSync(temp_dir);
+
+        cb(null, 'uploads/')
+    },
     filename: (req, file, cb) => {cb(null, file.originalname)}
 });
 const upload = multer({storage: storage});

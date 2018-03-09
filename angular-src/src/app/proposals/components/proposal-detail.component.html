@@ -40,7 +40,7 @@
     <section class="section-title"> Client Information</section>
     <div class="data-field">
       <div class="field-title">Client</div>
-      <div class="field-value">{{proposal?.client}}</div>
+      <div class="field-value">{{(proposal?.client.length>30) ? (proposal?.client | slice:0:30)+'...':(proposal?.client)}}</div>
     </div>
 
     <div class="data-field">

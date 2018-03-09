@@ -1,0 +1,51 @@
+* {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.browser-check-container {
+  margin-left: 240px;
+}
+
+.browser-check-div {
+  width: 60%;
+  margin: 10% auto;
+}
+
+#browser-check-heading {
+  color: #333333;
+  font-size: 37px;
+  line-height: 48px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+#browser-check-img {
+  text-align: center;
+}
+
+#browser-check-img > img {
+  width: 15%;
+}
+
+#browser-check-subheading {
+  color: #333333;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 48px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+#goto-dashbaord-btn {
+  background-color: #0070E0;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  height: 41px;
+  width: 221px
+}
+
+#browser-check-btn {
+  text-align: center;
+}

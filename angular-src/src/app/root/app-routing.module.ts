@@ -9,12 +9,13 @@ import {ErrorComponent} from "./components/error.component";
 import {RoadmapComponent} from "./components/roadmap.component";
 import {UnderDevelopmentComponent} from "./components/under-development.component";
 import {LoginGuard} from "../authentication/guards/login.guard";
+import {BrowserCheckComponent} from "./components/browser-check.component";
 
 @NgModule({
   imports: [
     RouterModule.forRoot([
       {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-      //{path: 'welcome', component: WelcomeComponent, canActivate: [AuthGuard]},
+      {path: 'browser', component: BrowserCheckComponent, canActivate: [LoginGuard]},
       {path: 'welcome', component: PromptUserDetailsComponent, canActivate: [AuthGuard]},
       {path: 'error', component: ErrorComponent, canActivate: [AuthGuard]},
       {path: 'roadmap', component: RoadmapComponent, canActivate: [LoginGuard]},
