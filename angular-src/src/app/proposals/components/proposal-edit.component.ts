@@ -144,9 +144,9 @@ export class ProposalEditComponent implements OnInit {
         // The backend returned an unsuccessful response code.
         // The response body may contain clues as to what went wrong,
         this.proposalShareLink = false;
-        this._notificationService.sendNotification(err.error.message || "unknown error RUN!!!"); //TODO Does not show server 500 error.
+        this._notificationService.sendNotification(err.error.message || "unknown error"); //TODO Does not show server 500 error.
         UIkit.notification({
-          message: err.error.message || "unknown error RUN!!!",
+          message: err.error.message || "unknown error",
           status: 'primary',
           pos: 'top-right',
           timeout: 5000

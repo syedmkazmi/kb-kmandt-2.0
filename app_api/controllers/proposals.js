@@ -7,7 +7,8 @@ mongoose.Promise = Promise;
 const fs = require("fs");
 const rp = require('request-promise-native');
 const request = require('request');
-
+const path = require("path");
+const temp_dir = path.join(process.cwd(), 'uploads');
 // Mongoose Data Schemas
 const Proposal = mongoose.model('Proposals');
 const User = mongoose.model('Users');
@@ -145,6 +146,9 @@ let getOne = (req, res) => {
 // UPLOAD FILE TO DROP BOX        ========================
 // =======================================================
 let upload = (req, res) => {
+
+    if (!fs.existsSync(temp_dir))
+        fs.mkdirSync(temp_dir);
 
     let options = {
         method: 'POST',

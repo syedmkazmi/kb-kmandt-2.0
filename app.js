@@ -53,16 +53,24 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-new CronJob('00 43 10 * * 1-5', function() {
+
+// CRON JOBS
+let job1 = new CronJob('00 00 07 * * 5', function() {
     // Execute code here
     console.log("Starting first cron job");
     mail.proposalStatus();
 }, null, true, 'Europe/London');
 
-new CronJob('00 26 15 * * 1-5', function() {
+job1.start();
+console.log("Cron Job 1 " + job1.running);
+
+let job2 = new CronJob('00 01 07 * * 5', function() {
     // Execute code here
     console.log("Starting second cron job");
     mail.proposalSummary();
 }, null, true, 'Europe/London');
+
+job2.start();
+console.log("Cron Job 2 " + job2.running);
 
 module.exports = app;

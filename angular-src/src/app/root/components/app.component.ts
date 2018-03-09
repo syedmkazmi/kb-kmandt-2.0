@@ -5,6 +5,12 @@ import {SpinnerService} from "../spinner.service";
 import {RouterEvent} from "@angular/router";
 import UIkit from 'uikit'
 
+declare global {
+  interface Document {
+    documentMode?: any;
+  }
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,7 +19,7 @@ import UIkit from 'uikit'
 
 export class AppComponent implements OnInit, AfterViewInit {
 
-  public loading: boolean = false;
+public loading: boolean = false;
 
   constructor(private _router: Router, private _authService: AuthenticationService, private _spinnerService: SpinnerService) {
     _router.events.subscribe((routerEvent: RouterEvent) => {
@@ -29,10 +35,15 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
+  isBrowserIE() {
+   return /*@cc_on!@*/false || !!document.documentMode;
+  }
+
   ngAfterViewInit() {
   }
 
   ngOnInit() {
+    console.log(this.isBrowserIE());
   }
 
 }
