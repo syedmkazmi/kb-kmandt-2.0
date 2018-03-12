@@ -3,19 +3,15 @@
     <meta charset="utf8">
     <title>Bio</title>
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700');
-        @font-face {
-            font-family: 'Source Sans Pro';
-            font-style: normal;
-            font-weight: 600;
-            src: local('Source Sans Pro SemiBold'), local('SourceSansPro-SemiBold'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwmhdu3cOWxy40.woff2) format('woff2');
-            unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+        @import url('https://fonts.googleapis.com/css?family=Mina:400,700');
+        * {
+            font-family: 'Mina', sans-serif;
         }
 
         html, body {
             margin: 0;
             padding: 0;
-            font-family: 'Source Sans Pro', sans-serif;
+            font-family: 'Mina', sans-serif;
             font-weight: 500;
             background: #fff;
             font-size: 9px;
@@ -24,228 +20,19 @@
             color: #fff;
         }
 
-        .page {
-            position: relative;
-            /*height: 90mm;
-            width: 50mm;*/
-            display: block;
-            background: #fff;
-            page-break-after: auto;
-            color: #fff;
-        }
-
-        @media print {
-            body {
-                background: #fff;
-                color: #fff;
-            }
-
-            .page {
-                margin: 0;
-                height: 100%;
-                width: 100%;
-            }
-        }
-
-        .page.first {
-            border-left: 5px solid green;
-        }
-
-        .bottom {
-            position: absolute;
-            left: 5mm;
-            right: 5mm;
-            bottom: 5mm;
-        }
-
-        .group {
-            margin-top: 3mm;
-        }
-
-        .line {
-            color: black;
-            position: relative;
-            border: 5px solid green;
-            border-radius: 5px;
-        }
-
-        .center {
-            text-align: center;
-        }
-
-        .logo {
-            position: relative;
-            width: 20%;
-            left: 10%;
-            top: 15%;
-            border-radius: 100%;
-        }
-
-        .test {
-            position: relative;
-            padding: 20px;
-
-        }
-
-        .test2 {
-            position: static;
-            padding: 20px;
-
-        }
-
         h1 {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 18px;
-            color: #356FB3;
-            margin: 0px;
-            font-weight: 600;
+            font-family: 'Mina', sans-serif;
+            font-weight: 700;
         }
 
         h2 {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 12px;
-            font-weight: 300;
-            margin-bottom: 0;
-            margin-left: 0;
-            margin-right: 0;
-            margin-top: 5px;
-        }
-
-        h3 {
-            font-family: 'Source Sans Pro', sans-serif;
-            color: #356FB3;
-            font-size: 12px;
-            margin: 0px;
-            font-weight: bold;
-        }
-
-        p {
-            font-family: 'Source Sans Pro', sans-serif;
-            line-height: 13px;
+            font-family: 'Mina', sans-serif;
             font-weight: 400;
-            font-size: 7px;
-            text-align: justify;
         }
-
-        h1:first-letter {
-            text-transform: uppercase;
-        }
-
-        h2:first-letter {
-            text-transform: uppercase;
-        }
-
-        h3:first-letter {
-            text-transform: uppercase;
-        }
-
-        .col-sm-4 {
-            min-width: 33%;
-            width: 33%;
-            display: -webkit-inline-box;
-        }
-
-        .col-sm-8 {
-            width: 66%;
-            display: -webkit-inline-box;
-            background-color: red;
-        }
-
-        .row {
-
-            overflow: hidden;
-        }
-
-        .a {
-            background: #fff;
-            width: 24%;
-            color: black;
-            display: inline-block;
-            margin-top: 10px;
-
-        }
-
-        .b {
-            width: 74%;
-            color: black;
-            display: inline-block;
-            margin-top: 20px;
-        }
-
-        img {
-            margin-bottom: 50px;
-            width: 100px;
-
-        }
-
-        .a, .b {
-            vertical-align: top;
-        }
-
-        .skillsList {
-            border-radius: 2px;
-            display: inline-block;
-            background-color: #CDE6F6;
-
-            color: black;
-            margin: 2px;
-            padding: 2px 3px 2px 3px;
-            font-size: 7px;
-        }
-
     </style>
 </head>
 <body>
-
-<div class="page">
-    <div class="row">
-        <div class="a">
-            <img style="border-radius: 100%" src="<%= photo %>">
-            <img src="src/<%= iconOne %>">
-            <img src="src/<%= iconTwo %>">
-            <img src="src/<%= iconThree %>">
-            <img src="src/<%= iconFour %>">
-        </div>
-        <div class="b">
-            <div>
-                <h1 style="font-family: 'Source Sans Pro', sans-serif"><%= firstName%> <%= lastName%></h1>
-                <h2 style="font-family: 'Source Sans Pro', sans-serif; font-weight: 300"><%= jobTitle %></h2>
-                <br>
-                <p><%- background %></p>
-
-                <h3>Skills</h3>
-                <br>
-
-                <div>
-                    <% for(var i = 0; i < skills.length; i++) { %>
-                    <div class="skillsList"><%= skills[i] %></div>
-                    <% } %>
-                </div>
-
-                <br>
-                <h3>Experience</h3>
-                <div style="page-break-inside: avoid;">
-                    <p><%= exp1 %></p>
-                </div>
-                <div style="page-break-inside: avoid;">
-                    <p><%= exp2 %></p>
-                </div>
-                <div style="page-break-inside: avoid;">
-                    <p><%= exp3 %></p>
-                </div>
-                <div style="page-break-after: avoid"></div>
-                <div>
-                    <p style="page-break-inside: avoid;"><%= exp4 %></p>
-                </div>
-                <div style="page-break-inside: avoid;">
-                    <p><%= exp5 %></p>
-                </div>
-                <div style="page-break-inside: avoid;">
-                    <p><%= exp6 %></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <h1>A red flare silhouetted the jagged edge of a wing.</h1>
+<h2>A red flare silhouetted the jagged edge of a wing.</h2>
 </body>
 </html>
