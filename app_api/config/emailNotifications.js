@@ -66,7 +66,8 @@ let _email = (proposals) => {
 
     const input =	{
         'id': 7,
-        'to': 'syed.kazmi@kmandt.com',
+        'to': 'steve.boam@kmandt.com',
+        'cc' : 'max.pardo-roques@kmandt.com',
         'attr': {"PLIST": proposals.replace(/,/g, '<br><br>')}
     };
 
