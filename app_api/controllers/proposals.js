@@ -151,7 +151,7 @@ let upload = (req, res) => {
         uri: 'https://content.dropboxapi.com/2/files/upload',
         headers: {
             'Authorization': 'Bearer ' + process.env.DROPBOX_API_TOKEN,
-            'Dropbox-API-Arg': "{\"path\": \"/test/" + req.file.originalname + "\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}",
+            'Dropbox-API-Arg': "{\"path\": \"/proposals/" + req.file.originalname + "\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}",
             'Content-Type': 'application/octet-stream'
         }, body: fs.createReadStream(`uploads/${req.file.originalname}`, {highWaterMark: 256 * 1024})
     };
@@ -249,7 +249,7 @@ let _generateShareableLink = (filename) => {
             headers: {
                 'Authorization': 'Bearer ' + process.env.DROPBOX_API_TOKEN,
                 'Content-Type': 'application/json; charset=utf-8'
-            }, body: JSON.stringify({path: `/test/${filename}`, settings: {requested_visibility: "public"}})
+            }, body: JSON.stringify({path: `/proposals/${filename}`, settings: {requested_visibility: "public"}})
         }, (err, httpResponse) => {
             if (err) {
                 reject(err);
@@ -262,7 +262,7 @@ let _generateShareableLink = (filename) => {
                         headers: {
                             'Authorization': 'Bearer ' + process.env.DROPBOX_API_TOKEN,
                             'Content-Type': 'application/json; charset=utf-8'
-                        }, body: JSON.stringify({path: `/test/${filename}`, "direct_only": true})
+                        }, body: JSON.stringify({path: `/proposals/${filename}`, "direct_only": true})
                     }, function optionalCallback(err, httpResponse) {
                         if (err) {
                             console.log(err);
