@@ -2,7 +2,7 @@
  * Created by syedkazmi on 21/08/2017.
  */
 const mongoose = require('mongoose');
-const dbURI = 'mongodb://syed26:plzopen26@ds049864.mlab.com:49864/foliogram';
+const dbURI = 'mongodb://syed26:plzopen26@ds011505-a0.mlab.com:11505,ds011505-a1.mlab.com:11505/knowledge-base?replicaSet=rs-ds011505';
 // mongodb://syed26:plzopen26@ds049864.mlab.com:49864/foliogram
 // mongodb://syed26:plzopen26@ds011505-a0.mlab.com:11505,ds011505-a1.mlab.com:11505/knowledge-base?replicaSet=rs-ds011505
 
