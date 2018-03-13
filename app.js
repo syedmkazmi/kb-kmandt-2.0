@@ -30,12 +30,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
-    if (req.header('x-forwarded-proto') !== 'https') {
-        res.redirect(`https://${req.header('host')}${req.url}`)
-    } else {
-        next();
+app.use(function (req, res, next) {
+    let sslUrl;
+
+    if (process.env.NODE_ENV === 'production' &&
+        req.headers['x-forwarded-proto'] !== 'https') {
+
+        sslUrl = ['https://kb-kmandt.herokuapp.com', req.url].join('');
+        return res.redirect(sslUrl);
     }
+
+    return next();
 });
 
 app.use(passport.initialize());
