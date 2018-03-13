@@ -2,6 +2,7 @@ require('dotenv').load();
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
+const forceSsl = require('force-ssl-heroku');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -17,7 +18,7 @@ const apiRoutes = require('./app_api/routes/index');
 
 
 const app = express();
-
+app.use(forceSsl);
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server','views'));
 app.set('view engine', 'ejs');
@@ -29,8 +30,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(requireHTTPS);
 
 app.use(passport.initialize());
 
@@ -54,14 +53,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-function requireHTTPS(req, res, next) {
-    // The 'x-forwarded-proto' check is for Heroku
-    if (!req.secure && req.get('x-forwarded-proto') !== 'https' && process.env.NODE_ENV !== "development") {
-        return res.redirect('https://' + req.get('host') + req.url);
-    }
-    next();
-}
 
 
 // CRON JOBS
