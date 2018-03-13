@@ -30,18 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function (req, res, next) {
-    let sslUrl;
-
-    if (process.env.NODE_ENV === 'production' &&
-        req.headers['x-forwarded-proto'] !== 'https') {
-
-        sslUrl = ['https://kb-kmandt.herokuapp.com', req.url].join('');
-        return res.redirect(sslUrl);
-    }
-
-    return next();
-});
+app.use(requireHTTPS);
 
 app.use(passport.initialize());
 
@@ -65,6 +54,14 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+function requireHTTPS(req, res, next) {
+    // The 'x-forwarded-proto' check is for Heroku
+    if (!req.secure && req.get('x-forwarded-proto') !== 'https' && process.env.NODE_ENV !== "development") {
+        return res.redirect('https://' + req.get('host') + req.url);
+    }
+    next();
+}
 
 
 // CRON JOBS
