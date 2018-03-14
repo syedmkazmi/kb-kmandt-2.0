@@ -18,7 +18,7 @@ import {BrowserCheckComponent} from "./components/browser-check.component";
       {path: 'browser', component: BrowserCheckComponent, canActivate: [LoginGuard]},
       {path: 'welcome', component: PromptUserDetailsComponent, canActivate: [AuthGuard]},
       {path: 'error', component: ErrorComponent, canActivate: [AuthGuard]},
-      {path: 'roadmap', component: RoadmapComponent, canActivate: [LoginGuard]},
+      {path: 'roadmap', component: RoadmapComponent},
       {path: 'development', component: UnderDevelopmentComponent, canActivate: [AuthGuard]},
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       {path: '**', component: PageNotFoundComponent}

@@ -14,12 +14,14 @@ export class RootNavComponent implements OnInit {
   subscription1: Subscription;
   subscription2: Subscription;
   subscription3: Subscription;
+  subscription4: Subscription;
 
   isLoggedIn: any;
   name: string;
   _id: string;
   profileImage: string;
   associateView: boolean = false;
+  roadmap: boolean = false;
 
   constructor(private _authService: AuthenticationService, private _userService: UserService, private _location: Location) {
 
@@ -37,6 +39,10 @@ export class RootNavComponent implements OnInit {
 
     this.subscription3 = this._userService.getMessage().subscribe(data => {
       this.associateView = data;
+    });
+
+    this.subscription4 = this._authService.getMessage().subscribe(data => {
+      this.roadmap = data;
     });
 
   }
