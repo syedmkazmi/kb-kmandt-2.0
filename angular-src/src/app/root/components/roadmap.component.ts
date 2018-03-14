@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from "../../authentication/services/authentication.service";
 
 @Component({
   selector: 'app-roadmap',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RoadmapComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _authService: AuthenticationService) { }
 
   ngOnInit() {
+    this._authService.sendMessage(false);
   }
 
 }

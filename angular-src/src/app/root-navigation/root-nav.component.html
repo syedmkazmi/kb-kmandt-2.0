@@ -1,4 +1,4 @@
-<div id="header" *ngIf="isLoggedIn || associateView">
+<div id="header" *ngIf="isLoggedIn || associateView || roadmap">
   <span id="previous-page-btn" uk-icon="icon: arrow-left; ratio: 2" (click)="goBack()"></span>
   <div id="user-profile-btn" class="uk-inline">
     <a>{{name}}<span uk-icon="icon: chevron-down"></span></a>
@@ -24,7 +24,7 @@
 </div>
 
 <!--data:image/png;base64, {{name}}-->
-<div class="uk-offcanvas-content" *ngIf="isLoggedIn || associateView">
+<div class="uk-offcanvas-content" *ngIf="isLoggedIn || associateView || roadmap">
   <section id="nav">
     <ul uk-nav>
       <img id="header-logo" src="/assets/images/Logo.svg">
