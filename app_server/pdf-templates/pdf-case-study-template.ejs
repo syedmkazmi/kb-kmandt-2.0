@@ -1,0 +1,230 @@
+<html>
+<head>
+    <meta charset="utf8">
+    <title>Case Study</title>
+    <style>
+        @font-face {
+            font-family: SourceSansPro;
+            src: url("https://kb-kmandt.herokuapp.com/SourceSansPro-ExtraLight.otf") format("opentype");
+        }
+
+        @font-face {
+            font-family: SourceSansPro;
+            font-weight: 300;
+            src: url("https://kb-kmandt.herokuapp.com/SourceSansPro-Regular.otf") format("opentype");
+        }
+
+        @font-face {
+            font-family: SourceSansPro;
+            font-weight: bold;
+            src: url("https://kb-kmandt.herokuapp.com/SourceSansPro-Semibold.otf") format("opentype");
+        }
+
+        @font-face {
+            font-family: SourceSansPro;
+            font-weight: 900;
+            src: url("https://kb-kmandt.herokuapp.com/SourceSansPro-Bold.otf") format("opentype");
+        }
+
+        html, body {
+            font-family: 'SourceSansPro', sans-serif;
+            font-weight: 500;
+            background: #fff;
+            font-size: 9px;
+            -webkit-print-color-adjust: exact;
+            box-sizing: border-box;
+            color: #fff;
+        }
+
+        .page {
+            position: relative;
+            /*height: 90mm;
+            width: 50mm;*/
+            display: block;
+            background: #fff;
+            page-break-after: auto;
+            color: #fff;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #fff;
+                font-family: 'SourceSansPro', sans-serif;
+            }
+
+            .page {
+                margin: 0;
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .page.first {
+            border-left: 5px solid green;
+        }
+
+        h1 {
+            font-family: 'SourceSansPro', sans-serif;
+            font-size: 25px;
+            font-weight: 900;
+            color: #356FB3;
+            margin: 0px;
+        }
+
+        h2 {
+            font-family: 'SourceSansPro', sans-serif;
+            font-size: 15px;
+            font-weight: 300;
+            margin-bottom: 0;
+            margin-left: 0;
+            margin-right: 0;
+            margin-top: 0;
+        }
+
+        h3 {
+            font-family: 'SourceSansPro', sans-serif;
+            color: #356FB3;
+            /*background-color: #356FB3;
+            width: 200px;
+            padding: 5px;*/
+            font-size: 16px;
+            margin: 0px;
+            font-weight: bold;
+        }
+
+        p {
+            font-family: 'SourceSansPro', sans-serif;
+            line-height: 13px;
+            font-size: 10px;
+            color: #121212;
+            white-space: pre-line;
+        }
+
+        h1:first-letter {
+            text-transform: uppercase;
+        }
+
+        h2:first-letter {
+            text-transform: uppercase;
+        }
+
+        h3:first-letter {
+            text-transform: uppercase;
+        }
+
+        .row {
+            padding: 0 50px 50px 30px;
+            overflow: hidden;
+        }
+
+        .a {
+            background: #fff;
+            width: 24%;
+            color: black;
+            display: inline-block;
+            margin-top: 10px;
+
+        }
+
+        .b {
+            width: 74%;
+            color: black;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        img {
+            margin-bottom: 20px;
+            width: 100px;
+            margin-left: 0;
+            margin-right: 0;
+            margin-top: 0;
+        }
+
+        .a, .b {
+            vertical-align: top;
+        }
+
+        .skillsList {
+            border-radius: 2px;
+            display: inline-block;
+            background-color: #CDE6F6;
+
+            color: black;
+            margin: 2px;
+            padding: 2px 3px 2px 3px;
+            font-size: 7px;
+        }
+
+        table {
+            font-size: 8px;
+            color: #121212;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #cdddf1;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <img style="width: 100%; object-fit: cover" src="https://www.kmandt.com/images/Theatre-Planning-.jpg">
+    <div class="row">
+        <div>
+            <div>
+                <h1>Improving General Practice - PGP <br>Quickstart</h1>
+                <p>In early 2016, NHS England, the body responsible for overseeing the commissioning of health services in England, launched their GP Forward view in which they recognised the extreme pressures on General Practice across the country.
+
+                    To help improve General Practice, NHS England approached KM&T to provide support through their ‘General Practice Improvement Programme’ known as GPIP (re-branded to PGP Quickstart for the purposes of this project).</p>
+                <br>
+                <h3>Results</h3>
+                <p>The PGP Quickstart programme was rolled out and fully delivered to over 300 practices across the country. From as far north as Tyneside to as far south as the Isle of Wight and everything in between.</p>
+                <table style="width:100%">
+                    <tr>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry</td>
+                    </tr>
+                    <tr>
+                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry</td>
+                    </tr>
+                    <tr>
+                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry</td>
+                    </tr>
+                </table>
+
+                <br>
+                <h3>Business Case</h3>
+                <div style="page-break-inside: avoid;">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+
+                        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                </div>
+
+                <br>
+                <h3>Approach</h3>
+                <div style="page-break-inside: auto;">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+
+                        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="pageFooter">
+        <img style="width: 12%; padding-left: 35px; margin-top: 10px; display: inline-block" src="https://www.kmandt.com/images/KMT-Global.png">
+        <p style="display: inline-block; margin: 5px">info@kmandt.com</p>
+        <p style="display: inline-block; margin: 5px">www.kmandt.com</p>
+    </div>
+</div>
+</body>
+</html>
+

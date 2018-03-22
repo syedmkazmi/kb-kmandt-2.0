@@ -12,7 +12,7 @@ const ejs = require('ejs');
 let html = fs.readFileSync('./app_server/pdf-templates/pdf-bio-template.ejs', 'utf8');
 const base = path.resolve("./angular-src/src");
 const options = {format: 'A4', timeout: 50000, base: `file://${base}`, border: "40px"};
-
+//const options = {format: 'A4', timeout: 50000, base: `file://${base}`, footer: {height: "20mm"}, border: {top: "20px", left: "20px", right: "20px"}};
 
 let sendJsonResponse = (res, status, content) => {
     res
@@ -70,7 +70,7 @@ let associatePdfBio = (req, res) => {
                 'Content-Type': 'application/octet-stream'
             }, body: fs.createReadStream(`${temp_dir}/${filename}.pdf`)
         };
-
+        //kb-2.0-associate-bios
         rp(options)
             .then(() => {
                 return _deleteLocalFile(filename)
