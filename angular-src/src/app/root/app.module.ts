@@ -16,6 +16,7 @@ import {NotificationsComponent} from './components/notifications.component';
 import {NotificationsService} from "./services/notifications.service";
 import {PageNotFoundComponent} from './components/page-not-found.component';
 import {ProposalModule} from "../proposals/proposal.module";
+import {CaseStudyModule} from "../case-studies/case-study.module";
 import {ProposalService} from "../proposals/services/proposal.service";
 import {SharedService} from "./services/shared.service";
 import {SectorResolverService} from "./services/sector-resolver.service";
@@ -37,6 +38,8 @@ import { ErrorComponent } from './components/error.component';
 import { RoadmapComponent } from './components/roadmap.component';
 import { UnderDevelopmentComponent } from './components/under-development.component';
 import { BrowserCheckComponent } from './components/browser-check.component';
+import {CaseStudyUserResolverService} from "../case-studies/services/case-study-user-resolver.service";
+import {CaseStudyService} from "../case-studies/services/case-study.service";
 
 @NgModule({
   declarations: [
@@ -59,6 +62,7 @@ import { BrowserCheckComponent } from './components/browser-check.component';
     HttpClientModule,
     DashboardModule,
     ProposalModule,
+    CaseStudyModule,
     BioModule,
     UsersModule,
     AssociatesModule,
@@ -77,6 +81,8 @@ import { BrowserCheckComponent } from './components/browser-check.component';
     SkillResolverService,
     IconResolverService,
     BioUserResolverService,
+    CaseStudyService,
+    CaseStudyUserResolverService,
     AuthGuard,
     UserDetailsGuard,
     LoginGuard,

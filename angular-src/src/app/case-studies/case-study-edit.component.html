@@ -1,0 +1,209 @@
+<div class="caseStudyEditForm" uk-grid>
+  <h1>{{title}}</h1>
+
+  <div class="grid-container" uk-grid>
+  <!--------------------------------------------------------------->
+  <!------------------------- SECTION ONE ------------------------->
+  <!--------------------------------------------------------------->
+  <div id="section-one">
+    <!------------------------- CASE STUDY ADD FORM ------------------------->
+    <form (ngSubmit)="save()" [formGroup]="caseStudyEditForm" novalidate>
+      <!----- SELECT STATUS ------>
+      <div class="uk-margin">
+        <select class="uk-select" id="case-study-status" formControlName="caseStudyStatus"
+                [ngClass]="{'pending': caseStudyEditForm.controls['caseStudyStatus'].value === 'pending', 'approved': caseStudyEditForm.controls['caseStudyStatus'].value === 'approved'}">
+          <option value="" disabled selected>Change Status</option>
+          <option value="pending">Case Study is under development</option>
+          <option value="approved">Case Study is complete</option>
+        </select>
+      </div>
+
+      <div class="main-grid" uk-grid>
+
+        <!----- USER INFO ----->
+        <div class="user-info">
+          <div class="uk-grid-small" uk-grid>
+            <div class="uk-width-1-2@s">
+              <label class="uk-form-label" for="firstName">First Name</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" type="text" placeholder="First Name" id="firstName" formControlName="firstName">
+              </div>
+            </div>
+
+            <div class="uk-width-1-2@s">
+              <label class="uk-form-label" for="lastName">Last Name</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" type="text" placeholder="Last Name" id="lastName" formControlName="lastName">
+              </div>
+            </div>
+
+            <div class="uk-width-1-2@s">
+              <label class="uk-form-label" for="lineManagerEmail">Line Manager Email</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" type="text" placeholder="Line Manager Email" id="lineManagerEmail"
+                       formControlName="lineManagerEmail">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <fieldset class="uk-fieldset">
+        <legend class="uk-legend">Basic Information</legend>
+        <div class="uk-grid-small" uk-grid>
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="region">Region</label>
+            <div class="uk-form-controls">
+              <select class="uk-select" id="region" formControlName="region">
+                <option value="" disabled selected>Select Region</option>
+                <option value="UK">United Kingdom</option>
+                <option value="NA">North America</option>
+                <option VALUE="AU">Asia Pacific</option>
+              </select>
+
+            </div>
+          </div>
+
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="proposalNo">Proposal No.</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" type="text" placeholder="Proposal No" id="proposalNo"
+                     formControlName="proposalNo">
+            </div>
+          </div>
+
+          <!----- SELECT SECTOR ------>
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="title"
+                   [ngClass]="{'error': caseStudyEditForm.get('sector').touched && caseStudyEditForm.get('sector').hasError('required')}">{{caseStudyEditForm.get('sector').touched
+              && caseStudyEditForm.get('sector').hasError('required') ? "Sector is Required" : "Sector"}}</label>
+            <div class="uk-form-controls">
+              <select class="uk-select" formControlName="sector" id="sector">
+                <option value="" disabled selected>Select Sector</option>
+                <option *ngFor="let sector of sectors" value="{{sector.sectorName}}">{{sector.sectorName}}</option>
+              </select>
+            </div>
+          </div>
+
+          <!----- SELECT CLIENT ------>
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="title"
+                   [ngClass]="{'error': caseStudyEditForm.get('client').touched && caseStudyEditForm.get('client').hasError('required')}">{{caseStudyEditForm.get('client').touched
+              && caseStudyEditForm.get('client').hasError('required') ? "Client is Required" : "Client"}}</label>
+            <div class="uk-form-controls">
+              <select class="uk-select" formControlName="client" id="client" *ngIf="!newClient">
+                <option value="" disabled selected>Select Client</option>
+                <optgroup *ngFor="let sector of sectors" label="{{sector.sectorName}}">
+                  <option *ngFor="let client of sector.sectorClients" value="{{client}}">{{client}}</option>
+                </optgroup>
+              </select>
+              <input class="uk-input" type="text" placeholder="Enter Client Name" formControlName="client"
+                     *ngIf="newClient">
+            </div>
+          </div>
+          <div class="new-client-toggle" *ngIf="!newClient"><a (click)="addNewClient()">Add new client</a></div>
+          <div class="new-client-toggle" *ngIf="newClient"><a (click)="addNewClient()">Choose from existing clients</a>
+          </div>
+        </div>
+        <div>
+          <label class="uk-form-label" for="title">Whats the case study about?</label>
+          <div class="uk-form-controls">
+            <input class="uk-input" type="text" placeholder="Case Study Title" id="title" formControlName="title">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="uk-fieldset">
+        <legend class="uk-legend">Case Study Details</legend>
+
+        <div class="uk-form-controls">
+          <label class="uk-form-label" for="region">Background</label>
+          <div class="uk-margin">
+            <textarea class="uk-textarea" rows="5" placeholder="Enter Background and Overview here"
+                      formControlName="background"></textarea>
+          </div>
+        </div>
+
+        <div class="uk-form-controls">
+          <label class="uk-form-label" for="region">Business Case</label>
+          <div class="uk-margin">
+            <textarea class="uk-textarea" rows="5" placeholder="Enter Business Case"
+                      formControlName="businessCase"></textarea>
+          </div>
+        </div>
+
+        <div class="uk-form-controls">
+          <label class="uk-form-label" for="region">Approach</label>
+          <div class="uk-margin">
+            <textarea class="uk-textarea" rows="5" placeholder="Enter Approach" formControlName="approach"></textarea>
+          </div>
+        </div>
+
+        <div class="uk-form-controls">
+          <label class="uk-form-label" for="region">Results</label>
+          <div class="uk-margin">
+            <textarea class="uk-textarea" rows="5" placeholder="Enter Results" formControlName="results"></textarea>
+          </div>
+        </div>
+
+      </fieldset>
+
+      <fieldset class="uk-fieldset">
+        <legend class="uk-legend">Case Study Tags</legend>
+        <!------------------------- SKILLS FIELD ------------------------->
+        <div class="skills">
+          <!----- TIP ----->
+          <div id="skills-tips">
+            From the list below, select all the different tags that apply to this case study.
+          </div>
+          <div class="uk-margin">
+            <div *ngFor="let data of skills">
+              <label id="skills-label" *ngFor="let skill of data.allSkills">
+                <input class="uk-checkbox" type="checkbox"
+                       [checked]="caseStudyEditForm.controls['skills'].value.indexOf(skill) > - 1"
+                       (change)="skillsOnChange(skill, $event.target.checked)">
+                {{skill}}
+              </label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!----- SUBMIT BUTTON ------>
+      <button class="uk-button uk-button-primary" id="case-study-create-btn" [disabled]="caseStudyEditForm.invalid">
+        {{caseStudyEditForm.invalid ? "Complete All Fields To Activate Me" : "SAVE CASE STUDY"}}
+      </button>
+    </form>
+  </div>
+
+  <!--------------------------------------------------------------->
+  <!------------------------- SECTION TWO ------------------------->
+  <!--------------------------------------------------------------->
+  <div class="section-two">
+    <!---------------------------- STICKY UPLOAD ---------------------------->
+    <div class="sticky-upload">
+      <!----- PROPOSAL ID ------>
+      <div id="sec-three-heading">Case Study ID</div>
+      <div id="case-study-id"><img id="barcode" src="assets/images/proposal-icons/barcode.svg">
+        {{caseStudyEditForm.controls['caseStudyNo'].value}}
+      </div>
+
+      <!----- UPLOAD PROPOSAL FILE ------>
+      <p id="upload-case-study-file-heading">Upload case study document</p>
+      <p>Select a file by clicking in the box below to upload the Case Study to the KB.</p>
+      <div class="drop-zone">
+        <div *ngIf="caseStudyShareLink" id="file-upload-spinner" uk-spinner></div>
+        <div *ngIf="!caseStudyShareLink">
+          <span uk-icon="icon: cloud-upload; ratio: 2"></span>
+          <p>Click here to select file</p>
+          <input id="file-field" name="file-field" (change)="uploadFile($event)" type="file">
+        </div>
+      </div>
+
+  </div>
+
+  </div>
+</div>
+</div>

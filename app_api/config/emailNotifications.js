@@ -18,11 +18,12 @@ let sendJsonResponse = (res, status, content) => {
 // REMINDER EMAILS FOR PROPOSAL STATUS     ===============
 // =======================================================
 let proposalStatus = (req,res) => {
-
+console.log("running");
     Proposal.aggregate([{ $match: { $and: [ { "proposalStatus": "live" }, { "responseDate": { $lt: new Date() } } ] } },{"$group":{_id:"$ownerEmail", projects:{ $push: "$proposalTitle"}}}])
         .exec()
         .then((data) => {
-            return new Promise((resolve, reject) => {
+            console.log(data);
+            /*return new Promise((resolve, reject) => {
                 data.map((val) => {
 
                     let proposals = val.projects.toString();
@@ -42,7 +43,7 @@ let proposalStatus = (req,res) => {
                         }
                     })
                 });
-            });
+            });*/
         })
         .then(() => {sendJsonResponse(res, 200, "done")})
         .catch(err => {sendJsonResponse(res, 500, err)})

@@ -1,0 +1,287 @@
+table {
+  color: #121212;
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+th {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 38px;
+  font-weight: normal;
+  display: inline-block;
+  width: auto;
+  line-height: 1;
+}
+
+hr {
+  margin-top: 0;
+}
+
+.search-bar {
+  float: right;
+}
+
+#search-bar {
+  display: inline-block;
+}
+
+.uk-search-input {
+  border-right: none;
+}
+
+.uk-search-default {
+  width: 230px;
+}
+
+.unsuccessful-filter {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+  height: 100px;
+}
+
+#filters-btn > .uk-button-default {
+  text-transform: capitalize;
+  padding-right: 0;
+  font-size: 15px;
+  margin-top: 1px;
+}
+
+#filters-btn > .uk-button-default > span {
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+#filters-btn > .uk-button-default:focus {
+  color: #0070E0;
+  border-color: #0070e0;
+}
+
+#filters-btn {
+  margin-left: -10px;
+}
+
+.filter-title {
+  width: 50px;
+  display: inline-block;
+}
+
+#status {
+  display: inline-block;
+}
+
+.filter-options {
+  display: inline-flex;
+  margin-left: 60px;
+}
+
+.option-1, .option-2, .option-3 {
+}
+
+#case-studies {
+  margin-left: 240px;
+  padding-left: 60px;
+  padding-top: 40px;
+  padding-right: 60px;
+}
+
+#casestudy-title, #casestudy-title-pending {
+  width: 350px;
+  cursor: pointer;
+}
+
+#casestudy-icon, #casestudy-icon-pending{
+  padding: 0;
+  width: 30px;
+}
+
+#title, #title-pending {
+  font-weight: 600;
+  font-size: 15px;
+  color: #121212;
+  line-height: 20px;
+}
+
+#client, #client-pending {
+  display: block;
+  color: #A4ACB3;
+}
+
+#arrow_forward, #arrow_forward-pending {
+  width: 12px;
+  color: #A4ACB3;
+}
+
+.uk-table > tbody > tr:hover {
+  background-color: #FAFCFF;
+}
+
+.uk-table > tbody > tr:hover .casestudy-title > #title {
+  color: #0070e0;
+}
+
+/*.uk-table > tbody > tr:hover .casestudy-icon-td > .casestudy-icon {
+  content:url("../../../assets/images/casestudy-icons/casestudy-hover.svg");
+}*/
+
+.uk-table td {
+  padding: 16px 11px;
+}
+
+#casestudy-status {
+}
+
+.live {
+  color: #f9a615;
+}
+
+.won {
+  color: #13CE66;
+}
+
+.lost {
+  color: #ff5346;
+}
+
+.status-circle-live {
+  display: inline-block;
+  background-color: #f9a615;
+  border-collapse: collapse;
+  margin: 2px 6px 2px 2px;
+  border-radius: 50%;
+  width: 13px;
+  height: 13px;
+  vertical-align: text-bottom;
+}
+
+.status-circle-lost {
+  display: inline-block;
+  background-color: #ff5346;
+  border-collapse: collapse;
+  margin: 2px 6px 2px 2px;
+  border-radius: 50%;
+  width: 13px;
+  height: 13px;
+  vertical-align: text-bottom;
+}
+
+.status-circle-won {
+  display: inline-block;
+  background-color: #13CE66;
+  border-collapse: collapse;
+  margin: 2px 6px 2px 2px;
+  border-radius: 50%;
+  width: 13px;
+  height: 13px;
+  vertical-align: text-bottom;
+}
+
+#edit-btn, #edit-btn-pending {
+  height: 35px;
+  border: 1px solid #C2C7CF;
+  width: 70px;
+  line-height: 2.5;
+  text-transform: capitalize;
+  padding: 0;
+  color: #ACB6C0;
+}
+
+#casestudy-owner {
+  width: 200px;
+}
+
+#casestudy-action, #casestudy-action-pending {
+  width: 10px;
+}
+
+#casestudy-file {
+}
+
+#casestudy-file > a > .material-icons {
+  transform: rotate(45deg);
+}
+
+#casestudy-file-pending > a > .material-icons {
+  transform: rotate(45deg);
+}
+
+.file-available {
+  color: #0070e0;
+}
+
+.file-unavailable {
+  color: #ABABAB;
+}
+
+.uk-offcanvas-bar {
+  width: 450px;
+  height: 100%;
+  color: #333333;
+  padding: 0 0 0 0;
+  background-color: #FFFFFF;
+}
+
+.uk-offcanvas-close {
+  color: #333333;
+}
+
+.uk-drop.uk-open {
+  width: 540px;
+}
+
+#empty-filter-results {
+  padding: 10px 50px 10px 50px;
+}
+
+#empty-filter-message {
+  color: #333333;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 48px;
+}
+
+#clear-filter-btn {
+  font-size: 15px;
+  color: #FF5346;
+  cursor: pointer;
+}
+
+#apply-filter-btn {
+  font-size: 15px;
+  float: right;
+  cursor: pointer;
+  color: #0070E0;
+}
+
+.uk-select:not([multiple]):not([size]) {
+  height: 30px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.uk-select {
+  width: 50%;
+  margin-left: 100px;
+}
+
+#casestudy-icon {
+  padding: 0;
+  width: 30px;
+}
+
+.uk-table > tbody > tr:hover .casestudy-icon-td > .casestudy-icon {
+  content:url("../../../assets/images/casestudy-icon/cs_hover.svg");
+}
+
+
+@media screen and (max-width: 600px) {
+  #casestudys {
+    margin-left: 0;
+  }
+}

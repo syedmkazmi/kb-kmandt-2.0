@@ -1,0 +1,164 @@
+<section id="case-studies">
+  <h1>Case Studies</h1>
+
+  <div class="search-bar">
+    <div class="uk-margin" id="search-bar">
+      <div class="uk-search uk-search-default">
+        <span uk-search-icon></span>
+        <input class="uk-search-input" type="search"  [(ngModel)]="_listFilter" placeholder="Search by case study title">
+      </div>
+    </div>
+
+    <div class="uk-inline" id="filters-btn">
+      <button class="uk-button uk-button-default" type="button">Filters <span uk-icon="icon: settings"></span></button>
+      <div uk-drop="mode: click; pos: top-right">
+        <div class="uk-card uk-card-body uk-card-default">
+
+          <div id="status">
+            <p class="filter-title">Sector</p>
+            <div class="filter-options" uk-grid>
+              <div class="option-1"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.sector" value="office" name="sector"> Office</label></div>
+              <div class="option-2"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.sector" value="industry" name="sector"> Industry</label></div>
+              <div class="option-3"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.sector" value="healthcare" name="sector"> Healthcare</label></div>
+            </div>
+          </div>
+
+          <div id="region">
+            <p class="filter-title">Region</p>
+            <div class="filter-options" uk-grid>
+              <div class="option-1"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.region" value="UK" name="region"> UK</label></div>
+              <div class="option-2"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.region" value="NA" name="region"> NA</label></div>
+              <div class="option-3"><label><input class="uk-radio" type="radio" [(ngModel)]="queryParam.region" value="AU" name="region"> AU</label></div>
+            </div>
+          </div>
+
+          <div id="clients">
+            <p class="filter-title">Client</p>
+            <select class="uk-select" [(ngModel)]="queryParam.client">
+              <option value="" disabled selected>Select Client</option>
+              <optgroup *ngFor="let sector of sectors" label="{{sector.sectorName}}">
+                <option *ngFor="let client of sector.sectorClients" value="{{client}}">{{client}}</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div id="skills" *ngFor="let data of skills">
+            <p class="filter-title">Tags</p>
+            <select class="uk-select" [(ngModel)]="queryParam.skills">
+              <option value="" disabled selected>Select Tags</option>
+                <option *ngFor="let skill of data.allSkills" value="{{skill}}">{{skill}}</option>
+            </select>
+          </div>
+          <hr>
+          <div>
+            <p id="apply-filter-btn" (click)="filterCaseStudies()">Apply</p>
+            <p id="clear-filter-btn" (click)="get()">Clear Filters</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section *ngIf="!filterStatus" class="unsuccessful-filter">
+    <div id="empty-filter-results">
+      <img src="/assets/images/mascots/sad-robert.svg">
+    </div>
+    <div>
+      <div id="empty-filter-message">{{filterMessage}}</div>
+    </div>
+  </section>
+
+  <ul *ngIf="filterStatus" uk-tab>
+    <li><a href="#">Approved - ({{caseStudies?.length}})</a></li>
+    <li><a href="#" (click)="getPending()">Pending - ({{caseStudiesPending?.length}})</a></li>
+  </ul>
+
+  <div *ngIf="filterStatus" class="uk-switcher uk-margin">
+    <section>
+   <table class="uk-table uk-table-middle uk-table-divider">
+     <thead>
+     <tr>
+       <th></th>
+       <th class="uk-width-small">TITLE</th>
+       <th>PROPOSAL NO</th>
+       <th>SECTOR</th>
+       <th></th>
+       <th></th>
+     </tr>
+     </thead>
+     <tbody>
+     <tr *ngFor="let cs of caseStudies | csfilter: _listFilter">
+
+       <td class="casestudy-icon-td" id="casestudy-icon"><img class="casestudy-icon"  src='/assets/images/casestudy-icon/cs_normal.svg'></td>
+       <td class="casestudy-title" id="casestudy-title"><span id="title">{{cs.caseStudyNo}} - <span>{{(cs.title.length>30) ? (cs.title | slice:0:30)+'...':(cs.title) }}</span></span>
+         <span
+           id="client">{{(cs.client.length>30) ? (cs.client | slice:0:30)+'...':(cs.client)}} <img
+           id="arrow_forward"
+           src="assets/images/proposal-icons/arrow_forward.svg"><span> {{cs.region}}</span></span>
+       </td>
+       <td>{{cs.proposalNo || "Not Assigned"}}</td>
+       <td id="casestudy-sector"><span>{{cs.sector}}</span></td>
+       <td>
+         <div id="casestudy-file">
+           <a href="{{cs.caseStudyUrls}}" target="_blank"><i class="material-icons"
+                                                                  [ngClass]="{'file-available': cs.caseStudyUrls, 'file-unavailable': cs.caseStudyUrls === 'none' || !cs.caseStudyUrls }">attach_file</i></a>
+         </div>
+       </td>
+       <td id="casestudy-action">
+         <a class="uk-button uk-button-default" id="edit-btn" [routerLink]="['/casestudies', cs._id]" uk-toggle="target: #casestudy-detail">Edit</a>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+</section>
+
+    <section>
+      <table class="uk-table uk-table-middle uk-table-divider">
+        <thead>
+        <tr>
+          <th></th>
+          <th class="uk-width-small">TITLE</th>
+          <th>PROPOSAL NO</th>
+          <th>SECTOR</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let cs of caseStudiesPending | csfilter: _listFilter">
+          <td class="casestudy-icon-td" id="casestudy-icon-pending"><img class="casestudy-icon"  src='/assets/images/casestudy-icon/cs_normal.svg'></td>
+          <td class="casestudy-title" id="casestudy-title-pending"><span id="title-pending">{{cs.caseStudyNo}} - <span>{{(cs.title.length>30) ? (cs.title | slice:0:30)+'...':(cs.title) }}</span></span>
+            <span
+              id="client-pending">{{(cs.client.length>30) ? (cs.client | slice:0:30)+'...':(cs.client)}} <img
+              id="arrow_forward-pending"
+              src="assets/images/proposal-icons/arrow_forward.svg"><span> {{cs.region}}</span></span>
+          </td>
+          <td>{{cs.proposalNo || "Not Assigned"}}</td>
+          <td id="casestudy-sector-pending"><span>{{cs.sector}}</span></td>
+          <td>
+            <div id="casestudy-file-pending">
+              <a href="{{cs.caseStudyUrls}}" target="_blank"><i class="material-icons"
+                                                                [ngClass]="{'file-available': cs.caseStudyUrls, 'file-unavailable': cs.caseStudyUrls === 'none' || !cs.caseStudyUrls }">attach_file</i></a>
+            </div>
+          </td>
+          <td id="casestudy-action-pending">
+            <a class="uk-button uk-button-default" id="edit-btn-pending" [routerLink]="['/casestudies', cs._id]" uk-toggle="target: #casestudy-detail">Edit</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!--<div>
+      <div *ngIf="caseStudies?.length <= 0" id="loading-spinner" uk-spinner></div>
+      <ul class="uk-list uk-list-divider" *ngIf="caseStudies?.length > 0">
+        <li class="file-links" *ngFor="let cs of caseStudies"><img class="pdf-icon"
+                                                                   src="/assets/images/dashboard-icons/pdf-icon.svg">{{cs.title}}
+          <span uk-icon="download"></span></li>
+      </ul>
+    </div>-->
+  </div>
+
+
+
+</section>
