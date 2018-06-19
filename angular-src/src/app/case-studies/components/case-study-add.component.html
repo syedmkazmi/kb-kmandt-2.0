@@ -1,0 +1,174 @@
+<div class="caseStudyAddForm" uk-grid>
+
+  <!--------------------------------------------------------------->
+  <!------------------------- SECTION ONE ------------------------->
+  <!--------------------------------------------------------------->
+  <div id="section-one">
+    <h1>{{title}}</h1>
+    <!------------------------- CASE STUDY ADD FORM ------------------------->
+    <form (ngSubmit)="save()" [formGroup]="caseStudyForm" novalidate>
+
+      <div class="main-grid" uk-grid>
+
+        <!----- USER INFO ----->
+        <div class="user-info">
+          <div class="uk-grid-small" uk-grid>
+            <div class="uk-width-1-2@s">
+              <label class="uk-form-label" for="firstName">First Name</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" type="text" placeholder="First Name" id="firstName" formControlName="firstName">
+              </div>
+            </div>
+
+            <div class="uk-width-1-2@s">
+              <label class="uk-form-label" for="lastName">Last Name</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" type="text" placeholder="Last Name" id="lastName" formControlName="lastName">
+              </div>
+            </div>
+
+            <div class="uk-width-1-2@s">
+              <label class="uk-form-label" for="lineManagerEmail">Line Manager Email</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" type="text" placeholder="Line Manager Email" id="lineManagerEmail"
+                       formControlName="lineManagerEmail">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <fieldset class="uk-fieldset">
+        <legend class="uk-legend">Basic Information</legend>
+        <div class="uk-grid-small" uk-grid>
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="region">Region</label>
+            <div class="uk-form-controls">
+              <select class="uk-select" id="region" formControlName="region">
+                <option value="" disabled selected>Select Region</option>
+                <option value="UK">United Kingdom</option>
+                <option value="NA">North America</option>
+                <option VALUE="AU">Asia Pacific</option>
+              </select>
+
+            </div>
+          </div>
+
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="proposalNo">Proposal No.</label>
+            <div class="uk-form-controls">
+              <input class="uk-input" type="text" placeholder="Proposal No" id="proposalNo" formControlName="proposalNo"
+                     (change)="autoSave()">
+            </div>
+          </div>
+
+          <!----- SELECT SECTOR ------>
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="title"
+                   [ngClass]="{'error': caseStudyForm.get('sector').touched && caseStudyForm.get('sector').hasError('required')}">{{caseStudyForm.get('sector').touched
+              && caseStudyForm.get('sector').hasError('required') ? "Sector is Required" : "Sector"}}</label>
+            <div class="uk-form-controls">
+              <select class="uk-select" formControlName="sector" id="sector" (change)="autoSave()">
+                <option value="" disabled selected>Select Sector</option>
+                <option *ngFor="let sector of sectors" value="{{sector.sectorName}}">{{sector.sectorName}}</option>
+              </select>
+            </div>
+          </div>
+
+          <!----- SELECT CLIENT ------>
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="title"
+                   [ngClass]="{'error': caseStudyForm.get('client').touched && caseStudyForm.get('client').hasError('required')}">{{caseStudyForm.get('client').touched
+              && caseStudyForm.get('client').hasError('required') ? "Client is Required" : "Client"}}</label>
+            <div class="uk-form-controls">
+              <select class="uk-select" formControlName="client" id="client" *ngIf="!newClient" (change)="autoSave()">
+                <option value="" disabled selected>Select Client</option>
+                <optgroup *ngFor="let sector of sectors" label="{{sector.sectorName}}">
+                  <option *ngFor="let client of sector.sectorClients" value="{{client}}">{{client}}</option>
+                </optgroup>
+              </select>
+              <input class="uk-input" type="text" placeholder="Enter Client Name" formControlName="client"
+                     *ngIf="newClient" (change)="autoSave()">
+            </div>
+          </div>
+          <div class="new-client-toggle" *ngIf="!newClient"><a (click)="addNewClient()">Add new client</a></div>
+          <div class="new-client-toggle" *ngIf="newClient"><a (click)="addNewClient()">Choose from existing clients</a>
+          </div>
+        </div>
+        <div>
+          <label class="uk-form-label" for="title">Whats the case study about?</label>
+          <div class="uk-form-controls">
+            <input class="uk-input" type="text" placeholder="Case Study Title" id="title" formControlName="title"
+                   (change)="autoSave()">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="uk-fieldset">
+        <legend class="uk-legend">Case Study Details</legend>
+
+        <div class="uk-form-controls">
+          <label class="uk-form-label" for="region">Background</label>
+          <div class="uk-margin">
+            <textarea class="uk-textarea" rows="5" placeholder="Enter Background and Overview here"
+                      formControlName="background" (change)="autoSave()"></textarea>
+          </div>
+        </div>
+
+        <div class="uk-form-controls">
+          <label class="uk-form-label" for="region">Business Case</label>
+          <div class="uk-margin">
+            <textarea class="uk-textarea" rows="5" placeholder="Enter Business Case" formControlName="businessCase"
+                      (change)="autoSave()"></textarea>
+          </div>
+        </div>
+
+        <div class="uk-form-controls">
+          <label class="uk-form-label" for="region">Approach</label>
+          <div class="uk-margin">
+            <textarea class="uk-textarea" rows="5" placeholder="Enter Approach" formControlName="approach"
+                      (change)="autoSave()"></textarea>
+          </div>
+        </div>
+
+        <div class="uk-form-controls">
+          <label class="uk-form-label" for="region">Results</label>
+          <div class="uk-margin">
+            <textarea class="uk-textarea" rows="5" placeholder="Enter Results" formControlName="results"
+                      (change)="autoSave()"></textarea>
+          </div>
+        </div>
+
+      </fieldset>
+
+      <fieldset class="uk-fieldset">
+        <legend class="uk-legend">Case Study Tags</legend>
+        <!------------------------- SKILLS FIELD ------------------------->
+        <div class="skills">
+          <!----- TIP ----->
+          <div id="skills-tips">
+            From the list below, select all the different tags that apply to this case study.
+          </div>
+          <div class="uk-margin">
+            <div *ngFor="let data of skills">
+              <label id="skills-label" *ngFor="let skill of data.allSkills">
+                <input class="uk-checkbox" type="checkbox"
+                       [checked]="caseStudyForm.controls['skills'].value.indexOf(skill) > - 1"
+                       (change)="skillsOnChange(skill, $event.target.checked)">
+                {{skill}}
+              </label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!----- SUBMIT BUTTON ------>
+      <button class="uk-button uk-button-primary" id="case-study-create-btn" [disabled]="caseStudyForm.invalid">
+        {{caseStudyForm.invalid ? "Complete All Fields To Activate Me" : "CREATE CASE STUDY"}}
+      </button>
+    </form>
+  </div>
+
+</div>

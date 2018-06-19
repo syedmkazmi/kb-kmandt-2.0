@@ -132,7 +132,8 @@ let update = (req, res) => {
             iconTwo: req.body.iconTwo,
             iconThree: req.body.iconThree,
             iconFour: req.body.iconFour,
-            bioForSector: req.body.bioForSector
+            bioForSector: req.body.bioForSector,
+            dateCreated: Date.now()
         },
         {safe: true, new: true}
     )

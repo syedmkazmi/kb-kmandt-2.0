@@ -14,6 +14,7 @@ const {create: newProposal, update: updateExisting, get: getAll, getOne: getOne,
 const {create: newBio, getOne: bio, get: bios, update: existingBio, pdfBio: pdfBio} = require('../controllers/bios');
 const {marketing: marketingFiles, humanResources: hrFiles, clients: clientFiles, download: file} = require('../controllers/templates');
 const {register: registerUser, login: loginUser, verify: verify, resetPassword: reset, resetPasswordVerify: verifyPassword} = require('../controllers/authentication');
+const {caseStudies: caseStudies, create: newCaseStudy, get: casestudy, getPending: pendingCaseStudy, getOne: getOneCaseStudy, update: updateCaseStudy, upload: uploadCaseStudy} = require('../controllers/casestudies');
 const {get: sectors} = require('../controllers/sectors');
 const {get: skills} = require('../controllers/skills');
 const {get: icons} = require('../controllers/icons');
@@ -88,6 +89,7 @@ router
     .route('/users/:id/bios')
     .get(userbios);
 
+
 // middleware for token authentication
 router.use((req, res, next)=>{
     let token = req.body.token || req.query.token ||req.headers['x-access-token'];
@@ -139,6 +141,22 @@ router
 router
     .route('/bios/:id/pdf')
     .post(pdfBio);
+
+// case studies
+router
+    .route('/casestudies')
+    .post(newCaseStudy)
+    .get(casestudy);
+router
+    .route('/casestudies/pending')
+    .get(pendingCaseStudy);
+router
+    .route('/casestudies/:id')
+    .get(getOneCaseStudy)
+    .put(updateCaseStudy)
+    .post(upload.single('casestudy'), uploadCaseStudy);
+
+
 
 // marketing
 router

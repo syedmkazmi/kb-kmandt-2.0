@@ -57,7 +57,7 @@ app.use(function(err, req, res, next) {
 
 
 // CRON JOBS
-let job1 = new CronJob('00 00 07 * * 5', function() {
+let job1 = new CronJob('00 51 00 * * 5', function() {
     // Execute code here
     console.log("Starting first cron job");
     mail.proposalStatus();

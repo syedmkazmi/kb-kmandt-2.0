@@ -1,0 +1,125 @@
+* {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+.caseStudyAddForm {
+  margin-left: 240px;
+  padding: 40px 60px 40px 60px;
+}
+
+h1{
+  text-transform: capitalize;
+  font-size: 38px;
+  font-weight: normal;
+  line-height: 1;
+}
+
+#section-one {
+  width: 70%;
+}
+
+.user-info {
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.uk-form-controls {
+  margin-top: 10px;
+}
+
+.uk-form-label {
+  color: #121212;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#caseStudy-heading {
+  height: 31px;
+  color: #1B1A3D;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 31px;
+}
+
+.uk-fieldset {
+  margin-bottom: 50px;
+}
+
+.uk-legend {
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+legend {
+  padding-bottom: 17px;
+}
+
+.new-client-toggle {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.new-client-toggle > a {
+  float: right;
+}
+
+#proposal-create-btn {
+  height: 41px;
+  margin-top: 40px;
+  /*width: 221px;*/
+  background-color: #0070E0;
+}
+
+#proposal-create-btn:disabled {
+  color: #FFFFFF;
+  background-color: #C4CDD1;
+  border-color: transparent;
+}
+
+.error {
+  color: #FF5346;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.skills > .uk-margin {
+  -webkit-column-count: 3; /* Chrome, Safari, Opera */
+  -moz-column-count: 3; /* Firefox */
+  column-count: 3;
+}
+
+#skills-label {
+  width: 100%;
+  border: 1px solid #E9E9EF;
+  border-radius: 3px;
+  background-color: #F7F8F9;
+  display: inline-block;
+  margin: 3px;
+  padding: 6px;
+  color: #616171;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+#skills-label > input {
+  float: right;
+}
+
+.uk-checkbox {
+  margin-top: 0;
+  border-radius: 3px;
+  background-color: #FFFFFF;
+}
+
+.uk-checkbox:checked {
+  border: 1px solid #0070E0;
+  border-radius: 3px;
+  background-color: #0070E0;
+}
+
+.uk-checkbox:checked + label {
+  border: 1px solid #0070E0;
+  border-radius: 3px;
+}

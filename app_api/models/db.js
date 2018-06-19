@@ -46,9 +46,12 @@ process.on('SIGTERM', () => {
 });
 
 require('./users');
+require('./caseStudyCounter');
 require('./counter');
 require('./proposals');
 require('./sectors');
 require('./skills');
 require('./icons');
 require('./bios');
+require('./casestudies');
+
